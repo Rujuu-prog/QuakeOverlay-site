@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "QuakeOverlay",
-    "description": "配信画面に地震情報をリアルタイム表示するOBSオーバーレイ"
+    "description": "配信画面に地震情報を表示するOBSオーバーレイツール"
   },
   "nav": {
     "home": "トップ",
@@ -9,12 +9,93 @@
     "releases": "リリースノート"
   },
   "home": {
-    "heroTitle": "配信画面に地震情報をリアルタイム表示",
-    "heroSubtitle": "OBS配信用の地震情報オーバーレイツール",
+    "heroTitle": "配信中でも、地震情報を見逃さない。",
+    "heroSubtitle": "QuakeOverlay は、地震情報を自動で取得し\nOBSの配信画面にオーバーレイ表示できるツールです。\nゲーム配信や雑談配信でも視聴者と一緒に地震情報を確認できます。",
     "ctaDownload": "Boothでダウンロード",
-    "ctaDocs": "ドキュメントを見る"
+    "ctaDocs": "ドキュメントを見る",
+    "hero": {
+      "badge": "OBS配信者向け",
+      "screenshotAlt": "QuakeOverlayのメイン画面"
+    },
+    "features": {
+      "title": "主な機能",
+      "subtitle": "配信に必要な地震情報機能を網羅",
+      "items": {
+        "realtime": {
+          "title": "地震情報通知",
+          "description": "地震情報を自動で取得し、配信画面のオーバーレイに表示。ゲーム配信や雑談配信中でも、視聴者に地震情報を分かりやすく伝えられます。"
+        },
+        "overlay": {
+          "title": "OBSオーバーレイ",
+          "description": "OBSのブラウザソースとして簡単に追加。配信画面に自然に溶け込むデザインです。"
+        },
+        "customize": {
+          "title": "カスタマイズ",
+          "description": "表示位置、サイズ、表示する震度の閾値など、細かくカスタマイズできます。"
+        },
+        "multilang": {
+          "title": "多言語対応",
+          "description": "日本語・英語・韓国語に対応。海外視聴者にも地震情報を伝えられます。"
+        }
+      }
+    },
+    "demo": {
+      "title": "動作デモ",
+      "subtitle": "実際の動作をご覧ください",
+      "items": {
+        "main": { "caption": "メイン画面 - 地震情報の表示" },
+        "overlay": { "caption": "OBSオーバーレイ表示例" },
+        "settings": { "caption": "設定画面 - 細かなカスタマイズが可能" }
+      }
+    },
+    "howItWorks": {
+      "title": "かんたん3ステップ",
+      "subtitle": "セットアップは数分で完了",
+      "steps": {
+        "download": {
+          "title": "ダウンロード",
+          "description": "Boothからダウンロードして、ZIPを展開するだけ。"
+        },
+        "configure": {
+          "title": "設定",
+          "description": "アプリを起動して、表示する震度や表示位置をお好みに設定。"
+        },
+        "stream": {
+          "title": "配信開始",
+          "description": "OBSにブラウザソースを追加して、URLを設定すれば準備完了。"
+        }
+      }
+    },
+    "reviews": {
+      "title": "ユーザーの声",
+      "subtitle": "QuakeOverlayを使用しているユーザーの声",
+      "empty": "レビュー準備中"
+    },
+    "cta": {
+      "title": "今すぐ始めよう",
+      "subtitle": "ダウンロードして、配信画面に地震情報を表示しましょう",
+      "download": "Boothでダウンロード"
+    }
+  },
+  "header": {
+    "skipToContent": "メインコンテンツへスキップ",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "languageSwitcher": "言語切替",
+    "currentLanguage": "日本語"
   },
   "footer": {
-    "copyright": "© {year} QuakeOverlay. All rights reserved."
+    "copyright": "© {year} QuakeOverlay. All rights reserved.",
+    "description": "配信画面に地震情報を表示するOBSオーバーレイツール",
+    "documents": "ドキュメント",
+    "links": "リンク",
+    "language": "言語",
+    "gettingStarted": "はじめに",
+    "screens": "画面説明",
+    "faq": "よくある質問",
+    "support": "サポート"
+  },
+  "accessibility": {
+    "mainContent": "メインコンテンツ"
   }
 }

@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "QuakeOverlay",
-    "description": "OBS 방송에 실시간 지진 정보를 표시하는 오버레이"
+    "description": "OBS 방송에 지진 정보를 표시하는 오버레이"
   },
   "nav": {
     "home": "홈",
@@ -9,12 +9,93 @@
     "releases": "릴리스 노트"
   },
   "home": {
-    "heroTitle": "방송 화면에 실시간 지진 정보 표시",
-    "heroSubtitle": "OBS 방송용 지진 정보 오버레이 도구",
+    "heroTitle": "방송 중에도 지진 정보를 놓치지 마세요.",
+    "heroSubtitle": "QuakeOverlay는 지진 정보를 자동으로 가져와\nOBS 방송 화면에 오버레이로 표시하는 도구입니다.\n게임 방송이나 잡담 방송 중에도 시청자와 함께 지진 정보를 확인할 수 있습니다.",
     "ctaDownload": "Booth에서 다운로드",
-    "ctaDocs": "문서 보기"
+    "ctaDocs": "문서 보기",
+    "hero": {
+      "badge": "OBS 스트리머용",
+      "screenshotAlt": "QuakeOverlay 메인 화면"
+    },
+    "features": {
+      "title": "주요 기능",
+      "subtitle": "방송에 필요한 지진 정보 기능을 모두 제공",
+      "items": {
+        "realtime": {
+          "title": "지진 정보 알림",
+          "description": "지진 정보를 자동으로 가져와 오버레이에 표시합니다. 방송 중에도 시청자에게 지진 정보를 전달할 수 있습니다."
+        },
+        "overlay": {
+          "title": "OBS 오버레이",
+          "description": "OBS 브라우저 소스로 간편하게 추가. 방송 화면에 자연스럽게 어울리는 디자인입니다."
+        },
+        "customize": {
+          "title": "커스터마이징",
+          "description": "표시 위치, 크기, 진도 임계값 등을 세밀하게 맞춤 설정할 수 있습니다."
+        },
+        "multilang": {
+          "title": "다국어 지원",
+          "description": "일본어, 영어, 한국어를 지원합니다. 해외 시청자에게도 지진 정보를 전달할 수 있습니다."
+        }
+      }
+    },
+    "demo": {
+      "title": "데모",
+      "subtitle": "실제 동작을 확인하세요",
+      "items": {
+        "main": { "caption": "메인 화면 - 지진 정보 표시" },
+        "overlay": { "caption": "OBS 오버레이 표시 예시" },
+        "settings": { "caption": "설정 화면 - 세밀한 커스터마이징 가능" }
+      }
+    },
+    "howItWorks": {
+      "title": "간단한 3단계",
+      "subtitle": "몇 분이면 설정 완료",
+      "steps": {
+        "download": {
+          "title": "다운로드",
+          "description": "Booth에서 다운로드하고 ZIP 파일을 압축 해제하세요."
+        },
+        "configure": {
+          "title": "설정",
+          "description": "앱을 실행하고 표시할 진도와 위치를 원하는 대로 설정하세요."
+        },
+        "stream": {
+          "title": "방송 시작",
+          "description": "OBS에 브라우저 소스를 추가하고 URL을 설정하면 준비 완료입니다."
+        }
+      }
+    },
+    "reviews": {
+      "title": "사용자 리뷰",
+      "subtitle": "QuakeOverlay를 사용하는 사용자들의 목소리",
+      "empty": "리뷰 준비 중"
+    },
+    "cta": {
+      "title": "지금 시작하세요",
+      "subtitle": "다운로드하고 방송 화면에 지진 정보를 표시하세요",
+      "download": "Booth에서 다운로드"
+    }
+  },
+  "header": {
+    "skipToContent": "메인 콘텐츠로 건너뛰기",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기",
+    "languageSwitcher": "언어 전환",
+    "currentLanguage": "한국어"
   },
   "footer": {
-    "copyright": "© {year} QuakeOverlay. All rights reserved."
+    "copyright": "© {year} QuakeOverlay. All rights reserved.",
+    "description": "OBS 방송에 지진 정보를 표시하는 오버레이 도구",
+    "documents": "문서",
+    "links": "링크",
+    "language": "언어",
+    "gettingStarted": "시작하기",
+    "screens": "화면 설명",
+    "faq": "자주 묻는 질문",
+    "support": "지원"
+  },
+  "accessibility": {
+    "mainContent": "메인 콘텐츠"
   }
 }

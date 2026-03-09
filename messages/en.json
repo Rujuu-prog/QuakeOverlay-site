@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "QuakeOverlay",
-    "description": "Real-time earthquake information overlay for OBS streaming"
+    "description": "Earthquake information overlay for OBS streaming"
   },
   "nav": {
     "home": "Home",
@@ -9,12 +9,93 @@
     "releases": "Releases"
   },
   "home": {
-    "heroTitle": "Real-time Earthquake Info on Your Stream",
-    "heroSubtitle": "Earthquake information overlay tool for OBS streaming",
+    "heroTitle": "Never miss earthquake information during your stream.",
+    "heroSubtitle": "QuakeOverlay automatically fetches earthquake data\nand displays it on your OBS stream overlay.\nStay informed and share earthquake information with your viewers during streams.",
     "ctaDownload": "Download on Booth",
-    "ctaDocs": "View Documentation"
+    "ctaDocs": "View Documentation",
+    "hero": {
+      "badge": "For OBS Streamers",
+      "screenshotAlt": "QuakeOverlay main screen"
+    },
+    "features": {
+      "title": "Key Features",
+      "subtitle": "Everything you need for earthquake info on stream",
+      "items": {
+        "realtime": {
+          "title": "Earthquake Alerts",
+          "description": "Automatically fetches earthquake data and displays it on your stream overlay. Keep your viewers informed during streams."
+        },
+        "overlay": {
+          "title": "OBS Overlay",
+          "description": "Easily add as a browser source in OBS. Designed to blend naturally into your stream."
+        },
+        "customize": {
+          "title": "Customization",
+          "description": "Fine-tune display position, size, intensity threshold, and more to your preference."
+        },
+        "multilang": {
+          "title": "Multi-language",
+          "description": "Supports Japanese, English, and Korean. Share earthquake info with international viewers."
+        }
+      }
+    },
+    "demo": {
+      "title": "Demo",
+      "subtitle": "See it in action",
+      "items": {
+        "main": { "caption": "Main screen - Earthquake information display" },
+        "overlay": { "caption": "OBS overlay example" },
+        "settings": { "caption": "Settings - Fine-grained customization" }
+      }
+    },
+    "howItWorks": {
+      "title": "Easy 3 Steps",
+      "subtitle": "Setup takes just minutes",
+      "steps": {
+        "download": {
+          "title": "Download",
+          "description": "Download from Booth and extract the ZIP file."
+        },
+        "configure": {
+          "title": "Configure",
+          "description": "Launch the app and set your preferred intensity level and display position."
+        },
+        "stream": {
+          "title": "Start Streaming",
+          "description": "Add a browser source in OBS, set the URL, and you're ready to go."
+        }
+      }
+    },
+    "reviews": {
+      "title": "User Reviews",
+      "subtitle": "What users are saying about QuakeOverlay",
+      "empty": "Reviews coming soon"
+    },
+    "cta": {
+      "title": "Get Started Now",
+      "subtitle": "Download and display earthquake info on your stream",
+      "download": "Download on Booth"
+    }
+  },
+  "header": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "languageSwitcher": "Language",
+    "currentLanguage": "English"
   },
   "footer": {
-    "copyright": "© {year} QuakeOverlay. All rights reserved."
+    "copyright": "© {year} QuakeOverlay. All rights reserved.",
+    "description": "Earthquake information overlay tool for OBS streaming",
+    "documents": "Documents",
+    "links": "Links",
+    "language": "Language",
+    "gettingStarted": "Getting Started",
+    "screens": "Screens",
+    "faq": "FAQ",
+    "support": "Support"
+  },
+  "accessibility": {
+    "mainContent": "Main content"
   }
 }

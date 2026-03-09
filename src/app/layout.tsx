@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_JP, Noto_Sans_KR, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, Zen_Kaku_Gothic_New, Noto_Sans_KR, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,9 +8,16 @@ const inter = Inter({
   display: "swap",
 });
 
-const notoSansJP = Noto_Sans_JP({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-noto-sans-jp",
+  variable: "--font-space-grotesk",
+  display: "swap",
+  weight: ["500", "700"],
+});
+
+const zenKakuGothicNew = Zen_Kaku_Gothic_New({
+  subsets: ["latin"],
+  variable: "--font-zen-kaku-gothic-new",
   display: "swap",
   weight: ["400", "500", "700"],
 });
@@ -31,7 +38,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "QuakeOverlay",
-  description: "Real-time earthquake information overlay for OBS streaming",
+  description: "Earthquake information overlay for OBS streaming",
 };
 
 export default function RootLayout({
@@ -42,7 +49,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${notoSansJP.variable} ${notoSansKR.variable} ${jetbrainsMono.variable}`}
+        className={`${inter.variable} ${spaceGrotesk.variable} ${zenKakuGothicNew.variable} ${notoSansKR.variable} ${jetbrainsMono.variable}`}
       >
         {children}
       </body>
