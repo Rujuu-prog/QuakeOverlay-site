@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "QuakeOverlay",
+    "description": "OBS 방송에 실시간 지진 정보를 표시하는 오버레이"
+  },
+  "nav": {
+    "home": "홈",
+    "docs": "문서",
+    "releases": "릴리스 노트"
+  },
+  "home": {
+    "heroTitle": "방송 화면에 실시간 지진 정보 표시",
+    "heroSubtitle": "OBS 방송용 지진 정보 오버레이 도구",
+    "ctaDownload": "Booth에서 다운로드",
+    "ctaDocs": "문서 보기"
+  },
+  "footer": {
+    "copyright": "© {year} QuakeOverlay. All rights reserved."
+  }
+}

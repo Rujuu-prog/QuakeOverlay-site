@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "QuakeOverlay",
+    "description": "配信画面に地震情報をリアルタイム表示するOBSオーバーレイ"
+  },
+  "nav": {
+    "home": "トップ",
+    "docs": "ドキュメント",
+    "releases": "リリースノート"
+  },
+  "home": {
+    "heroTitle": "配信画面に地震情報をリアルタイム表示",
+    "heroSubtitle": "OBS配信用の地震情報オーバーレイツール",
+    "ctaDownload": "Boothでダウンロード",
+    "ctaDocs": "ドキュメントを見る"
+  },
+  "footer": {
+    "copyright": "© {year} QuakeOverlay. All rights reserved."
+  }
+}

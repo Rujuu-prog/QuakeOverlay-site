@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "QuakeOverlay",
+    "description": "Real-time earthquake information overlay for OBS streaming"
+  },
+  "nav": {
+    "home": "Home",
+    "docs": "Docs",
+    "releases": "Releases"
+  },
+  "home": {
+    "heroTitle": "Real-time Earthquake Info on Your Stream",
+    "heroSubtitle": "Earthquake information overlay tool for OBS streaming",
+    "ctaDownload": "Download on Booth",
+    "ctaDocs": "View Documentation"
+  },
+  "footer": {
+    "copyright": "© {year} QuakeOverlay. All rights reserved."
+  }
+}
