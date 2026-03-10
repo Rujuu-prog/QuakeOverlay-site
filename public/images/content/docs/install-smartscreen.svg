@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="20" y="20" width="760" height="410" rx="12" fill="none" stroke="#00d4ff" stroke-width="2" stroke-dasharray="8,4"/>
+  <rect x="250" y="30" width="300" height="36" rx="18" fill="#00d4ff" opacity="0.15"/>
+  <text x="400" y="55" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#00d4ff">PLACEHOLDER IMAGE</text>
+  <!-- Icon -->
+  <rect x="300" y="100" width="200" height="140" rx="8" fill="#16213e" stroke="#0f3460" stroke-width="2"/>
+  <text x="400" y="155" text-anchor="middle" font-family="sans-serif" font-size="40" fill="#00d4ff" opacity="0.5">🛡️</text>
+  <text x="400" y="220" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#a0a0a0">SmartScreen</text>
+  <!-- Description -->
+  <text x="400" y="280" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#e0e0e0">Windows Defender SmartScreen 警告画面</text>
+  <text x="400" y="310" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#a0a0a0">「詳細情報」クリック → 「実行」ボタン表示の2段階を</text>
+  <text x="400" y="332" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#a0a0a0">1枚にまとめたスクリーンショット</text>
+  <text x="400" y="362" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#00d4ff">ボタン位置を赤枠でハイライト推奨</text>
+  <text x="400" y="400" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#666">推奨サイズ: 800×450 | PNG形式推奨</text>
+</svg>

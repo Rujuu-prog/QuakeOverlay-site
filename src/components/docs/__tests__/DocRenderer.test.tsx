@@ -50,4 +50,42 @@ describe("DocRenderer", () => {
     const link = screen.getByText("docs");
     expect(link).not.toHaveAttribute("target");
   });
+
+  it("renders image with src and alt", () => {
+    const doc = makeDocument("![テスト画像](/images/content/docs/test.png)");
+    render(<DocRenderer document={doc} />);
+    const img = screen.getByAltText("テスト画像");
+    expect(img).toHaveAttribute("src", "/images/content/docs/test.png");
+  });
+
+  it("renders image without alt text", () => {
+    const doc = makeDocument("![](/images/content/docs/test.png)");
+    const { container } = render(<DocRenderer document={doc} />);
+    const img = container.querySelector("img");
+    expect(img).toHaveAttribute("src", "/images/content/docs/test.png");
+    expect(img).toHaveAttribute("alt", "");
+  });
+
+  it("renders GIF image correctly", () => {
+    const doc = makeDocument("![demo](/images/content/docs/demo.gif)");
+    render(<DocRenderer document={doc} />);
+    const img = screen.getByAltText("demo");
+    expect(img).toHaveAttribute("src", "/images/content/docs/demo.gif");
+  });
+
+  it("renders image with title as figure with caption", () => {
+    const doc = makeDocument('![alt](/images/test.png "キャプション")');
+    render(<DocRenderer document={doc} />);
+    expect(screen.getByText("キャプション")).toBeInTheDocument();
+    const figure = screen.getByRole("figure");
+    expect(figure).toBeInTheDocument();
+  });
+
+  it("applies lazy loading to images", () => {
+    const doc = makeDocument("![test](/images/test.png)");
+    render(<DocRenderer document={doc} />);
+    const img = screen.getByAltText("test");
+    expect(img).toHaveAttribute("loading", "lazy");
+    expect(img).toHaveAttribute("decoding", "async");
+  });
 });

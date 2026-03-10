@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#bg)"/>
+  <rect x="20" y="20" width="860" height="560" rx="12" fill="none" stroke="#00d4ff" stroke-width="2" stroke-dasharray="8,4"/>
+  <rect x="300" y="30" width="300" height="36" rx="18" fill="#00d4ff" opacity="0.15"/>
+  <text x="450" y="55" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="bold" fill="#00d4ff">PLACEHOLDER IMAGE</text>
+  <text x="450" y="85" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#a0a0a0">v1.0.0 主要機能ハイライト — 2x2 グリッド</text>
+  <!-- Grid 2x2 -->
+  <!-- Feature 1: Earthquake Notification -->
+  <rect x="60" y="110" width="380" height="200" rx="8" fill="#16213e" stroke="#0f3460" stroke-width="1"/>
+  <rect x="70" y="120" width="360" height="140" rx="6" fill="#0d0d1a"/>
+  <text x="250" y="170" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#00d4ff" opacity="0.4">🔔</text>
+  <text x="250" y="200" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#a0a0a0">リアルタイム地震通知</text>
+  <text x="250" y="220" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">震度・M値・震源地を即座に表示</text>
+  <text x="250" y="296" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#00d4ff">地震情報通知</text>
+  <!-- Feature 2: OBS Integration -->
+  <rect x="460" y="110" width="380" height="200" rx="8" fill="#16213e" stroke="#0f3460" stroke-width="1"/>
+  <rect x="470" y="120" width="360" height="140" rx="6" fill="#0d0d1a"/>
+  <text x="650" y="170" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#00d4ff" opacity="0.4">🎬</text>
+  <text x="650" y="200" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#a0a0a0">OBSブラウザソース連携</text>
+  <text x="650" y="220" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">ワンクリックでオーバーレイ追加</text>
+  <text x="650" y="296" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#00d4ff">OBS連携</text>
+  <!-- Feature 3: Multi-language -->
+  <rect x="60" y="330" width="380" height="200" rx="8" fill="#16213e" stroke="#0f3460" stroke-width="1"/>
+  <rect x="70" y="340" width="360" height="140" rx="6" fill="#0d0d1a"/>
+  <text x="250" y="390" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#00d4ff" opacity="0.4">🌐</text>
+  <text x="250" y="420" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#a0a0a0">日本語 / English / 한국어</text>
+  <text x="250" y="440" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">3言語対応インターフェース</text>
+  <text x="250" y="516" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#00d4ff">多言語対応</text>
+  <!-- Feature 4: Customization -->
+  <rect x="460" y="330" width="380" height="200" rx="8" fill="#16213e" stroke="#0f3460" stroke-width="1"/>
+  <rect x="470" y="340" width="360" height="140" rx="6" fill="#0d0d1a"/>
+  <text x="650" y="390" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#00d4ff" opacity="0.4">🎨</text>
+  <text x="650" y="420" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#a0a0a0">テーマ・位置・サイズ変更</text>
+  <text x="650" y="440" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#666">配信スタイルに合わせてカスタマイズ</text>
+  <text x="650" y="516" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#00d4ff">カスタマイズ</text>
+  <!-- Footer -->
+  <text x="450" y="565" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#666">推奨サイズ: 900×600 | PNG形式推奨</text>
+</svg>

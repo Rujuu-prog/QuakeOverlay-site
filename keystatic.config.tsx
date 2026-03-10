@@ -40,6 +40,12 @@ export default config({
         }),
         content: fields.markdoc({
           label: "コンテンツ",
+          options: {
+            image: {
+              directory: "public/images/content/docs",
+              publicPath: "/images/content/docs/",
+            },
+          },
         }),
       },
     }),
@@ -83,6 +89,12 @@ export default config({
         ),
         content: fields.markdoc({
           label: "詳細",
+          options: {
+            image: {
+              directory: "public/images/content/releases",
+              publicPath: "/images/content/releases/",
+            },
+          },
         }),
       },
     }),

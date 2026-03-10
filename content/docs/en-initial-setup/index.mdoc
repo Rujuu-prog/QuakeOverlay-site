@@ -11,6 +11,8 @@ When you launch QuakeOverlay for the first time, the application will guide you 
 
 ### Setup Wizard
 
+![Setup wizard — Language selection screen](/images/content/docs/setup-wizard.svg "Setup wizard — Choose from Japanese, English, or Korean")
+
 The setup wizard consists of three steps:
 
 1. **Language Selection** - Choose your preferred display language
@@ -23,6 +25,8 @@ QuakeOverlay provides a local web server that serves the overlay content. To dis
 
 ### Step-by-Step OBS Configuration
 
+![Adding a Browser Source in OBS Studio](/images/content/docs/setup-obs-add-source.svg "Click '+' in Sources panel then select 'Browser'")
+
 1. Open OBS Studio
 2. In the **Sources** panel, click the **+** button
 3. Select **Browser** from the source type list
@@ -30,6 +34,8 @@ QuakeOverlay provides a local web server that serves the overlay content. To dis
 5. Click **OK**
 
 In the Browser Source properties, configure the following settings:
+
+![OBS Browser Source properties](/images/content/docs/setup-obs-properties.svg "Recommended URL, size, and option settings")
 
 ```
 URL: http://localhost:3210/overlay
@@ -88,6 +94,8 @@ Navigate to the data source dropdown in the setup wizard and select your preferr
 ## Verifying the Setup
 
 After completing the initial setup, verify everything is working correctly:
+
+![Status bar connection states](/images/content/docs/setup-status-bar.svg "Green = Connected / Yellow = Reconnecting / Red = Error")
 
 1. Check that the QuakeOverlay status bar shows "Connected" in green
 2. Open your browser and navigate to `http://localhost:3210/overlay`

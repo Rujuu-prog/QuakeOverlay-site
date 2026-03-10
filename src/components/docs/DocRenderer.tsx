@@ -56,6 +56,31 @@ function Link({
   );
 }
 
+function DocImage({
+  src,
+  alt,
+  title,
+}: {
+  src: string;
+  alt?: string;
+  title?: string;
+}) {
+  const imgElement = (
+    <img src={src} alt={alt ?? ""} loading="lazy" decoding="async" />
+  );
+
+  if (title) {
+    return (
+      <figure>
+        {imgElement}
+        <figcaption>{title}</figcaption>
+      </figure>
+    );
+  }
+
+  return imgElement;
+}
+
 function FenceBlock({
   language,
   content,
@@ -88,6 +113,14 @@ const config: Parameters<typeof Markdoc.transform>[1] = {
         title: { type: String },
       },
     },
+    image: {
+      render: "DocImage",
+      attributes: {
+        src: { type: String, required: true },
+        alt: { type: String },
+        title: { type: String },
+      },
+    },
   },
 };
 
@@ -95,6 +128,7 @@ const components = {
   Heading,
   FenceBlock,
   Link,
+  DocImage,
 };
 
 export function DocRenderer({ document }: DocRendererProps) {
