@@ -28,9 +28,7 @@ describe("Demo", () => {
 
   it("renders captions", () => {
     render(<Demo />);
-    expect(
-      screen.getByText("Main screen - Earthquake information display")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Dashboard")).toBeInTheDocument();
   });
 
   it("renders navigation buttons", () => {
@@ -41,9 +39,22 @@ describe("Demo", () => {
     expect(nextButton).toBeInTheDocument();
   });
 
-  it("renders screenshot with dummy path when no localized images available", () => {
+  it("renders first screenshot with dashboard path", () => {
     render(<Demo />);
     const img = screen.getByRole("img");
-    expect(img).toHaveAttribute("src", "/images/dummy/app-screenshot-main.svg");
+    expect(img).toHaveAttribute("src", "/images/screenshots/ja/dashboard.png");
+  });
+
+  it("renders 6 dot indicators", () => {
+    render(<Demo />);
+    const dots = screen.getAllByRole("button", { name: /go to slide/i });
+    expect(dots).toHaveLength(6);
+  });
+
+  it("non-GIF screenshot does not have unoptimized attribute", () => {
+    render(<Demo />);
+    const img = screen.getByRole("img");
+    // dashboard is .png, should not be unoptimized
+    expect(img).not.toHaveAttribute("unoptimized");
   });
 });

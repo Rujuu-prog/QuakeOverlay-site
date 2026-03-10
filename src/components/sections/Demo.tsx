@@ -4,12 +4,15 @@ import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { getScreenshotPath } from "@/lib/screenshots";
+import { getScreenshotPath, isAnimatedFormat } from "@/lib/screenshots";
 import type { ScreenshotKey } from "@/constants/screenshots";
 
 const DEMO_ITEMS: readonly { key: ScreenshotKey }[] = [
-  { key: "main" },
+  { key: "dashboard" },
   { key: "overlay" },
+  { key: "receiveLog" },
+  { key: "overlaySettings" },
+  { key: "mapSettings" },
   { key: "settings" },
 ];
 
@@ -50,6 +53,7 @@ export function Demo() {
               width={1920}
               height={1080}
               className="w-full h-auto"
+              unoptimized={isAnimatedFormat(DEMO_ITEMS[currentIndex].key) || undefined}
             />
           </div>
 

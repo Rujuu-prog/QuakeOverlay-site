@@ -49,6 +49,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${inter.variable} ${spaceGrotesk.variable} ${zenKakuGothicNew.variable} ${notoSansKR.variable} ${jetbrainsMono.variable}`}
       >
         {children}

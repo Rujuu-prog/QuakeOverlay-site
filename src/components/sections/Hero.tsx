@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { EXTERNAL_LINKS } from "@/constants/site";
-import { getScreenshotPath } from "@/lib/screenshots";
+import { getScreenshotPath, isAnimatedFormat } from "@/lib/screenshots";
 import Image from "next/image";
 
 export function Hero() {
@@ -80,6 +80,7 @@ export function Hero() {
                 height={1080}
                 className="w-full h-auto"
                 priority
+                unoptimized={isAnimatedFormat("main") || undefined}
               />
             </div>
           </div>

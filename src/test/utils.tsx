@@ -49,7 +49,11 @@ const defaultMessages = {
       subtitle: "See it in action",
       items: {
         main: { caption: "Main screen - Earthquake information display" },
+        dashboard: { caption: "Dashboard" },
         overlay: { caption: "OBS overlay example" },
+        receiveLog: { caption: "Receive Log" },
+        overlaySettings: { caption: "Earthquake Notification Overlay Settings" },
+        mapSettings: { caption: "Map Display Settings" },
         settings: { caption: "Settings - Fine-grained customization" },
       },
     },

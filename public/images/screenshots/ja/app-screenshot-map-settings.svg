@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <rect width="1920" height="1080" fill="#0a0a12"/>
+  <rect x="40" y="40" width="1840" height="1000" rx="12" fill="#12121e" stroke="#00d4ff" stroke-width="2" stroke-opacity="0.3"/>
+  <text x="960" y="500" text-anchor="middle" fill="#8888aa" font-family="sans-serif" font-size="48">QuakeOverlay</text>
+  <text x="960" y="570" text-anchor="middle" fill="#555577" font-family="sans-serif" font-size="28">Map Settings</text>
+  <rect x="200" y="650" width="600" height="50" rx="8" fill="#1a1a2e" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.2"/>
+  <text x="220" y="683" fill="#8888aa" font-family="sans-serif" font-size="16">Map Style: Dark</text>
+  <rect x="200" y="720" width="600" height="50" rx="8" fill="#1a1a2e" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.2"/>
+  <text x="220" y="753" fill="#8888aa" font-family="sans-serif" font-size="16">Zoom Level: 7</text>
+  <rect x="200" y="790" width="600" height="50" rx="8" fill="#1a1a2e" stroke="#00d4ff" stroke-width="1" stroke-opacity="0.2"/>
+  <text x="220" y="823" fill="#8888aa" font-family="sans-serif" font-size="16">Show Epicenter: ON</text>
+</svg>

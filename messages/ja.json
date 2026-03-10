@@ -44,7 +44,11 @@
       "subtitle": "実際の動作をご覧ください",
       "items": {
         "main": { "caption": "メイン画面 - 地震情報の表示" },
+        "dashboard": { "caption": "ダッシュボード画面" },
         "overlay": { "caption": "OBSオーバーレイ表示例" },
+        "receiveLog": { "caption": "受信ログ" },
+        "overlaySettings": { "caption": "地震通知overlay設定画面" },
+        "mapSettings": { "caption": "地図表示設定画面" },
         "settings": { "caption": "設定画面 - 細かなカスタマイズが可能" }
       }
     },

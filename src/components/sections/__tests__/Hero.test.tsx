@@ -76,6 +76,13 @@ describe("Hero", () => {
   it("renders screenshot with dummy path when no localized images available", () => {
     render(<Hero />);
     const img = screen.getByAltText("QuakeOverlay main screen");
-    expect(img).toHaveAttribute("src", "/images/dummy/app-screenshot-main.svg");
+    expect(img).toHaveAttribute("src", "/images/screenshots/ja/app-screenshot-main.svg");
+  });
+
+  it("non-GIF screenshot does not have unoptimized attribute", () => {
+    render(<Hero />);
+    const img = screen.getByAltText("QuakeOverlay main screen");
+    // main is .svg, should not be unoptimized
+    expect(img).not.toHaveAttribute("unoptimized");
   });
 });
