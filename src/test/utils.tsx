@@ -123,6 +123,37 @@ const defaultMessages = {
     openSidebar: "Open sidebar",
     closeSidebar: "Close sidebar",
   },
+  releases: {
+    title: "Release Notes",
+    subtitle: "QuakeOverlay update history",
+    filterAll: "All",
+    changeTypes: {
+      feature: "Feature",
+      improvement: "Improvement",
+      fix: "Fix",
+      breaking: "Breaking",
+    },
+    knownIssues: "Known Issues",
+    noReleases: "No releases yet",
+    detail: {
+      backToList: "Back to Release Notes",
+    },
+    breadcrumb: {
+      home: "Home",
+      releases: "Releases",
+    },
+    roadmap: {
+      title: "Roadmap",
+      subtitle: "Upcoming development plans",
+      targetVersion: "Target version",
+      statuses: {
+        planned: "Planned",
+        "in-progress": "In Progress",
+        completed: "Completed",
+      },
+      noItems: "No roadmap items yet",
+    },
+  },
   accessibility: {
     mainContent: "Main content",
   },

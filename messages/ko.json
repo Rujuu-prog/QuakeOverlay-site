@@ -118,6 +118,37 @@
     "openSidebar": "사이드바 열기",
     "closeSidebar": "사이드바 닫기"
   },
+  "releases": {
+    "title": "릴리스 노트",
+    "subtitle": "QuakeOverlay 업데이트 기록",
+    "filterAll": "전체",
+    "changeTypes": {
+      "feature": "새 기능",
+      "improvement": "개선",
+      "fix": "수정",
+      "breaking": "호환성 변경"
+    },
+    "knownIssues": "알려진 문제",
+    "noReleases": "릴리스 정보가 아직 없습니다",
+    "breadcrumb": {
+      "home": "홈",
+      "releases": "릴리스 노트"
+    },
+    "detail": {
+      "backToList": "릴리스 노트 목록으로 돌아가기"
+    },
+    "roadmap": {
+      "title": "로드맵",
+      "subtitle": "향후 개발 예정",
+      "targetVersion": "대상 버전",
+      "statuses": {
+        "planned": "예정",
+        "in-progress": "진행 중",
+        "completed": "완료"
+      },
+      "noItems": "로드맵 정보가 아직 없습니다"
+    }
+  },
   "accessibility": {
     "mainContent": "메인 콘텐츠"
   }

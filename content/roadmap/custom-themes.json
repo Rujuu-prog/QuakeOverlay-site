@@ -1,0 +1,7 @@
+{
+  "title": "カスタムテーマ",
+  "description": "オーバーレイの配色やフォントをカスタマイズできるテーマ機能を追加します。",
+  "status": "in-progress",
+  "targetVersion": "v1.1.0",
+  "locale": "ja"
+}

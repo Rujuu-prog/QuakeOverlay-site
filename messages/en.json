@@ -118,6 +118,37 @@
     "openSidebar": "Open sidebar",
     "closeSidebar": "Close sidebar"
   },
+  "releases": {
+    "title": "Release Notes",
+    "subtitle": "QuakeOverlay update history",
+    "filterAll": "All",
+    "changeTypes": {
+      "feature": "Feature",
+      "improvement": "Improvement",
+      "fix": "Fix",
+      "breaking": "Breaking"
+    },
+    "knownIssues": "Known Issues",
+    "noReleases": "No releases yet",
+    "breadcrumb": {
+      "home": "Home",
+      "releases": "Releases"
+    },
+    "detail": {
+      "backToList": "Back to Release Notes"
+    },
+    "roadmap": {
+      "title": "Roadmap",
+      "subtitle": "Upcoming development plans",
+      "targetVersion": "Target version",
+      "statuses": {
+        "planned": "Planned",
+        "in-progress": "In Progress",
+        "completed": "Completed"
+      },
+      "noItems": "No roadmap items yet"
+    }
+  },
   "accessibility": {
     "mainContent": "Main content"
   }

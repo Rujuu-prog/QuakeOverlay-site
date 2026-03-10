@@ -302,6 +302,32 @@
   background-color: transparent !important;
 }
 
+/* Accordion animation */
+@keyframes accordion-open {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+.accordion-content {
+  animation: accordion-open 0.2s ease-out;
+}
+
+/* Timeline dot pulse on hover */
+.timeline-dot {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.timeline-dot:hover {
+  box-shadow: 0 0 8px var(--color-accent-glow);
+  transform: scale(1.3);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

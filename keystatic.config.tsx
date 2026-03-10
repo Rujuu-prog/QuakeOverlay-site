@@ -46,7 +46,7 @@ export default config({
     releases: collection({
       label: "リリースノート",
       slugField: "version",
-      path: "content/releases/*",
+      path: "content/releases/*/",
       format: { contentField: "content" },
       entryLayout: "content",
       schema: {
@@ -69,6 +69,15 @@ export default config({
           }),
           {
             label: "変更点",
+            itemLabel: (props) => props.fields.description.value,
+          },
+        ),
+        knownIssues: fields.array(
+          fields.object({
+            description: fields.text({ label: "説明", validation: { isRequired: true } }),
+          }),
+          {
+            label: "既知の問題",
             itemLabel: (props) => props.fields.description.value,
           },
         ),

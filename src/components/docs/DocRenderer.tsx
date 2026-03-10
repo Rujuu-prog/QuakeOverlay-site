@@ -31,10 +31,7 @@ function Heading({
 }) {
   const text = extractChildrenText(children);
   const id = generateHeadingId(text);
-  const Tag = `h${level}` as keyof Pick<
-    JSX.IntrinsicElements,
-    "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
-  >;
+  const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   return <Tag id={id}>{children}</Tag>;
 }
 

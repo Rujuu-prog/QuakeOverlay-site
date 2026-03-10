@@ -1,0 +1,7 @@
+{
+  "title": "サウンドアラート",
+  "description": "地震情報受信時にカスタムサウンドで通知する機能を追加します。",
+  "status": "planned",
+  "targetVersion": "v1.2.0",
+  "locale": "ja"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "津波警報対応",
+  "description": "津波警報・注意報の表示に対応し、より安全な配信環境を提供します。",
+  "status": "planned",
+  "targetVersion": "v1.2.0",
+  "locale": "ja"
+}

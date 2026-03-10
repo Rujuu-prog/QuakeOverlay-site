@@ -118,6 +118,37 @@
     "openSidebar": "サイドバーを開く",
     "closeSidebar": "サイドバーを閉じる"
   },
+  "releases": {
+    "title": "リリースノート",
+    "subtitle": "QuakeOverlayの更新履歴",
+    "filterAll": "すべて",
+    "changeTypes": {
+      "feature": "新機能",
+      "improvement": "改善",
+      "fix": "修正",
+      "breaking": "破壊的変更"
+    },
+    "knownIssues": "既知の問題",
+    "noReleases": "リリース情報はまだありません",
+    "breadcrumb": {
+      "home": "トップ",
+      "releases": "リリースノート"
+    },
+    "detail": {
+      "backToList": "リリースノート一覧に戻る"
+    },
+    "roadmap": {
+      "title": "ロードマップ",
+      "subtitle": "今後の開発予定",
+      "targetVersion": "対象バージョン",
+      "statuses": {
+        "planned": "予定",
+        "in-progress": "進行中",
+        "completed": "完了"
+      },
+      "noItems": "ロードマップ情報はまだありません"
+    }
+  },
   "accessibility": {
     "mainContent": "メインコンテンツ"
   }
