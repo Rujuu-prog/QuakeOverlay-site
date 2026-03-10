@@ -1,18 +1,21 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getScreenshotPath } from "@/lib/screenshots";
+import type { ScreenshotKey } from "@/constants/screenshots";
 
-const DEMO_ITEMS = [
-  { key: "main", src: "/images/dummy/app-screenshot-main.svg" },
-  { key: "overlay", src: "/images/dummy/app-screenshot-overlay.svg" },
-  { key: "settings", src: "/images/dummy/app-screenshot-settings.svg" },
-] as const;
+const DEMO_ITEMS: readonly { key: ScreenshotKey }[] = [
+  { key: "main" },
+  { key: "overlay" },
+  { key: "settings" },
+];
 
 export function Demo() {
   const t = useTranslations("home.demo");
+  const locale = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -42,7 +45,7 @@ export function Demo() {
           {/* Carousel */}
           <div className="relative rounded-xl border border-border-accent overflow-hidden bg-bg-secondary">
             <Image
-              src={DEMO_ITEMS[currentIndex].src}
+              src={getScreenshotPath(DEMO_ITEMS[currentIndex].key, locale)}
               alt={t(`items.${DEMO_ITEMS[currentIndex].key}.caption`)}
               width={1920}
               height={1080}

@@ -1,12 +1,14 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { EXTERNAL_LINKS } from "@/constants/site";
+import { getScreenshotPath } from "@/lib/screenshots";
 import Image from "next/image";
 
 export function Hero() {
   const t = useTranslations("home");
+  const locale = useLocale();
 
   return (
     <section className="relative overflow-hidden py-16 md:py-20 lg:py-24">
@@ -72,7 +74,7 @@ export function Hero() {
           <div className="flex-1 max-w-2xl">
             <div className="relative rounded-xl border border-border-accent overflow-hidden glow-accent">
               <Image
-                src="/images/dummy/app-screenshot-main.svg"
+                src={getScreenshotPath("main", locale)}
                 alt={t("hero.screenshotAlt")}
                 width={1920}
                 height={1080}

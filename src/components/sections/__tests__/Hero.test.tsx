@@ -72,4 +72,10 @@ describe("Hero", () => {
     const img = screen.getByAltText("QuakeOverlay main screen");
     expect(img).toBeInTheDocument();
   });
+
+  it("renders screenshot with dummy path when no localized images available", () => {
+    render(<Hero />);
+    const img = screen.getByAltText("QuakeOverlay main screen");
+    expect(img).toHaveAttribute("src", "/images/dummy/app-screenshot-main.svg");
+  });
 });

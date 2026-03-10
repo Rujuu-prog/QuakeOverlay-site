@@ -40,4 +40,10 @@ describe("Demo", () => {
     expect(prevButton).toBeInTheDocument();
     expect(nextButton).toBeInTheDocument();
   });
+
+  it("renders screenshot with dummy path when no localized images available", () => {
+    render(<Demo />);
+    const img = screen.getByRole("img");
+    expect(img).toHaveAttribute("src", "/images/dummy/app-screenshot-main.svg");
+  });
 });
