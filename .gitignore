@@ -31,6 +31,7 @@ yarn-error.log*
 
 # project
 /.claude
+/.playwright-mcp
 /order
 /doc
 /tmp
