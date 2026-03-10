@@ -11,7 +11,7 @@ export default config({
     docs: collection({
       label: "ドキュメント",
       slugField: "title",
-      path: "content/docs/*",
+      path: "content/docs/*/",
       format: { contentField: "content" },
       entryLayout: "content",
       schema: {

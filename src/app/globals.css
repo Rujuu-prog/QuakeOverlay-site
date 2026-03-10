@@ -62,12 +62,13 @@
 }
 
 /* Base styles */
-body {
+.app-layout {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-var-body);
   font-size: var(--text-body);
   line-height: var(--leading-normal);
+  min-height: 100vh;
 }
 
 /* Glow utilities */
@@ -166,6 +167,139 @@ body {
 
 .btn-transition:active {
   transform: scale(0.98);
+}
+
+/* Document content styles */
+.doc-content h2 {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 5rem;
+  color: var(--color-text-primary);
+}
+
+.doc-content h3 {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 5rem;
+  color: var(--color-text-primary);
+}
+
+.doc-content h4 {
+  font-size: var(--text-h4);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: 5rem;
+  color: var(--color-text-primary);
+}
+
+.doc-content p {
+  margin-bottom: 1rem;
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
+}
+
+.doc-content a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.doc-content a:hover {
+  color: var(--color-accent-hover);
+}
+
+.doc-content code:not(pre code) {
+  background: var(--color-bg-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  color: var(--color-text-primary);
+}
+
+.doc-content pre {
+  background: var(--color-bg-elevated);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.doc-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.doc-content th {
+  border-bottom: 2px solid var(--color-border-default);
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.doc-content td {
+  border-bottom: 1px solid var(--color-border-default);
+  padding: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.doc-content tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.doc-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.doc-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.doc-content li {
+  margin-bottom: 0.25rem;
+  line-height: var(--leading-normal);
+}
+
+.doc-content blockquote {
+  border-left: 4px solid var(--color-border-accent);
+  background: var(--color-bg-secondary);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: var(--color-text-secondary);
+}
+
+.doc-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border-default);
+  margin: 2rem 0;
+}
+
+.doc-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Override shiki background */
+.doc-content .shiki {
+  background-color: transparent !important;
 }
 
 /* Reduced motion */

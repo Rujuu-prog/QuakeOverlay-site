@@ -95,6 +95,29 @@
     "faq": "자주 묻는 질문",
     "support": "지원"
   },
+  "docs": {
+    "title": "문서",
+    "searchPlaceholder": "문서 검색…",
+    "noResults": "해당 문서를 찾을 수 없습니다",
+    "tableOfContents": "목차",
+    "onThisPage": "이 페이지 내용",
+    "previousPage": "이전 페이지",
+    "nextPage": "다음 페이지",
+    "breadcrumb": {
+      "home": "홈",
+      "docs": "문서"
+    },
+    "categories": {
+      "getting-started": "시작하기",
+      "screens": "화면 설명",
+      "customization": "커스터마이징",
+      "faq": "자주 묻는 질문",
+      "support": "지원"
+    },
+    "sidebar": "사이드바",
+    "openSidebar": "사이드바 열기",
+    "closeSidebar": "사이드바 닫기"
+  },
   "accessibility": {
     "mainContent": "메인 콘텐츠"
   }

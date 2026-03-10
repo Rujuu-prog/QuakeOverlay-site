@@ -1,12 +1,13 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SITE_NAME, EXTERNAL_LINKS } from "@/constants/site";
 import { ExternalLink } from "lucide-react";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const locale = useLocale();
   const year = new Date().getFullYear();
 
   return (
@@ -25,7 +26,7 @@ export function Footer() {
             <ul className="mt-3 flex flex-col gap-2">
               <li>
                 <Link
-                  href="/docs"
+                  href={`/docs/${locale}-installation`}
                   className="text-sm text-text-secondary hover:text-accent transition-colors duration-200"
                 >
                   {t("gettingStarted")}
@@ -33,7 +34,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/docs"
+                  href={`/docs/${locale}-main-screen`}
                   className="text-sm text-text-secondary hover:text-accent transition-colors duration-200"
                 >
                   {t("screens")}
@@ -41,7 +42,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/docs"
+                  href={`/docs/${locale}-faq`}
                   className="text-sm text-text-secondary hover:text-accent transition-colors duration-200"
                 >
                   {t("faq")}
@@ -49,7 +50,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/docs"
+                  href={`/docs/${locale}-contact`}
                   className="text-sm text-text-secondary hover:text-accent transition-colors duration-200"
                 >
                   {t("support")}

@@ -1,0 +1,97 @@
+---
+title: "Installation"
+description: "How to download and install QuakeOverlay"
+category: "getting-started"
+order: 0
+locale: "en"
+---
+## Overview
+
+QuakeOverlay is a desktop application that displays real-time earthquake information as an overlay in OBS Studio. This guide walks you through downloading and installing QuakeOverlay on your system.
+
+## System Requirements
+
+Before installing QuakeOverlay, make sure your system meets the following requirements:
+
+- Windows 10 or later (64-bit)
+- .NET 8.0 Runtime or later
+- At least 4 GB of RAM
+- 100 MB of available disk space
+- An active internet connection for receiving earthquake data
+- OBS Studio 28.0 or later (for overlay functionality)
+
+## Downloading QuakeOverlay
+
+QuakeOverlay is distributed through Booth. Follow these steps to download the application:
+
+1. Visit the QuakeOverlay product page on [Booth](https://booth.pm)
+2. Purchase or download the application
+3. Once the download is complete, you will receive a ZIP archive file
+
+### Download Package Contents
+
+The downloaded ZIP file contains the following:
+
+```
+QuakeOverlay/
+├── QuakeOverlay.exe
+├── appsettings.json
+├── README.txt
+├── assets/
+│   ├── themes/
+│   └── sounds/
+└── licenses/
+```
+
+## Installation Steps
+
+QuakeOverlay does not require a traditional installer. Follow these steps to set it up:
+
+1. Locate the downloaded ZIP file (e.g., `QuakeOverlay_v1.0.0.zip`)
+2. Right-click the ZIP file and select **Extract All...**
+3. Choose a destination folder (e.g., `C:\Tools\QuakeOverlay`)
+4. Click **Extract**
+5. Navigate to the extracted folder
+6. Double-click `QuakeOverlay.exe` to launch the application
+
+### Important Notes
+
+- Do not extract the files into `Program Files` or other system-protected directories, as this may cause permission issues
+- If Windows SmartScreen shows a warning, click **More info** and then **Run anyway**
+- Keep all files in the same directory structure; do not move individual files out of the folder
+
+## Verifying the Installation
+
+After launching QuakeOverlay for the first time, verify the installation by checking the following:
+
+- The main window appears without errors
+- The status indicator in the bottom-left corner shows a green connection icon
+- The application version is displayed in the title bar
+
+## Configuration File
+
+QuakeOverlay uses a JSON configuration file located in the application directory. The default configuration looks like this:
+
+```json
+{
+  "general": {
+    "language": "en",
+    "autoStart": false,
+    "minimizeToTray": true
+  },
+  "connection": {
+    "dataSource": "JMA",
+    "updateInterval": 5
+  }
+}
+```
+
+You can modify these settings through the application's Settings screen or by editing the file directly.
+
+## Troubleshooting Installation Issues
+
+If you encounter problems during installation, check the following:
+
+- **.NET Runtime missing**: Download and install the .NET 8.0 Runtime from the [official Microsoft website](https://dotnet.microsoft.com/download)
+- **Application won't start**: Ensure all files were extracted properly and no antivirus software is blocking the executable
+- **Permission errors**: Move the application folder to a non-protected directory such as your Desktop or Documents folder

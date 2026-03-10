@@ -1,0 +1,148 @@
+---
+title: "FAQ"
+description: "Frequently asked questions"
+category: "faq"
+order: 0
+locale: "en"
+---
+## Frequently Asked Questions
+
+This page answers the most common questions about QuakeOverlay. If your question is not covered here, please visit the Contact page for further support.
+
+## General Questions
+
+### What is QuakeOverlay?
+
+QuakeOverlay is a desktop application that displays real-time earthquake information as an overlay in streaming software like OBS Studio. It receives earthquake data from official sources and presents the information to your viewers through a customizable on-screen display.
+
+### Which operating systems are supported?
+
+Currently, QuakeOverlay supports Windows 10 and later (64-bit only). macOS and Linux support is not available at this time.
+
+### Is QuakeOverlay free?
+
+QuakeOverlay is available for purchase on Booth. Please check the product page for current pricing information.
+
+## Setup and Configuration
+
+### The overlay is not showing in OBS. What should I check?
+
+If the overlay is not visible in OBS Studio, verify the following:
+
+1. Confirm that QuakeOverlay is running and the status indicator shows green
+2. Check that the Browser Source URL is correct (`http://localhost:3210/overlay`)
+3. Ensure the Browser Source width and height match your canvas resolution
+4. Verify that the Browser Source is not hidden or locked in the Sources panel
+5. Try refreshing the Browser Source by right-clicking it and selecting **Refresh**
+
+You can also test the overlay URL directly in your web browser:
+
+```
+http://localhost:3210/overlay
+```
+
+If the page loads correctly in the browser but not in OBS, the issue is with the OBS Browser Source configuration.
+
+### Can I change the port number?
+
+Yes. Edit the `appsettings.json` file and change the port value:
+
+```json
+{
+  "server": {
+    "port": 8080,
+    "host": "localhost"
+  }
+}
+```
+
+After changing the port, restart QuakeOverlay and update your OBS Browser Source URL accordingly.
+
+### How do I reset all settings to defaults?
+
+You can reset settings in two ways:
+
+- Use the **Reset to Defaults** button in the Settings screen
+- Delete the `appsettings.json` file and restart the application; a new default file will be created automatically
+
+## Data and Accuracy
+
+### Where does the earthquake data come from?
+
+QuakeOverlay supports three data sources:
+
+- **JMA (Japan Meteorological Agency)** - Official earthquake data for Japan
+- **P2P Earthquake** - A community-based earthquake detection network
+- **USGS** - United States Geological Survey data covering global earthquakes
+
+You can select your preferred data source in the Settings screen under the General tab.
+
+### How quickly does the overlay display earthquake information?
+
+The display speed depends on the data source and your update interval setting. Typically:
+
+- **JMA**: Data is available within 10-30 seconds of the event
+- **P2P Earthquake**: Detection may occur within seconds due to community reporting
+- **USGS**: Data is typically available within 1-5 minutes
+
+The default update interval is 5 seconds, meaning QuakeOverlay checks for new data every 5 seconds.
+
+### Is the earthquake data always accurate?
+
+Earthquake data from official sources like JMA and USGS undergoes quality assurance. However, initial reports may be revised as more data becomes available. Preliminary magnitude and location estimates can change in subsequent updates.
+
+## Customization
+
+### Can I use custom fonts in the overlay?
+
+Yes. QuakeOverlay supports custom fonts through the theme configuration. Place your font files in the `assets/fonts/` directory and reference them in your custom theme:
+
+```json
+{
+  "theme": {
+    "fonts": {
+      "family": "MyCustomFont, sans-serif",
+      "customFontPath": "assets/fonts/MyCustomFont.woff2"
+    }
+  }
+}
+```
+
+### How do I create a custom theme?
+
+Create a JSON file in the `assets/themes/` directory with your theme configuration. See the Theme Customization documentation for the full theme file structure and available options.
+
+### Can I display the overlay on a second monitor?
+
+The overlay is rendered through a web browser or OBS Browser Source, so it is displayed wherever that source is configured. If you want to preview the overlay on a second monitor, you can open the overlay URL in a web browser window and move it to the desired monitor.
+
+## Troubleshooting
+
+### QuakeOverlay crashes on startup. What should I do?
+
+If the application crashes on startup, try the following steps:
+
+1. Ensure you have the .NET 8.0 Runtime installed
+2. Delete the `appsettings.json` file to reset the configuration
+3. Check the `logs/` directory for error messages
+4. Run the application from a command prompt to see console error output:
+
+```
+cd C:\Tools\QuakeOverlay
+QuakeOverlay.exe
+```
+
+5. If the issue persists, report the bug through the Contact page with the log file attached
+
+### The application shows "Disconnected" status. How do I fix it?
+
+A disconnected status usually means the application cannot reach the data source. Check the following:
+
+- Verify your internet connection is active
+- Check if a firewall is blocking QuakeOverlay
+- Try switching to a different data source in Settings
+- Restart the application
+
+### My antivirus is blocking QuakeOverlay. Is it safe?
+
+QuakeOverlay is a legitimate application distributed through Booth. Some antivirus programs may flag it because it runs a local web server. You can safely add QuakeOverlay to your antivirus exceptions list. The application only communicates with official earthquake data servers and your local network.

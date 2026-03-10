@@ -1,0 +1,173 @@
+---
+title: "テーマカスタマイズ"
+description: "表示テーマの変更方法"
+category: "customization"
+order: 0
+locale: "ja"
+---
+## テーマカスタマイズの概要
+
+QuakeOverlayでは、オーバーレイの見た目をテーマ機能で自由にカスタマイズできます。プリセットテーマの選択や、カスタムカラーの設定、フォントの変更が可能です。
+
+## プリセットテーマ
+
+### テーマの種類
+
+以下のプリセットテーマが用意されています。
+
+- **ダーク**: 暗い背景に明るい文字（デフォルト）
+- **ライト**: 明るい背景に暗い文字
+- **セミトランスペアレント**: 半透明の背景
+- **ミニマル**: 最小限の装飾で情報を表示
+- **レトロ**: 昔ながらの地震速報風デザイン
+
+### テーマの切り替え
+
+テーマは設定画面の「表示」タブから切り替えられます。また、URLパラメータでも指定可能です。
+
+```
+http://localhost:8080/overlay?theme=dark
+http://localhost:8080/overlay?theme=light
+http://localhost:8080/overlay?theme=minimal
+```
+
+## カスタムカラー設定
+
+### カラーパレット
+
+カスタムテーマでは、各要素の色を個別に設定できます。
+
+```json
+{
+  "theme": {
+    "name": "custom",
+    "colors": {
+      "background": "#1a1a2e",
+      "cardBackground": "#16213e",
+      "text": "#eaeaea",
+      "textSecondary": "#a0a0a0",
+      "border": "#0f3460",
+      "accent": "#e94560",
+      "intensityHigh": "#ff0000",
+      "intensityMid": "#ff8c00",
+      "intensityLow": "#4caf50",
+      "shadow": "rgba(0, 0, 0, 0.5)"
+    }
+  }
+}
+```
+
+### 色の設定項目
+
+設定可能な色の一覧です。
+
+1. **background**: 全体の背景色
+2. **cardBackground**: 情報カードの背景色
+3. **text**: メインテキストの色
+4. **textSecondary**: サブテキストの色
+5. **border**: 枠線の色
+6. **accent**: アクセントカラー（強調表示）
+7. **intensityHigh**: 高震度時の色
+8. **intensityMid**: 中震度時の色
+9. **intensityLow**: 低震度時の色
+10. **shadow**: 影の色
+
+### カラーピッカー
+
+設定画面にはカラーピッカーが搭載されており、視覚的に色を選択できます。16進数カラーコードの直接入力にも対応しています。
+
+## フォント設定
+
+### フォントの変更
+
+表示フォントを変更できます。システムにインストールされているフォントを使用できます。
+
+```json
+{
+  "theme": {
+    "fonts": {
+      "primary": "Noto Sans JP",
+      "secondary": "Roboto",
+      "monospace": "JetBrains Mono",
+      "size": {
+        "title": "24px",
+        "body": "16px",
+        "small": "12px",
+        "intensity": "48px"
+      },
+      "weight": {
+        "normal": 400,
+        "bold": 700
+      }
+    }
+  }
+}
+```
+
+### 推奨フォント
+
+以下のフォントが推奨されます。
+
+- **Noto Sans JP**: Google提供の日本語フォント（デフォルト）
+- **M PLUS 1p**: 視認性の高いゴシック体
+- **BIZ UDPGothic**: ユニバーサルデザインフォント
+- **源ノ角ゴシック**: Adobe提供の高品質フォント
+
+### Webフォントの使用
+
+カスタムフォントをWebフォントとして読み込むことも可能です。
+
+```json
+{
+  "theme": {
+    "webFonts": [
+      {
+        "family": "Noto Sans JP",
+        "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+      }
+    ]
+  }
+}
+```
+
+## テーマのエクスポートと共有
+
+### テーマファイルの書き出し
+
+作成したカスタムテーマはJSON形式でエクスポートできます。
+
+1. 設定画面の「テーマ」タブを開く
+2. 「テーマをエクスポート」ボタンをクリック
+3. 保存先を選択してJSON形式で保存
+
+### テーマの読み込み
+
+他のユーザーが作成したテーマファイルを読み込むことができます。
+
+1. 設定画面の「テーマ」タブを開く
+2. 「テーマをインポート」ボタンをクリック
+3. JSONファイルを選択して読み込み
+
+### テーマファイルの構造
+
+テーマファイルの完全な構造は以下のとおりです。
+
+```json
+{
+  "themeName": "My Custom Theme",
+  "version": "1.0",
+  "author": "ユーザー名",
+  "colors": {},
+  "fonts": {},
+  "spacing": {
+    "cardPadding": "16px",
+    "cardMargin": "8px",
+    "borderRadius": "8px"
+  },
+  "effects": {
+    "blur": false,
+    "shadow": true,
+    "gradient": false
+  }
+}
+```

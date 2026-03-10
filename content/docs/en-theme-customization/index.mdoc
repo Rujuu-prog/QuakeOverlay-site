@@ -1,0 +1,169 @@
+---
+title: "Theme Customization"
+description: "How to change display themes"
+category: "customization"
+order: 0
+locale: "en"
+---
+## Overview
+
+QuakeOverlay supports multiple visual themes for the overlay display. You can choose from built-in themes or create your own custom theme to match your stream's visual identity.
+
+## Built-in Themes
+
+QuakeOverlay comes with four pre-installed themes:
+
+- **Default** - A balanced theme with a semi-transparent dark background and clear typography
+- **Dark** - A fully dark theme suited for streams with darker color palettes
+- **Light** - A bright theme with high contrast for visibility on dark backgrounds
+- **Minimal** - A compact, low-profile theme that takes up minimal screen space
+
+### Theme Preview
+
+You can preview themes before applying them by navigating to the Theme Customization section in the Settings screen. Each theme shows a live preview of how the overlay will appear.
+
+## Selecting a Theme
+
+To change the active theme:
+
+1. Open the Settings screen
+2. Navigate to the **Display** tab
+3. Click on the **Theme** dropdown
+4. Select your desired theme
+5. Click **Apply** to save the changes
+
+The theme change takes effect immediately on the overlay without requiring a restart.
+
+## Custom Colors
+
+You can customize the colors used by the overlay without creating a full custom theme. The following color properties are available:
+
+- **Background Color** - The main background of the overlay panel
+- **Text Color** - The primary text color for earthquake details
+- **Header Color** - The color of the alert header bar
+- **Accent Color** - Used for highlights, borders, and intensity indicators
+- **Shadow Color** - The drop shadow beneath the overlay
+
+### Color Configuration
+
+Colors are defined in the theme configuration file using standard CSS color values:
+
+```json
+{
+  "theme": {
+    "name": "custom",
+    "colors": {
+      "background": "rgba(20, 20, 30, 0.85)",
+      "text": "#FFFFFF",
+      "header": "#1a1a2e",
+      "accent": "#e94560",
+      "shadow": "rgba(0, 0, 0, 0.5)",
+      "intensityColors": {
+        "1": "#808080",
+        "2": "#808080",
+        "3": "#0000FF",
+        "4": "#00AA00",
+        "5-": "#FFD700",
+        "5+": "#FF8C00",
+        "6-": "#FF0000",
+        "6+": "#8B0000",
+        "7": "#800080"
+      }
+    }
+  }
+}
+```
+
+## Font Settings
+
+QuakeOverlay allows you to customize the fonts used in the overlay display.
+
+### Available Font Options
+
+- **Font Family** - Choose from system fonts or bundled web fonts
+- **Font Size** - Adjust the base font size (12px - 32px)
+- **Font Weight** - Set the font weight (Normal, Bold, Light)
+- **Line Height** - Control the spacing between lines of text
+
+### Bundled Fonts
+
+QuakeOverlay includes the following fonts:
+
+1. Noto Sans JP (default)
+2. Inter
+3. Roboto
+4. Source Han Sans
+
+### Font Configuration
+
+```json
+{
+  "theme": {
+    "fonts": {
+      "family": "Noto Sans JP, sans-serif",
+      "size": "16px",
+      "weight": "400",
+      "lineHeight": "1.5",
+      "headerSize": "22px",
+      "headerWeight": "700"
+    }
+  }
+}
+```
+
+## Creating a Custom Theme
+
+To create a fully custom theme, create a new JSON file in the `assets/themes/` directory.
+
+### Custom Theme Structure
+
+Create a file named `my-theme.json` with the following structure:
+
+```json
+{
+  "name": "My Custom Theme",
+  "version": "1.0",
+  "author": "Your Name",
+  "colors": {
+    "background": "rgba(15, 15, 35, 0.9)",
+    "text": "#E0E0E0",
+    "header": "#2D2D5E",
+    "accent": "#00D4FF",
+    "shadow": "rgba(0, 0, 0, 0.6)"
+  },
+  "fonts": {
+    "family": "Inter, sans-serif",
+    "size": "15px",
+    "weight": "400"
+  },
+  "borders": {
+    "radius": "8px",
+    "width": "1px",
+    "color": "rgba(255, 255, 255, 0.1)"
+  },
+  "animation": {
+    "slideIn": "ease-out",
+    "slideOut": "ease-in",
+    "duration": "0.4s"
+  }
+}
+```
+
+### Loading Custom Themes
+
+After creating your custom theme file:
+
+1. Place it in the `assets/themes/` directory
+2. Restart QuakeOverlay
+3. The custom theme will appear in the Theme dropdown in Settings
+4. Select it and click **Apply**
+
+## Theme Best Practices
+
+When customizing themes, keep these guidelines in mind:
+
+- Use semi-transparent backgrounds so the stream content remains partially visible
+- Ensure sufficient contrast between text and background for readability
+- Test your theme with different intensity levels to verify all colors are distinguishable
+- Keep font sizes readable on both 1080p and 4K displays
+- Use smooth animations (0.3s - 0.5s duration) to avoid distracting viewers

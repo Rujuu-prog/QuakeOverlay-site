@@ -1,0 +1,112 @@
+---
+title: "Main Screen"
+description: "Overview of the main screen features"
+category: "screens"
+order: 0
+locale: "en"
+---
+## Overview
+
+The Main Screen is the primary interface of QuakeOverlay. It displays real-time earthquake information, connection status, and provides quick access to all application features. When QuakeOverlay is running, this screen serves as your central monitoring dashboard.
+
+## Screen Layout
+
+The Main Screen is divided into several key areas:
+
+- **Title Bar** - Displays the application name and version number
+- **Earthquake List** - Shows recent earthquake events in a scrollable list
+- **Status Bar** - Indicates the connection status and data source
+- **Action Buttons** - Quick access to settings, overlay preview, and controls
+
+### Earthquake List
+
+The earthquake list is the central component of the Main Screen. Each entry in the list shows the following information:
+
+- **Time** - When the earthquake occurred (local time)
+- **Location** - The epicenter location name
+- **Magnitude** - The magnitude of the earthquake
+- **Maximum Intensity** - The highest seismic intensity observed
+- **Depth** - The depth of the hypocenter in kilometers
+
+#### List Item Color Coding
+
+Earthquake entries are color-coded based on their maximum intensity:
+
+| Intensity | Color | Description |
+|-----------|-------|-------------|
+| 1-2 | Gray | Minor shaking, rarely felt |
+| 3 | Blue | Weak shaking, felt indoors |
+| 4 | Green | Moderate shaking |
+| 5- | Yellow | Strong shaking |
+| 5+ | Orange | Very strong shaking |
+| 6- | Red | Severe shaking |
+| 6+ | Dark Red | Violent shaking |
+| 7 | Purple | Extreme shaking |
+
+## Status Indicators
+
+The status bar at the bottom of the Main Screen provides real-time feedback about the application state.
+
+### Connection Status
+
+The connection indicator shows the current state of the data feed:
+
+- **Green circle** - Connected and receiving data normally
+- **Yellow circle** - Connected but experiencing delays
+- **Red circle** - Disconnected or unable to reach the data source
+
+### Data Source Indicator
+
+Next to the connection status, the active data source is displayed. This shows which earthquake data provider is currently being used (e.g., JMA, P2P Earthquake, USGS).
+
+## Earthquake Detail View
+
+Clicking on any earthquake entry in the list opens a detailed view with additional information:
+
+```json
+{
+  "eventId": "20240315_143022",
+  "timestamp": "2024-03-15T14:30:22+09:00",
+  "epicenter": {
+    "name": "Chiba Prefecture, Eastern",
+    "latitude": 35.6,
+    "longitude": 140.1
+  },
+  "magnitude": 4.2,
+  "depth": 30,
+  "maxIntensity": "4",
+  "stations": [
+    { "name": "Chiba", "intensity": "4" },
+    { "name": "Tokyo", "intensity": "3" }
+  ]
+}
+```
+
+### Detail View Features
+
+The detail view provides:
+
+1. An interactive map showing the epicenter location
+2. A list of observation stations with individual intensity readings
+3. Timestamp information in both local and UTC formats
+4. Options to share or export the earthquake data
+
+## Context Menu
+
+Right-clicking on the Main Screen or an earthquake entry opens a context menu with the following options:
+
+- **Copy Details** - Copies the earthquake information to the clipboard
+- **Open in Browser** - Opens the earthquake detail page in your default browser
+- **Mark as Read** - Marks the earthquake entry as viewed
+- **Filter by Region** - Filters the list to show only earthquakes from the same region
+
+## Keyboard Shortcuts
+
+The Main Screen supports several keyboard shortcuts for quick navigation:
+
+- `Ctrl + S` - Open Settings
+- `Ctrl + O` - Open Overlay Preview
+- `Ctrl + R` - Refresh earthquake data
+- `Escape` - Minimize to system tray
+- `Up/Down Arrow` - Navigate earthquake list
+- `Enter` - Open selected earthquake detail view

@@ -95,6 +95,29 @@
     "faq": "よくある質問",
     "support": "サポート"
   },
+  "docs": {
+    "title": "ドキュメント",
+    "searchPlaceholder": "ドキュメントを検索…",
+    "noResults": "該当するドキュメントが見つかりません",
+    "tableOfContents": "目次",
+    "onThisPage": "このページの内容",
+    "previousPage": "前のページ",
+    "nextPage": "次のページ",
+    "breadcrumb": {
+      "home": "トップ",
+      "docs": "ドキュメント"
+    },
+    "categories": {
+      "getting-started": "はじめに",
+      "screens": "各画面の説明",
+      "customization": "カスタマイズ",
+      "faq": "よくある質問",
+      "support": "サポート"
+    },
+    "sidebar": "サイドバー",
+    "openSidebar": "サイドバーを開く",
+    "closeSidebar": "サイドバーを閉じる"
+  },
   "accessibility": {
     "mainContent": "メインコンテンツ"
   }

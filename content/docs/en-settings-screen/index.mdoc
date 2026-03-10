@@ -1,0 +1,186 @@
+---
+title: "Settings Screen"
+description: "Detailed settings reference"
+category: "screens"
+order: 2
+locale: "en"
+---
+## Overview
+
+The Settings Screen provides comprehensive control over all aspects of QuakeOverlay's behavior and appearance. It is organized into tabs for easy navigation: General, Notifications, Display, and Advanced.
+
+## General Settings
+
+The General tab contains basic application configuration options.
+
+### Language
+
+Select the display language for the application interface. Available languages:
+
+- English
+- Japanese (日本語)
+
+### Startup Behavior
+
+Configure how QuakeOverlay behaves when your system starts:
+
+- **Start with Windows** - Automatically launch QuakeOverlay on system startup
+- **Start minimized** - Launch the application minimized to the system tray
+- **Minimize to tray on close** - Clicking the close button minimizes to tray instead of exiting
+
+### Data Source
+
+Select the earthquake data provider:
+
+1. **JMA** - Japan Meteorological Agency official data
+2. **P2P Earthquake** - Community-based earthquake detection
+3. **USGS** - United States Geological Survey global data
+
+### Configuration Example
+
+The general settings are stored in the configuration file as follows:
+
+```json
+{
+  "general": {
+    "language": "en",
+    "autoStart": true,
+    "startMinimized": false,
+    "minimizeToTray": true,
+    "dataSource": "JMA",
+    "updateInterval": 5
+  }
+}
+```
+
+## Notification Settings
+
+The Notifications tab controls how QuakeOverlay alerts you about earthquake events.
+
+### Sound Notifications
+
+- **Enable sound alerts** - Toggle sound notifications on or off
+- **Sound file** - Select a custom notification sound (WAV or MP3)
+- **Volume** - Adjust the notification volume (0-100%)
+
+### Desktop Notifications
+
+- **Show Windows notifications** - Display Windows toast notifications
+- **Notification duration** - How long the Windows notification stays visible (seconds)
+
+### Intensity-Based Alerts
+
+Configure different notification behaviors based on earthquake intensity:
+
+| Intensity Range | Sound | Desktop Alert | Overlay |
+|----------------|-------|---------------|---------|
+| 1-2 | Off | Off | Optional |
+| 3-4 | Default | On | On |
+| 5+ | Alarm | On | On |
+| 6+ | Urgent | On | Full Screen |
+
+### Notification Configuration
+
+```json
+{
+  "notifications": {
+    "sound": {
+      "enabled": true,
+      "file": "assets/sounds/alert.wav",
+      "volume": 80
+    },
+    "desktop": {
+      "enabled": true,
+      "duration": 10
+    },
+    "intensityRules": [
+      { "minIntensity": 3, "sound": true, "desktop": true, "overlay": true },
+      { "minIntensity": 5, "sound": true, "desktop": true, "overlay": true, "urgent": true }
+    ]
+  }
+}
+```
+
+## Display Settings
+
+The Display tab controls the visual appearance and behavior of the overlay.
+
+### Overlay Position
+
+Choose where the overlay appears on screen:
+
+- Top Left
+- Top Right (default)
+- Bottom Left
+- Bottom Right
+- Center
+
+### Display Duration
+
+Set how long the overlay remains visible after an earthquake alert:
+
+- **Short** - 10 seconds
+- **Medium** - 30 seconds (default)
+- **Long** - 60 seconds
+- **Custom** - Enter a custom duration in seconds
+
+### Intensity Threshold
+
+Set the minimum earthquake intensity required to trigger the overlay. Events below this threshold will be logged but not displayed.
+
+### Theme
+
+Select the visual theme for the overlay. See the Theme Customization documentation for details.
+
+## Advanced Settings
+
+The Advanced tab provides additional configuration options for experienced users.
+
+### Server Settings
+
+- **Port** - The local server port for the overlay endpoint (default: 3210)
+- **Host** - The host address to bind to (default: localhost)
+
+### Data Settings
+
+- **Update interval** - How frequently to check for new earthquake data (seconds)
+- **Cache duration** - How long to keep earthquake data in memory (minutes)
+- **Maximum events** - Maximum number of events to display in the earthquake list
+
+### Logging
+
+- **Enable logging** - Write application logs to a file
+- **Log level** - Set the logging verbosity (Error, Warning, Info, Debug)
+- **Log file path** - Location of the log file
+
+```json
+{
+  "advanced": {
+    "server": {
+      "port": 3210,
+      "host": "localhost"
+    },
+    "data": {
+      "updateInterval": 5,
+      "cacheDuration": 60,
+      "maxEvents": 100
+    },
+    "logging": {
+      "enabled": true,
+      "level": "Info",
+      "filePath": "logs/quakeoverlay.log"
+    }
+  }
+}
+```
+
+## Resetting Settings
+
+To reset all settings to their default values:
+
+1. Open the Settings screen
+2. Click the **Reset to Defaults** button at the bottom of any tab
+3. Confirm the reset in the dialog that appears
+4. The application will restart with default settings
+
+Alternatively, you can delete the `appsettings.json` file and restart the application. A new default configuration file will be generated automatically.

@@ -18,6 +18,14 @@ vi.mock("@/i18n/navigation", () => ({
   ),
 }));
 
+vi.mock("next-intl", async () => {
+  const actual = await vi.importActual("next-intl");
+  return {
+    ...actual,
+    useLocale: () => "en",
+  };
+});
+
 describe("Footer", () => {
   it("renders as a footer element", () => {
     render(<Footer />);

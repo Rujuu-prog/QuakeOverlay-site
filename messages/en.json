@@ -95,6 +95,29 @@
     "faq": "FAQ",
     "support": "Support"
   },
+  "docs": {
+    "title": "Documentation",
+    "searchPlaceholder": "Search docs…",
+    "noResults": "No documents found",
+    "tableOfContents": "Table of Contents",
+    "onThisPage": "On this page",
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "breadcrumb": {
+      "home": "Home",
+      "docs": "Docs"
+    },
+    "categories": {
+      "getting-started": "Getting Started",
+      "screens": "Screens",
+      "customization": "Customization",
+      "faq": "FAQ",
+      "support": "Support"
+    },
+    "sidebar": "Sidebar",
+    "openSidebar": "Open sidebar",
+    "closeSidebar": "Close sidebar"
+  },
   "accessibility": {
     "mainContent": "Main content"
   }

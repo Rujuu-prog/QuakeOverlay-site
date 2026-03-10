@@ -1,0 +1,102 @@
+---
+title: "초기 설정"
+description: "QuakeOverlay 초기 설정 가이드"
+category: "getting-started"
+order: 1
+locale: "ko"
+---
+## 초기 설정 가이드
+
+QuakeOverlay를 처음 실행하면 초기 설정 마법사가 표시됩니다. 이 가이드에서는 최초 설정부터 OBS 브라우저 소스 연동까지의 과정을 설명합니다.
+
+## 최초 실행 시 설정
+
+### 설정 마법사
+
+QuakeOverlay를 처음 실행하면 다음 항목들을 순서대로 설정합니다.
+
+1. 표시 언어 선택 (한국어 / 일본어 / 영어)
+2. 지진 정보 소스 선택
+3. 알림 기준 진도 설정
+4. 오버레이 표시 위치 설정
+
+### 기본 설정 파일
+
+설정은 `config/settings.json` 파일에 저장됩니다. 기본 설정값은 다음과 같습니다.
+
+```json
+{
+  "language": "ko",
+  "dataSource": "jma",
+  "notification": {
+    "minIntensity": 3,
+    "sound": true,
+    "duration": 15
+  },
+  "overlay": {
+    "position": "top-right",
+    "opacity": 0.9,
+    "scale": 1.0
+  }
+}
+```
+
+## OBS 브라우저 소스 설정
+
+### 브라우저 소스 추가
+
+OBS Studio에서 QuakeOverlay를 표시하려면 브라우저 소스를 추가해야 합니다.
+
+1. OBS Studio를 실행합니다
+2. "소스" 패널에서 "+" 버튼을 클릭합니다
+3. "브라우저"를 선택합니다
+4. 소스 이름을 입력합니다 (예: "QuakeOverlay")
+5. "확인"을 클릭합니다
+
+### URL 설정
+
+브라우저 소스의 속성에서 URL을 설정합니다.
+
+```
+http://localhost:8080/overlay
+```
+
+권장 브라우저 소스 설정은 다음과 같습니다.
+
+- 너비: 1920
+- 높이: 1080
+- FPS: 30
+- 사용자 지정 CSS: 비워 둡니다
+
+### 브라우저 소스 속성 예시
+
+```json
+{
+  "url": "http://localhost:8080/overlay",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "customCSS": "",
+  "shutdownWhenHidden": false,
+  "refreshWhenActive": false
+}
+```
+
+## 연결 확인
+
+### 정상 연결 확인 방법
+
+설정이 올바르게 완료되면 다음과 같이 확인할 수 있습니다.
+
+- QuakeOverlay 메인 화면의 상태 표시줄에 "연결됨"이 표시됩니다
+- OBS 프리뷰에 오버레이가 정상적으로 표시됩니다
+- 테스트 버튼을 눌러 알림이 정상 작동하는지 확인합니다
+
+### 연결 실패 시 확인 사항
+
+연결이 되지 않는 경우 다음 항목을 확인하세요.
+
+1. QuakeOverlay가 실행 중인지 확인합니다
+2. URL이 올바르게 입력되었는지 확인합니다
+3. 방화벽 설정에서 포트 8080이 허용되어 있는지 확인합니다
+4. 다른 프로그램이 동일한 포트를 사용하고 있지 않은지 확인합니다

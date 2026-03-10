@@ -1,0 +1,104 @@
+---
+title: "Initial Setup"
+description: "First-time setup guide for QuakeOverlay"
+category: "getting-started"
+order: 1
+locale: "en"
+---
+## First Launch
+
+When you launch QuakeOverlay for the first time, the application will guide you through the initial setup process. This ensures that the overlay is properly configured to work with your streaming software.
+
+### Setup Wizard
+
+The setup wizard consists of three steps:
+
+1. **Language Selection** - Choose your preferred display language
+2. **Data Source Configuration** - Select the earthquake data provider
+3. **OBS Integration** - Configure the overlay URL for your streaming software
+
+## Configuring OBS Browser Source
+
+QuakeOverlay provides a local web server that serves the overlay content. To display the overlay in OBS Studio, you need to add a Browser Source.
+
+### Step-by-Step OBS Configuration
+
+1. Open OBS Studio
+2. In the **Sources** panel, click the **+** button
+3. Select **Browser** from the source type list
+4. Enter a name for the source (e.g., "QuakeOverlay")
+5. Click **OK**
+
+In the Browser Source properties, configure the following settings:
+
+```
+URL: http://localhost:3210/overlay
+Width: 1920
+Height: 1080
+Custom CSS: (leave empty)
+Refresh browser when scene becomes active: checked
+```
+
+### Recommended Browser Source Settings
+
+| Setting | Value |
+|---------|-------|
+| URL | `http://localhost:3210/overlay` |
+| Width | 1920 |
+| Height | 1080 |
+| FPS | 30 |
+| Custom CSS | (empty) |
+| Shutdown source when not visible | Unchecked |
+
+## URL Settings
+
+QuakeOverlay runs a local HTTP server to serve overlay content. The default port is `3210`, but you can change it if there is a conflict with other applications.
+
+### Changing the Port
+
+To change the server port, edit the `appsettings.json` file:
+
+```json
+{
+  "server": {
+    "port": 3210,
+    "host": "localhost"
+  },
+  "overlay": {
+    "endpoint": "/overlay",
+    "theme": "default"
+  }
+}
+```
+
+After changing the port, update the URL in your OBS Browser Source accordingly.
+
+## Data Source Configuration
+
+QuakeOverlay supports multiple earthquake data sources. During initial setup, you can choose from the following:
+
+- **JMA (Japan Meteorological Agency)** - Real-time earthquake data for Japan
+- **P2P Earthquake** - Community-based earthquake detection network
+- **USGS** - United States Geological Survey global earthquake data
+
+### Selecting a Data Source
+
+Navigate to the data source dropdown in the setup wizard and select your preferred provider. You can change this later in the Settings screen.
+
+## Verifying the Setup
+
+After completing the initial setup, verify everything is working correctly:
+
+1. Check that the QuakeOverlay status bar shows "Connected" in green
+2. Open your browser and navigate to `http://localhost:3210/overlay`
+3. Confirm that the overlay page loads with no errors
+4. In OBS, verify that the Browser Source displays the overlay
+5. Wait for a test notification or trigger one from the Settings screen
+
+## Next Steps
+
+Once the initial setup is complete, you may want to:
+
+- Customize the overlay appearance in the Theme Customization settings
+- Adjust earthquake intensity thresholds in Display Settings
+- Configure notification sounds and alerts in the Settings screen
