@@ -81,6 +81,17 @@ function DocImage({
   return imgElement;
 }
 
+function Paragraph({ children }: { children: ReactNode }) {
+  const childArray = React.Children.toArray(children);
+  const hasBlockElement = childArray.some(
+    (child) => React.isValidElement(child) && child.type === DocImage
+  );
+  if (hasBlockElement) {
+    return <>{children}</>;
+  }
+  return <p>{children}</p>;
+}
+
 function FenceBlock({
   language,
   content,
@@ -121,11 +132,15 @@ const config: Parameters<typeof Markdoc.transform>[1] = {
         title: { type: String },
       },
     },
+    paragraph: {
+      render: "Paragraph",
+    },
   },
 };
 
 const components = {
   Heading,
+  Paragraph,
   FenceBlock,
   Link,
   DocImage,

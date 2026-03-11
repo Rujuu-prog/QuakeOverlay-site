@@ -88,4 +88,21 @@ describe("DocRenderer", () => {
     expect(img).toHaveAttribute("loading", "lazy");
     expect(img).toHaveAttribute("decoding", "async");
   });
+
+  it("does not nest figure inside p when image has title", () => {
+    const doc = makeDocument('![alt](/images/test.png "キャプション")');
+    const { container } = render(<DocRenderer document={doc} />);
+    const figure = container.querySelector("figure");
+    expect(figure).toBeInTheDocument();
+    // figure should NOT be inside a <p> tag
+    expect(figure!.parentElement!.tagName).not.toBe("P");
+  });
+
+  it("still wraps normal text in p tags", () => {
+    const doc = makeDocument("This is a normal paragraph.");
+    const { container } = render(<DocRenderer document={doc} />);
+    const p = container.querySelector("p");
+    expect(p).toBeInTheDocument();
+    expect(p!.textContent).toBe("This is a normal paragraph.");
+  });
 });
