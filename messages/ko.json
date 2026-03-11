@@ -78,7 +78,8 @@
     "cta": {
       "title": "지금 시작하세요",
       "subtitle": "다운로드하고 방송 화면에 지진 정보를 표시하세요",
-      "download": "Booth에서 다운로드"
+      "download": "Booth에서 다운로드",
+      "contact": "문의하기"
     }
   },
   "header": {
@@ -97,7 +98,8 @@
     "gettingStarted": "시작하기",
     "screens": "화면 설명",
     "faq": "자주 묻는 질문",
-    "support": "지원"
+    "support": "지원",
+    "contact": "문의하기"
   },
   "docs": {
     "title": "문서",

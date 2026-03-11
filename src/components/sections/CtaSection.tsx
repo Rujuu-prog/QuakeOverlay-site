@@ -41,6 +41,15 @@ export function CtaSection() {
           >
             {t("download")}
           </Button>
+          <Button
+            href={EXTERNAL_LINKS.contactForm}
+            variant="secondary"
+            size="lg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t("contact")}
+          </Button>
         </div>
       </div>
     </section>

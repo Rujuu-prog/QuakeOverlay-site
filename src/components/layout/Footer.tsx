@@ -85,6 +85,17 @@ export function Footer() {
                   <ExternalLink className="size-3" />
                 </a>
               </li>
+              <li>
+                <a
+                  href={EXTERNAL_LINKS.contactForm}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-accent transition-colors duration-200"
+                >
+                  {t("contact")}
+                  <ExternalLink className="size-3" />
+                </a>
+              </li>
             </ul>
           </div>
 

@@ -78,7 +78,8 @@
     "cta": {
       "title": "Get Started Now",
       "subtitle": "Download and display earthquake info on your stream",
-      "download": "Download on Booth"
+      "download": "Download on Booth",
+      "contact": "Contact Us"
     }
   },
   "header": {
@@ -97,7 +98,8 @@
     "gettingStarted": "Getting Started",
     "screens": "Screens",
     "faq": "FAQ",
-    "support": "Support"
+    "support": "Support",
+    "contact": "Contact Us"
   },
   "docs": {
     "title": "Documentation",

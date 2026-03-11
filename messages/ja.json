@@ -78,7 +78,8 @@
     "cta": {
       "title": "今すぐ始めよう",
       "subtitle": "ダウンロードして、配信画面に地震情報を表示しましょう",
-      "download": "Boothでダウンロード"
+      "download": "Boothでダウンロード",
+      "contact": "お問い合わせ"
     }
   },
   "header": {
@@ -97,7 +98,8 @@
     "gettingStarted": "はじめに",
     "screens": "画面説明",
     "faq": "よくある質問",
-    "support": "サポート"
+    "support": "サポート",
+    "contact": "お問い合わせ"
   },
   "docs": {
     "title": "ドキュメント",
