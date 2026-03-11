@@ -38,22 +38,16 @@ Select the earthquake data provider:
 2. **P2P Earthquake** - Community-based earthquake detection
 3. **USGS** - United States Geological Survey global data
 
-### Configuration Example
+### Settings Summary
 
-The general settings are stored in the configuration file as follows:
-
-```json
-{
-  "general": {
-    "language": "en",
-    "autoStart": true,
-    "startMinimized": false,
-    "minimizeToTray": true,
-    "dataSource": "JMA",
-    "updateInterval": 5
-  }
-}
-```
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Language | English | Interface display language |
+| Auto Start | Off | Launch on Windows startup |
+| Start Minimized | Off | Start minimized to tray |
+| Minimize to Tray | On | Minimize to tray on close |
+| Data Source | JMA | Earthquake data provider |
+| Update Interval | 5 seconds | Data polling frequency |
 
 ## Notification Settings
 
@@ -81,27 +75,17 @@ Configure different notification behaviors based on earthquake intensity:
 | 5+ | Alarm | On | On |
 | 6+ | Urgent | On | Full Screen |
 
-### Notification Configuration
+### Notification Summary
 
-```json
-{
-  "notifications": {
-    "sound": {
-      "enabled": true,
-      "file": "assets/sounds/alert.wav",
-      "volume": 80
-    },
-    "desktop": {
-      "enabled": true,
-      "duration": 10
-    },
-    "intensityRules": [
-      { "minIntensity": 3, "sound": true, "desktop": true, "overlay": true },
-      { "minIntensity": 5, "sound": true, "desktop": true, "overlay": true, "urgent": true }
-    ]
-  }
-}
-```
+All notification settings can be configured in the **Notifications** tab of the Settings screen:
+
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Sound Enabled | On | Toggle sound alerts |
+| Sound File | Default alert | Notification sound file |
+| Sound Volume | 80% | Alert volume level |
+| Desktop Notifications | On | Windows toast notifications |
+| Notification Duration | 10 seconds | How long notifications stay visible |
 
 ## Display Settings
 
@@ -155,26 +139,18 @@ The Advanced tab provides additional configuration options for experienced users
 - **Log level** - Set the logging verbosity (Error, Warning, Info, Debug)
 - **Log file path** - Location of the log file
 
-```json
-{
-  "advanced": {
-    "server": {
-      "port": 3210,
-      "host": "localhost"
-    },
-    "data": {
-      "updateInterval": 5,
-      "cacheDuration": 60,
-      "maxEvents": 100
-    },
-    "logging": {
-      "enabled": true,
-      "level": "Info",
-      "filePath": "logs/quakeoverlay.log"
-    }
-  }
-}
-```
+All advanced settings can be configured in the **Advanced** tab of the Settings screen:
+
+| Category | Setting | Default Value | Description |
+|----------|---------|--------------|-------------|
+| Server | Port | 3210 | Local server port |
+| Server | Host | localhost | Server host address |
+| Data | Update Interval | 5 seconds | Data polling frequency |
+| Data | Cache Duration | 60 minutes | Data retention in memory |
+| Data | Max Events | 100 | Maximum events in list |
+| Logging | Enabled | On | Write logs to file |
+| Logging | Level | Info | Logging verbosity |
+| Logging | File Path | logs/quakeoverlay.log | Log file location |
 
 ## Resetting Settings
 

@@ -62,20 +62,12 @@ QuakeOverlay runs a local HTTP server to serve overlay content. The default port
 
 ### Changing the Port
 
-To change the server port, edit the `appsettings.json` file:
+To change the server port, open the Settings screen and navigate to the **Advanced** tab:
 
-```json
-{
-  "server": {
-    "port": 3210,
-    "host": "localhost"
-  },
-  "overlay": {
-    "endpoint": "/overlay",
-    "theme": "default"
-  }
-}
-```
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Port | 3210 | Local server port number |
+| Host | localhost | Server host address |
 
 After changing the port, update the URL in your OBS Browser Source accordingly.
 

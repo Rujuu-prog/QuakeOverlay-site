@@ -67,24 +67,13 @@ Next to the connection status, the active data source is displayed. This shows w
 
 Clicking on any earthquake entry in the list opens a detailed view with additional information:
 
-```json
-{
-  "eventId": "20240315_143022",
-  "timestamp": "2024-03-15T14:30:22+09:00",
-  "epicenter": {
-    "name": "Chiba Prefecture, Eastern",
-    "latitude": 35.6,
-    "longitude": 140.1
-  },
-  "magnitude": 4.2,
-  "depth": 30,
-  "maxIntensity": "4",
-  "stations": [
-    { "name": "Chiba", "intensity": "4" },
-    { "name": "Tokyo", "intensity": "3" }
-  ]
-}
-```
+- **Event ID**: Unique identifier for the earthquake event
+- **Timestamp**: Date and time of the earthquake (local and UTC)
+- **Epicenter**: Location name and coordinates (latitude/longitude)
+- **Magnitude**: The earthquake magnitude value
+- **Depth**: Hypocenter depth in kilometers
+- **Maximum Intensity**: The highest intensity observed
+- **Observation Stations**: List of individual stations with their recorded intensity levels
 
 ### Detail View Features
 

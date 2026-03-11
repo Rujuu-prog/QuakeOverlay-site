@@ -70,25 +70,19 @@ After launching QuakeOverlay for the first time, verify the installation by chec
 - The status indicator in the bottom-left corner shows a green connection icon
 - The application version is displayed in the title bar
 
-## Configuration File
+## Default Settings
 
-QuakeOverlay uses a JSON configuration file located in the application directory. The default configuration looks like this:
+QuakeOverlay comes with the following default settings, which can be changed from the Settings screen:
 
-```json
-{
-  "general": {
-    "language": "en",
-    "autoStart": false,
-    "minimizeToTray": true
-  },
-  "connection": {
-    "dataSource": "JMA",
-    "updateInterval": 5
-  }
-}
-```
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Language | English | Interface display language |
+| Auto Start | Off | Launch on Windows startup |
+| Minimize to Tray | On | Minimize to system tray on close |
+| Data Source | JMA | Earthquake data provider |
+| Update Interval | 5 seconds | Data polling frequency |
 
-You can modify these settings through the application's Settings screen or by editing the file directly.
+All settings can be modified through the Settings screen. For details, see the Settings Screen documentation.
 
 ## Troubleshooting Installation Issues
 

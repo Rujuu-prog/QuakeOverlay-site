@@ -37,42 +37,20 @@ http://localhost:8080/overlay?theme=minimal
 
 ### カラーパレット
 
-カスタムテーマでは、各要素の色を個別に設定できます。
+設定画面のカラーピッカーで各要素の色を設定できます。設定可能な項目は以下のとおりです。
 
-```json
-{
-  "theme": {
-    "name": "custom",
-    "colors": {
-      "background": "#1a1a2e",
-      "cardBackground": "#16213e",
-      "text": "#eaeaea",
-      "textSecondary": "#a0a0a0",
-      "border": "#0f3460",
-      "accent": "#e94560",
-      "intensityHigh": "#ff0000",
-      "intensityMid": "#ff8c00",
-      "intensityLow": "#4caf50",
-      "shadow": "rgba(0, 0, 0, 0.5)"
-    }
-  }
-}
-```
-
-### 色の設定項目
-
-設定可能な色の一覧です。
-
-1. **background**: 全体の背景色
-2. **cardBackground**: 情報カードの背景色
-3. **text**: メインテキストの色
-4. **textSecondary**: サブテキストの色
-5. **border**: 枠線の色
-6. **accent**: アクセントカラー（強調表示）
-7. **intensityHigh**: 高震度時の色
-8. **intensityMid**: 中震度時の色
-9. **intensityLow**: 低震度時の色
-10. **shadow**: 影の色
+| 設定項目 | デフォルト値（例） | 説明 |
+|----------|-------------------|------|
+| 背景色 | #1a1a2e | 全体の背景色 |
+| カード背景色 | #16213e | 情報カードの背景色 |
+| テキスト色 | #eaeaea | メインテキストの色 |
+| サブテキスト色 | #a0a0a0 | サブテキストの色 |
+| 枠線色 | #0f3460 | 枠線の色 |
+| アクセント色 | #e94560 | 強調表示の色 |
+| 高震度色 | #ff0000 | 高震度時の表示色 |
+| 中震度色 | #ff8c00 | 中震度時の表示色 |
+| 低震度色 | #4caf50 | 低震度時の表示色 |
+| 影の色 | rgba(0,0,0,0.5) | 影の色 |
 
 ### カラーピッカー
 
@@ -82,29 +60,19 @@ http://localhost:8080/overlay?theme=minimal
 
 ### フォントの変更
 
-表示フォントを変更できます。システムにインストールされているフォントを使用できます。
+設定画面の「テーマ」タブでフォントを変更できます。
 
-```json
-{
-  "theme": {
-    "fonts": {
-      "primary": "Noto Sans JP",
-      "secondary": "Roboto",
-      "monospace": "JetBrains Mono",
-      "size": {
-        "title": "24px",
-        "body": "16px",
-        "small": "12px",
-        "intensity": "48px"
-      },
-      "weight": {
-        "normal": 400,
-        "bold": 700
-      }
-    }
-  }
-}
-```
+| 設定項目 | デフォルト値 | 説明 |
+|----------|-------------|------|
+| メインフォント | Noto Sans JP | 主要テキストのフォント |
+| サブフォント | Roboto | 補助テキストのフォント |
+| 等幅フォント | JetBrains Mono | 数値やコードの表示用 |
+| タイトルサイズ | 24px | タイトルのフォントサイズ |
+| 本文サイズ | 16px | 本文のフォントサイズ |
+| 小テキストサイズ | 12px | 小さいテキストのサイズ |
+| 震度表示サイズ | 48px | 震度数値のフォントサイズ |
+| 通常ウェイト | 400 | 通常テキストの太さ |
+| 太字ウェイト | 700 | 太字テキストの太さ |
 
 ### 推奨フォント
 
@@ -117,20 +85,9 @@ http://localhost:8080/overlay?theme=minimal
 
 ### Webフォントの使用
 
-カスタムフォントをWebフォントとして読み込むことも可能です。
+設定画面の「テーマ」タブ →「フォント」セクションで、WebフォントのURLを入力することで外部フォントを使用できます。
 
-```json
-{
-  "theme": {
-    "webFonts": [
-      {
-        "family": "Noto Sans JP",
-        "url": "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
-      }
-    ]
-  }
-}
-```
+Google Fontsなどのフォントサービスから取得したURLを入力してください。例えば、Noto Sans JPを使用する場合は、Google Fontsのページからフォント名を選択し、URLをコピーして設定画面に貼り付けます。
 
 ## テーマのエクスポートと共有
 
@@ -152,7 +109,7 @@ http://localhost:8080/overlay?theme=minimal
 
 ### テーマファイルの構造
 
-テーマファイルの完全な構造は以下のとおりです。
+テーマのエクスポート/インポートで使用するJSONファイルの構造は以下のとおりです。エクスポートしたファイルを編集して再インポートすることで、より詳細なカスタマイズが可能です。
 
 ```json
 {

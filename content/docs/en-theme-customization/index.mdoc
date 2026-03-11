@@ -48,33 +48,30 @@ You can customize the colors used by the overlay without creating a full custom 
 
 ### Color Configuration
 
-Colors are defined in the theme configuration file using standard CSS color values:
+Colors can be customized using the Settings screen or through a custom theme file:
 
-```json
-{
-  "theme": {
-    "name": "custom",
-    "colors": {
-      "background": "rgba(20, 20, 30, 0.85)",
-      "text": "#FFFFFF",
-      "header": "#1a1a2e",
-      "accent": "#e94560",
-      "shadow": "rgba(0, 0, 0, 0.5)",
-      "intensityColors": {
-        "1": "#808080",
-        "2": "#808080",
-        "3": "#0000FF",
-        "4": "#00AA00",
-        "5-": "#FFD700",
-        "5+": "#FF8C00",
-        "6-": "#FF0000",
-        "6+": "#8B0000",
-        "7": "#800080"
-      }
-    }
-  }
-}
-```
+Colors can be customized in the Settings screen under the **Display** tab > **Theme** section, or by using the color picker:
+
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Background | rgba(20, 20, 30, 0.85) | Overlay panel background |
+| Text | #FFFFFF | Primary text color |
+| Header | #1a1a2e | Alert header bar color |
+| Accent | #e94560 | Highlights and borders |
+| Shadow | rgba(0, 0, 0, 0.5) | Drop shadow color |
+
+Intensity colors can also be customized per level:
+
+| Intensity | Default Color |
+|-----------|--------------|
+| 1-2 | Gray (#808080) |
+| 3 | Blue (#0000FF) |
+| 4 | Green (#00AA00) |
+| 5 Lower | Yellow (#FFD700) |
+| 5 Upper | Orange (#FF8C00) |
+| 6 Lower | Red (#FF0000) |
+| 6 Upper | Dark Red (#8B0000) |
+| 7 | Purple (#800080) |
 
 ## Font Settings
 
@@ -96,22 +93,16 @@ QuakeOverlay includes the following fonts:
 3. Roboto
 4. Source Han Sans
 
-### Font Configuration
+Font settings can be adjusted in the Settings screen under the **Display** tab > **Font** section:
 
-```json
-{
-  "theme": {
-    "fonts": {
-      "family": "Noto Sans JP, sans-serif",
-      "size": "16px",
-      "weight": "400",
-      "lineHeight": "1.5",
-      "headerSize": "22px",
-      "headerWeight": "700"
-    }
-  }
-}
-```
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Font Family | Noto Sans JP | Primary font face |
+| Font Size | 16px | Base text size |
+| Font Weight | 400 (Normal) | Text weight |
+| Line Height | 1.5 | Spacing between lines |
+| Header Size | 22px | Header text size |
+| Header Weight | 700 (Bold) | Header text weight |
 
 ## Creating a Custom Theme
 
@@ -119,7 +110,7 @@ To create a fully custom theme, create a new JSON file in the `assets/themes/` d
 
 ### Custom Theme Structure
 
-Create a file named `my-theme.json` with the following structure:
+Create a file named `my-theme.json` with the following structure. This is the JSON format used for theme import/export:
 
 ```json
 {

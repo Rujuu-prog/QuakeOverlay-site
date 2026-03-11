@@ -40,15 +40,13 @@ To configure the intensity threshold:
 
 ### Threshold Configuration
 
-```json
-{
-  "display": {
-    "intensityThreshold": 3,
-    "showLowerIntensity": false,
-    "logAllEvents": true
-  }
-}
-```
+The following threshold settings are available in the **Display** tab of the Settings screen:
+
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Minimum Intensity | 3 | Events below this level are not shown on overlay |
+| Show Lower Intensity | Off | Display lower-intensity events in subdued style |
+| Log All Events | On | Record all events in the application log |
 
 ## Display Duration
 
@@ -71,19 +69,15 @@ QuakeOverlay can automatically extend the display duration for earthquakes above
 - Intensity 6+ events display for 3x the configured duration
 - Intensity 7 events remain until manually dismissed
 
-```json
-{
-  "display": {
-    "duration": 30,
-    "autoExtend": {
-      "enabled": true,
-      "intensity5": 2.0,
-      "intensity6": 3.0,
-      "intensity7": -1
-    }
-  }
-}
-```
+The auto-extend feature can be configured in the **Display** tab > **Duration** section:
+
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Base Duration | 30 seconds | Default display time |
+| Auto-Extend Enabled | On | Automatically extend for major events |
+| Intensity 5+ Multiplier | 2.0x | Duration multiplier for intensity 5+ |
+| Intensity 6+ Multiplier | 3.0x | Duration multiplier for intensity 6+ |
+| Intensity 7 | Until dismissed | Stays visible until manually cleared |
 
 ## Position Settings
 
@@ -103,24 +97,18 @@ Choose from five preset positions:
 
 For precise control, you can specify exact pixel coordinates:
 
-```json
-{
-  "display": {
-    "position": {
-      "preset": "custom",
-      "x": 1200,
-      "y": 50,
-      "anchor": "top-right"
-    },
-    "margin": {
-      "top": 20,
-      "right": 20,
-      "bottom": 20,
-      "left": 20
-    }
-  }
-}
-```
+Custom position settings are available in the **Display** tab > **Position** section:
+
+| Setting | Example Value | Description |
+|---------|--------------|-------------|
+| Preset | Custom | Position mode selection |
+| X | 1200 | Horizontal position in pixels |
+| Y | 50 | Vertical position in pixels |
+| Anchor | Top Right | Which corner is placed at the coordinates |
+| Margin Top | 20px | Top edge margin |
+| Margin Right | 20px | Right edge margin |
+| Margin Bottom | 20px | Bottom edge margin |
+| Margin Left | 20px | Left edge margin |
 
 ### Position Anchor Points
 
@@ -140,18 +128,14 @@ Control the dimensions of the overlay panel:
 - **Height** - Set to auto or a fixed value (auto adjusts based on content)
 - **Scale** - Apply a scale factor for high-DPI displays (0.5 - 2.0)
 
-```json
-{
-  "display": {
-    "size": {
-      "width": 450,
-      "height": "auto",
-      "scale": 1.0,
-      "maxHeight": 300
-    }
-  }
-}
-```
+Size settings are available in the **Display** tab > **Size** section:
+
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Width | 450px | Overlay panel width |
+| Height | Auto | Panel height (auto adjusts to content) |
+| Scale | 1.0 | Scale factor for high-DPI displays |
+| Max Height | 300px | Maximum panel height |
 
 ## Animation Settings
 
@@ -166,18 +150,14 @@ Configure the transition animations for the overlay appearance and disappearance
 
 ### Animation Configuration
 
-```json
-{
-  "display": {
-    "animation": {
-      "type": "slide",
-      "duration": 400,
-      "easing": "ease-out",
-      "direction": "right"
-    }
-  }
-}
-```
+Animation settings are available in the **Display** tab > **Animation** section:
+
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Type | Slide | Animation style (Slide / Fade / Scale / None) |
+| Duration | 400ms | Animation length in milliseconds |
+| Easing | ease-out | Acceleration curve |
+| Direction | Right | Slide direction (for Slide type) |
 
 ## Information Display Options
 
@@ -190,19 +170,13 @@ Choose which earthquake details are shown in the overlay:
 - **Timestamp** - Optional, shown by default
 - **Map preview** - Optional, small map showing epicenter location
 
-These can be toggled individually in the Display tab of the Settings screen or configured in the JSON file:
+These can be toggled individually in the **Display** tab > **Information Fields** section of the Settings screen:
 
-```json
-{
-  "display": {
-    "fields": {
-      "location": true,
-      "magnitude": true,
-      "intensity": true,
-      "depth": false,
-      "timestamp": true,
-      "map": false
-    }
-  }
-}
-```
+| Field | Default | Description |
+|-------|---------|-------------|
+| Location | Shown | Epicenter location name (always shown) |
+| Magnitude | Shown | Earthquake magnitude value |
+| Intensity | Shown | Maximum intensity with color indicator |
+| Depth | Hidden | Hypocenter depth in kilometers |
+| Timestamp | Shown | When the earthquake occurred |
+| Map | Hidden | Small map preview showing epicenter |

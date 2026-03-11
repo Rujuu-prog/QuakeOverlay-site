@@ -45,16 +45,12 @@ If the page loads correctly in the browser but not in OBS, the issue is with the
 
 ### Can I change the port number?
 
-Yes. Edit the `appsettings.json` file and change the port value:
+Yes. Open the Settings screen and navigate to the **Advanced** tab to change the port number:
 
-```json
-{
-  "server": {
-    "port": 8080,
-    "host": "localhost"
-  }
-}
-```
+| Setting | Default Value | Description |
+|---------|--------------|-------------|
+| Port | 3210 | Local server port number |
+| Host | localhost | Server host address |
 
 After changing the port, restart QuakeOverlay and update your OBS Browser Source URL accordingly.
 
@@ -95,18 +91,14 @@ Earthquake data from official sources like JMA and USGS undergoes quality assura
 
 ### Can I use custom fonts in the overlay?
 
-Yes. QuakeOverlay supports custom fonts through the theme configuration. Place your font files in the `assets/fonts/` directory and reference them in your custom theme:
+Yes. QuakeOverlay supports custom fonts through the theme settings. To use a custom font:
 
-```json
-{
-  "theme": {
-    "fonts": {
-      "family": "MyCustomFont, sans-serif",
-      "customFontPath": "assets/fonts/MyCustomFont.woff2"
-    }
-  }
-}
-```
+1. Place your font file (WOFF2, TTF, or OTF) in the `assets/fonts/` directory
+2. Open the Settings screen and navigate to the **Display** tab
+3. In the **Font** section, select your custom font from the dropdown
+4. Click **Apply** to save the changes
+
+Alternatively, you can specify the font in a custom theme file. See the Theme Customization documentation for details.
 
 ### How do I create a custom theme?
 
