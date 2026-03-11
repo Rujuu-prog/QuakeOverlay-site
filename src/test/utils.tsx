@@ -158,6 +158,10 @@ const defaultMessages = {
       noItems: "No roadmap items yet",
     },
   },
+  loading: {
+    text: "Loading…",
+    ariaLabel: "Loading content",
+  },
   accessibility: {
     mainContent: "Main content",
   },

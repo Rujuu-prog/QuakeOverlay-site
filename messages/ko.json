@@ -155,6 +155,10 @@
       "noItems": "로드맵 정보가 아직 없습니다"
     }
   },
+  "loading": {
+    "text": "로딩 중…",
+    "ariaLabel": "콘텐츠를 불러오는 중입니다"
+  },
   "accessibility": {
     "mainContent": "메인 콘텐츠"
   }
