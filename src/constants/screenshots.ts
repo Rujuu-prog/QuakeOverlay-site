@@ -1,5 +1,5 @@
 export const SCREENSHOT_KEYS = {
-  dashboard: { filename: "dashboard", ext: ".png" },
+  dashboard: { filename: "dashboard", ext: ".gif" },
   main: { filename: "app-screenshot-main", ext: ".svg" },
   overlay: { filename: "app-screenshot-overlay", ext: ".svg" },
   settings: { filename: "app-screenshot-settings", ext: ".svg" },

@@ -7,9 +7,9 @@ describe("getScreenshotPath", () => {
     expect(result).toBe("/images/screenshots/ja/app-screenshot-main.svg");
   });
 
-  it("実画像キー(dashboard) → /images/screenshots/ja/dashboard.png を返す", () => {
+  it("実画像キー(dashboard) → /images/screenshots/ja/dashboard.gif を返す", () => {
     const result = getScreenshotPath("dashboard", "ja", ["ja"]);
-    expect(result).toBe("/images/screenshots/ja/dashboard.png");
+    expect(result).toBe("/images/screenshots/ja/dashboard.gif");
   });
 
   it("全キーで正しいパスを返す", () => {
@@ -23,7 +23,7 @@ describe("getScreenshotPath", () => {
       "/images/screenshots/ja/app-screenshot-settings.svg"
     );
     expect(getScreenshotPath("dashboard", "ja", ["ja"])).toBe(
-      "/images/screenshots/ja/dashboard.png"
+      "/images/screenshots/ja/dashboard.gif"
     );
     expect(getScreenshotPath("receiveLog", "ja", ["ja"])).toBe(
       "/images/screenshots/ja/app-screenshot-receive-log.svg"
@@ -53,13 +53,13 @@ describe("getScreenshotPath", () => {
 
   it("デフォルト引数(LOCALES_WITH_SCREENSHOTS)でjaのパスを返す", () => {
     const result = getScreenshotPath("dashboard", "ja");
-    expect(result).toBe("/images/screenshots/ja/dashboard.png");
+    expect(result).toBe("/images/screenshots/ja/dashboard.gif");
   });
 });
 
 describe("isAnimatedFormat", () => {
-  it(".png キーはfalseを返す", () => {
-    expect(isAnimatedFormat("dashboard")).toBe(false);
+  it(".gif キーはtrueを返す", () => {
+    expect(isAnimatedFormat("dashboard")).toBe(true);
   });
 
   it(".svg キーはfalseを返す", () => {
@@ -68,8 +68,8 @@ describe("isAnimatedFormat", () => {
     expect(isAnimatedFormat("settings")).toBe(false);
   });
 
-  it("全キーが現在は非アニメーション形式", () => {
-    expect(isAnimatedFormat("dashboard")).toBe(false);
+  it("dashboardのみアニメーション形式、他は非アニメーション", () => {
+    expect(isAnimatedFormat("dashboard")).toBe(true);
     expect(isAnimatedFormat("main")).toBe(false);
     expect(isAnimatedFormat("overlay")).toBe(false);
     expect(isAnimatedFormat("settings")).toBe(false);

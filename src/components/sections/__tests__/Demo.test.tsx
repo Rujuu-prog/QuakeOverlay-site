@@ -3,9 +3,9 @@ import { render, screen } from "@/test/utils";
 import { Demo } from "../Demo";
 
 vi.mock("next/image", () => ({
-  default: (props: Record<string, unknown>) => {
+  default: ({ unoptimized, ...props }: Record<string, unknown>) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} />;
+    return <img {...props} {...(unoptimized ? { unoptimized: "" } : {})} />;
   },
 }));
 
@@ -42,7 +42,7 @@ describe("Demo", () => {
   it("renders first screenshot with dashboard path", () => {
     render(<Demo />);
     const img = screen.getByRole("img");
-    expect(img).toHaveAttribute("src", "/images/screenshots/ja/dashboard.png");
+    expect(img).toHaveAttribute("src", "/images/screenshots/ja/dashboard.gif");
   });
 
   it("renders 6 dot indicators", () => {
@@ -51,10 +51,10 @@ describe("Demo", () => {
     expect(dots).toHaveLength(6);
   });
 
-  it("non-GIF screenshot does not have unoptimized attribute", () => {
+  it("GIF screenshot has unoptimized attribute", () => {
     render(<Demo />);
     const img = screen.getByRole("img");
-    // dashboard is .png, should not be unoptimized
-    expect(img).not.toHaveAttribute("unoptimized");
+    // dashboard is .gif, should be unoptimized
+    expect(img).toHaveAttribute("unoptimized");
   });
 });
