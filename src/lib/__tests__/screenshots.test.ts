@@ -26,7 +26,7 @@ describe("getScreenshotPath", () => {
       "/images/screenshots/ja/dashboard.gif"
     );
     expect(getScreenshotPath("receiveLog", "ja", ["ja"])).toBe(
-      "/images/screenshots/ja/app-screenshot-receive-log.svg"
+      "/images/screenshots/ja/log.gif"
     );
     expect(getScreenshotPath("overlaySettings", "ja", ["ja"])).toBe(
       "/images/screenshots/ja/app-screenshot-overlay-settings.svg"
@@ -58,8 +58,9 @@ describe("getScreenshotPath", () => {
 });
 
 describe("isAnimatedFormat", () => {
-  it(".gif キーはtrueを返す", () => {
+  it(".gif キー(複数)はtrueを返す", () => {
     expect(isAnimatedFormat("dashboard")).toBe(true);
+    expect(isAnimatedFormat("receiveLog")).toBe(true);
   });
 
   it(".svg キーはfalseを返す", () => {
@@ -68,12 +69,12 @@ describe("isAnimatedFormat", () => {
     expect(isAnimatedFormat("settings")).toBe(false);
   });
 
-  it("dashboardのみアニメーション形式、他は非アニメーション", () => {
+  it("dashboard と receiveLog がアニメーション形式、他は非アニメーション", () => {
     expect(isAnimatedFormat("dashboard")).toBe(true);
+    expect(isAnimatedFormat("receiveLog")).toBe(true);
     expect(isAnimatedFormat("main")).toBe(false);
     expect(isAnimatedFormat("overlay")).toBe(false);
     expect(isAnimatedFormat("settings")).toBe(false);
-    expect(isAnimatedFormat("receiveLog")).toBe(false);
     expect(isAnimatedFormat("overlaySettings")).toBe(false);
     expect(isAnimatedFormat("mapSettings")).toBe(false);
   });
