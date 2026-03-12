@@ -3,6 +3,7 @@ import Markdoc from "@markdoc/markdoc";
 import type { RenderableTreeNode } from "@markdoc/markdoc";
 import { generateHeadingId } from "@/lib/docs-utils";
 import { CodeBlock } from "./CodeBlock";
+import { ImageCarousel } from "./ImageCarousel";
 import type { ReactNode } from "react";
 
 type DocRendererProps = {
@@ -102,7 +103,39 @@ function FenceBlock({
   return <CodeBlock language={language}>{content ?? ""}</CodeBlock>;
 }
 
+function ImageCarouselTag({
+  images,
+  captions,
+  interval,
+}: {
+  images: string;
+  captions?: string;
+  interval?: number;
+}) {
+  const parsedImages: string[] = images.split(",").map((s) => s.trim());
+  const parsedCaptions: string[] = captions
+    ? captions.split(",").map((s) => s.trim())
+    : [];
+  return (
+    <ImageCarousel
+      images={parsedImages}
+      captions={parsedCaptions}
+      interval={interval}
+    />
+  );
+}
+
 const config: Parameters<typeof Markdoc.transform>[1] = {
+  tags: {
+    "image-carousel": {
+      render: "ImageCarouselTag",
+      attributes: {
+        images: { type: String, required: true },
+        captions: { type: String },
+        interval: { type: Number },
+      },
+    },
+  },
   nodes: {
     heading: {
       render: "Heading",
@@ -144,6 +177,7 @@ const components = {
   FenceBlock,
   Link,
   DocImage,
+  ImageCarouselTag,
 };
 
 export function DocRenderer({ document }: DocRendererProps) {
