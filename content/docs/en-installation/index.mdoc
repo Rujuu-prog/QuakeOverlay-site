@@ -11,83 +11,68 @@ QuakeOverlay is a desktop application that displays real-time earthquake informa
 
 ## System Requirements
 
-Before installing QuakeOverlay, make sure your system meets the following requirements:
+Before installing QuakeOverlay, make sure your system meets the following requirements.
 
-- Windows 10 or later (64-bit)
-- .NET 8.0 Runtime or later
-- At least 4 GB of RAM
-- 100 MB of available disk space
-- An active internet connection for receiving earthquake data
-- OBS Studio 28.0 or later (for overlay functionality)
+| Requirement | Details |
+|-------------|---------|
+| OS | Windows 10 or later (64-bit) |
+| OBS Studio | 28.0 or later |
+| Memory | 4 GB or more recommended |
+| Network | Active internet connection (required for earthquake data) |
 
-## Downloading QuakeOverlay
+## Download
 
-QuakeOverlay is distributed through Booth. Follow these steps to download the application:
+QuakeOverlay is distributed through Booth. Follow these steps to download the installer.
 
 1. Visit the QuakeOverlay product page on [Booth](https://booth.pm)
-2. Purchase or download the application
-3. Once the download is complete, you will receive a ZIP archive file
+2. Add it to your cart and complete the purchase
+3. Go to your order history and download the installer
 
-### Download Package Contents
+## Installation
 
-The downloaded ZIP file contains the following:
+Run the downloaded installer (.exe) and follow the on-screen instructions.
+
+![NSIS installer](/images/content/docs/install-nsis-wizard.svg "NSIS installer screen")
+
+1. Double-click the downloaded installer (`.exe` file) to launch it
+2. Choose an installation destination folder (the default is fine for most users)
+3. Click **Install**
+4. Once the installation is complete, a desktop shortcut will be created
+
+### Windows SmartScreen Warning
+
+When running the installer for the first time, Windows may display a "Windows protected your PC" warning. This is a standard warning for unsigned applications and it is safe to proceed.
+
+![SmartScreen warning](/images/content/docs/install-smartscreen.svg "SmartScreen warning")
+
+1. Click **More info**
+2. Click **Run anyway**
+
+## First Launch
+
+After installation, launch QuakeOverlay from the desktop shortcut or Start menu. **On the first launch, a setup wizard will start automatically.** Follow the on-screen instructions to complete the initial configuration.
+
+## Troubleshooting
+
+### Application Won't Start
+
+If QuakeOverlay fails to start, try the following steps.
+
+1. **Check antivirus software** — Make sure your antivirus is not blocking the installer or the application executable. If it is, add QuakeOverlay to the exception list
+2. **Run as administrator** — Right-click the QuakeOverlay shortcut or executable and select "Run as administrator"
+
+### Port Conflict
+
+QuakeOverlay uses port `47815` for its local server. If another application is already using this port, QuakeOverlay may not function correctly.
+
+You can check for port conflicts with the following command:
 
 ```
-QuakeOverlay/
-├── QuakeOverlay.exe
-├── appsettings.json
-├── README.txt
-├── assets/
-│   ├── themes/
-│   └── sounds/
-└── licenses/
+netstat -ano | findstr :47815
 ```
 
-## Installation Steps
+If another application is using port `47815`, close that application and restart QuakeOverlay.
 
-QuakeOverlay does not require a traditional installer. Follow these steps to set it up:
+### App Data Location
 
-1. Locate the downloaded ZIP file (e.g., `QuakeOverlay_v1.0.0.zip`)
-2. Right-click the ZIP file and select **Extract All...**
-3. Choose a destination folder (e.g., `C:\Tools\QuakeOverlay`)
-4. Click **Extract**
-5. Navigate to the extracted folder
-6. Double-click `QuakeOverlay.exe` to launch the application
-
-### Important Notes
-
-- Do not extract the files into `Program Files` or other system-protected directories, as this may cause permission issues
-- If Windows SmartScreen shows a warning, click **More info** and then **Run anyway**
-
-![Windows Defender SmartScreen warning](/images/content/docs/install-smartscreen.svg "SmartScreen warning — Click 'More info' then 'Run anyway'")
-- Keep all files in the same directory structure; do not move individual files out of the folder
-
-## Verifying the Installation
-
-After launching QuakeOverlay for the first time, verify the installation by checking the following:
-
-- The main window appears without errors
-- The status indicator in the bottom-left corner shows a green connection icon
-- The application version is displayed in the title bar
-
-## Default Settings
-
-QuakeOverlay comes with the following default settings, which can be changed from the Settings screen:
-
-| Setting | Default Value | Description |
-|---------|--------------|-------------|
-| Language | English | Interface display language |
-| Auto Start | Off | Launch on Windows startup |
-| Minimize to Tray | On | Minimize to system tray on close |
-| Data Source | JMA | Earthquake data provider |
-| Update Interval | 5 seconds | Data polling frequency |
-
-All settings can be modified through the Settings screen. For details, see the Settings Screen documentation.
-
-## Troubleshooting Installation Issues
-
-If you encounter problems during installation, check the following:
-
-- **.NET Runtime missing**: Download and install the .NET 8.0 Runtime from the [official Microsoft website](https://dotnet.microsoft.com/download)
-- **Application won't start**: Ensure all files were extracted properly and no antivirus software is blocking the executable
-- **Permission errors**: Move the application folder to a non-protected directory such as your Desktop or Documents folder
+QuakeOverlay stores its settings and cache in the `%APPDATA%` folder. If you experience issues, you can delete the QuakeOverlay data in this folder and restart the application to reset it to its default state.

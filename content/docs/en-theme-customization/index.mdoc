@@ -1,162 +1,143 @@
 ---
 title: "Theme Customization"
-description: "How to change display themes"
+description: "Overlay themes and detailed customization"
 category: "customization"
 order: 0
 locale: "en"
 ---
 ## Overview
 
-QuakeOverlay supports multiple visual themes for the overlay display. You can choose from built-in themes or create your own custom theme to match your stream's visual identity.
+QuakeOverlay includes 4 built-in themes for both alert and map overlays. All customization is done through the in-app Overlay Settings page. You can select a theme, then fine-tune colors, fonts, animations, and more to match your stream's look.
 
-## Built-in Themes
+## Alert Themes
 
-{% image-carousel images="/images/content/docs/theme-dark.svg,/images/content/docs/theme-light.svg,/images/content/docs/theme-semi-transparent.svg,/images/content/docs/theme-minimal.svg,/images/content/docs/theme-retro.svg" captions="Dark,Light,Semi-transparent,Minimal,Retro" /%}
+The alert overlay offers the following 4 themes.
 
-QuakeOverlay comes with four pre-installed themes:
+### news
 
-- **Default** - A balanced theme with a semi-transparent dark background and clear typography
-- **Dark** - A fully dark theme suited for streams with darker color palettes
-- **Light** - A bright theme with high contrast for visibility on dark backgrounds
-- **Minimal** - A compact, low-profile theme that takes up minimal screen space
+A banner-layout theme with a TV news broadcast style.
 
-### Theme Preview
+![News theme](/images/content/docs/theme-alert-news.svg "News alert theme")
 
-You can preview themes before applying them by navigating to the Theme Customization section in the Settings screen. Each theme shows a live preview of how the overlay will appear.
+### minimal
 
-## Selecting a Theme
+A card-layout theme with a simple, clean design.
 
-To change the active theme:
+![Minimal theme](/images/content/docs/theme-alert-minimal.svg "Minimal alert theme")
 
-1. Open the Settings screen
-2. Navigate to the **Display** tab
-3. Click on the **Theme** dropdown
-4. Select your desired theme
-5. Click **Apply** to save the changes
+### impact
 
-The theme change takes effect immediately on the overlay without requiring a restart.
+A banner-layout theme with a high-impact visual style.
 
-## Custom Colors
+![Impact theme](/images/content/docs/theme-alert-impact.svg "Impact alert theme")
 
-You can customize the colors used by the overlay without creating a full custom theme. The following color properties are available:
+### kawaii
 
-- **Background Color** - The main background of the overlay panel
-- **Text Color** - The primary text color for earthquake details
-- **Header Color** - The color of the alert header bar
-- **Accent Color** - Used for highlights, borders, and intensity indicators
-- **Shadow Color** - The drop shadow beneath the overlay
+A card-layout theme with a cute design.
 
-### Color Configuration
+![Kawaii theme](/images/content/docs/theme-alert-kawaii.svg "Kawaii alert theme")
 
-Colors can be customized using the Settings screen or through a custom theme file:
+## Alert Customization Options
 
-Colors can be customized in the Settings screen under the **Display** tab > **Theme** section, or by using the color picker:
+After selecting a theme, you can customize the following settings.
 
-| Setting | Default Value | Description |
-|---------|--------------|-------------|
-| Background | rgba(20, 20, 30, 0.85) | Overlay panel background |
-| Text | #FFFFFF | Primary text color |
-| Header | #1a1a2e | Alert header bar color |
-| Accent | #e94560 | Highlights and borders |
-| Shadow | rgba(0, 0, 0, 0.5) | Drop shadow color |
+| Setting | Default | Range / Options |
+|---------|---------|-----------------|
+| Position | bottom | top / bottom / center |
+| Background color | theme-dependent | Color picker |
+| Accent color | theme-dependent | Color picker |
+| Opacity | 90 | 0–100% |
+| Border color | theme-dependent | Color picker |
+| Text color | theme-dependent | Color picker |
+| Padding | 100% | 50–200% |
+| Font size | 100% | 50–200% |
+| Animation speed | 100% | 50–200% |
+| Font | default | 12 fonts (see below) |
+| Animation | default | default / fade / float / blur / slide |
+| Animation direction | up | up / down / left / right |
+| Stack method | card | banner / card / timeline / ticker / replace |
+| Max display count | 2 | 1–5 |
 
-Intensity colors can also be customized per level:
+## Map Themes
 
-| Intensity | Default Color |
-|-----------|--------------|
-| 1-2 | Gray (#808080) |
-| 3 | Blue (#0000FF) |
-| 4 | Green (#00AA00) |
-| 5 Lower | Yellow (#FFD700) |
-| 5 Upper | Orange (#FF8C00) |
-| 6 Lower | Red (#FF0000) |
-| 6 Upper | Dark Red (#8B0000) |
-| 7 | Purple (#800080) |
+The map overlay shares the same 4 theme options as the alert overlay.
 
-## Font Settings
+### map-news
 
-QuakeOverlay allows you to customize the fonts used in the overlay display.
+![News map theme](/images/content/docs/theme-map-news.svg "News map theme")
 
-### Available Font Options
+### map-minimal
 
-- **Font Family** - Choose from system fonts or bundled web fonts
-- **Font Size** - Adjust the base font size (12px - 32px)
-- **Font Weight** - Set the font weight (Normal, Bold, Light)
-- **Line Height** - Control the spacing between lines of text
+![Minimal map theme](/images/content/docs/theme-map-minimal.svg "Minimal map theme")
 
-### Bundled Fonts
+### map-impact
 
-QuakeOverlay includes the following fonts:
+![Impact map theme](/images/content/docs/theme-map-impact.svg "Impact map theme")
 
-1. Noto Sans JP (default)
-2. Inter
-3. Roboto
-4. Source Han Sans
+### map-kawaii
 
-Font settings can be adjusted in the Settings screen under the **Display** tab > **Font** section:
+![Kawaii map theme](/images/content/docs/theme-map-kawaii.svg "Kawaii map theme")
 
-| Setting | Default Value | Description |
-|---------|--------------|-------------|
-| Font Family | Noto Sans JP | Primary font face |
-| Font Size | 16px | Base text size |
-| Font Weight | 400 (Normal) | Text weight |
-| Line Height | 1.5 | Spacing between lines |
-| Header Size | 22px | Header text size |
-| Header Weight | 700 (Bold) | Header text weight |
+## Map Customization Options
 
-## Creating a Custom Theme
+### Color & Style Settings
 
-To create a fully custom theme, create a new JSON file in the `assets/themes/` directory.
+| Setting | Default | Description |
+|---------|---------|-------------|
+| Header background color | theme-dependent | Header area background |
+| Header text color | theme-dependent | Header text color |
+| Border color | theme-dependent | Card border color |
+| Tsunami bar background | theme-dependent | Tsunami info area background |
+| Tsunami bar text color | theme-dependent | Tsunami info text color |
+| Marker color | theme-dependent | Epicenter marker color |
+| Badge border color | theme-dependent | Intensity badge border |
+| Frame accent color | theme-dependent | Frame color (kawaii theme) |
+| Frame thickness | 100% | Frame width, kawaii theme (0–500%) |
 
-### Custom Theme Structure
+### Size & Font Settings
 
-Create a file named `my-theme.json` with the following structure. This is the JSON format used for theme import/export:
+| Setting | Default | Description |
+|---------|---------|-------------|
+| Font | zen-maru-gothic | 12 fonts (see below) |
+| Marker size | 100% | Epicenter marker size |
+| Label size | 100% | Prefecture label size |
+| Header font size | 120% | Header text size |
+| Tsunami font size | 160% | Tsunami info text size |
+| Time font size | 120% | Time display size |
+| Opacity | 90 | 0–100% |
 
-```json
-{
-  "name": "My Custom Theme",
-  "version": "1.0",
-  "author": "Your Name",
-  "colors": {
-    "background": "rgba(15, 15, 35, 0.9)",
-    "text": "#E0E0E0",
-    "header": "#2D2D5E",
-    "accent": "#00D4FF",
-    "shadow": "rgba(0, 0, 0, 0.6)"
-  },
-  "fonts": {
-    "family": "Inter, sans-serif",
-    "size": "15px",
-    "weight": "400"
-  },
-  "borders": {
-    "radius": "8px",
-    "width": "1px",
-    "color": "rgba(255, 255, 255, 0.1)"
-  },
-  "animation": {
-    "slideIn": "ease-out",
-    "slideOut": "ease-in",
-    "duration": "0.4s"
-  }
-}
-```
+### Display & Behavior Settings
 
-### Loading Custom Themes
+| Setting | Default | Description |
+|---------|---------|-------------|
+| Auto zoom | ON | Auto-zoom to epicenter |
+| Intensity coloring | ON | Color-code by seismic intensity |
+| Intensity labels | ON | Prefecture intensity labels |
+| Tsunami bar | ON | Show tsunami info bar |
+| Header info | ON | Show header details |
+| Sea transparency | ON | Transparent sea area |
+| Display mode | timer | timer / always-on |
+| Map display duration | 30 sec | 15–120 sec (timer mode) |
 
-After creating your custom theme file:
+## Available Fonts
 
-1. Place it in the `assets/themes/` directory
-2. Restart QuakeOverlay
-3. The custom theme will appear in the Theme dropdown in Settings
-4. Select it and click **Apply**
+Both alert and map overlays support the following 12 fonts.
 
-## Theme Best Practices
+1. default
+2. Zen Maru Gothic
+3. Noto Sans JP
+4. M PLUS Rounded 1c
+5. Kosugi Maru
+6. Kiwi Maru
+7. Hachi Maru Pop
+8. DotGothic16
+9. Dela Gothic One
+10. Shippori Mincho
+11. Reggae One
+12. Zen Antique
 
-When customizing themes, keep these guidelines in mind:
+## Tips
 
-- Use semi-transparent backgrounds so the stream content remains partially visible
-- Ensure sufficient contrast between text and background for readability
-- Test your theme with different intensity levels to verify all colors are distinguishable
-- Keep font sizes readable on both 1080p and 4K displays
-- Use smooth animations (0.3s - 0.5s duration) to avoid distracting viewers
+- Changes are previewed in real-time on the Overlay Settings page
+- Click Save to apply your changes, or Reset to revert to the theme defaults
+- Each theme stores its own customization separately
