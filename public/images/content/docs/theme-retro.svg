@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
-  <rect width="800" height="400" fill="#2d1b00" rx="12"/>
-  <text x="400" y="180" text-anchor="middle" fill="#ffcc00" font-size="32" font-family="sans-serif" font-weight="bold">Retro Theme</text>
-  <text x="400" y="230" text-anchor="middle" fill="#cc9900" font-size="18" font-family="sans-serif">ダミー画像 - 実際の画像に差し替えてください</text>
-  <rect x="200" y="280" width="400" height="60" rx="8" fill="#3d2b00" stroke="#ffcc00" stroke-width="2"/>
-  <text x="400" y="318" text-anchor="middle" fill="#ffcc00" font-size="16" font-family="sans-serif">Preview Placeholder</text>
-</svg>
