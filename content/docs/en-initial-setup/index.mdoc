@@ -1,104 +1,127 @@
 ---
 title: "Initial Setup"
-description: "First-time setup guide for QuakeOverlay"
+description: "Setup wizard and OBS integration guide"
 category: "getting-started"
 order: 1
 locale: "en"
 ---
-## First Launch
+## Setup Wizard
 
-When you launch QuakeOverlay for the first time, the application will guide you through the initial setup process. This ensures that the overlay is properly configured to work with your streaming software.
+When you launch QuakeOverlay for the first time, a 3-step setup wizard will guide you through the initial configuration. Just follow the on-screen instructions to get started.
 
-### Setup Wizard
+![Setup wizard](/images/content/docs/setup-wizard-steps.svg "3-step setup wizard")
 
-![Setup wizard — Language selection screen](/images/content/docs/setup-wizard.svg "Setup wizard — Choose from Japanese, English, or Korean")
+### Step 1: Language Selection
 
-The setup wizard consists of three steps:
+Choose your preferred display language for the app. You can select from the following three languages:
 
-1. **Language Selection** - Choose your preferred display language
-2. **Data Source Configuration** - Select the earthquake data provider
-3. **OBS Integration** - Configure the overlay URL for your streaming software
+- **日本語** (Japanese)
+- **English**
+- **한국어** (Korean)
 
-## Configuring OBS Browser Source
+The selected language will be applied across the entire app interface. You can change the language later from the settings page.
 
-QuakeOverlay provides a local web server that serves the overlay content. To display the overlay in OBS Studio, you need to add a Browser Source.
+### Step 2: Welcome Screen
 
-### Step-by-Step OBS Configuration
+The welcome screen introduces you to QuakeOverlay's four main features.
 
-![Adding a Browser Source in OBS Studio](/images/content/docs/setup-obs-add-source.svg "Click '+' in Sources panel then select 'Browser'")
+| Feature | Description |
+|---------|-------------|
+| Real-time Data | Fetches earthquake data in real time from the P2P Earthquake Information API |
+| Notifications | Displays alert notifications when an earthquake occurs |
+| Theme Customization | Customize the look and feel of your overlay |
+| OBS Integration | Use the overlay directly as a browser source in OBS Studio |
+
+Detailed settings for each feature can be configured within the app after completing the setup.
+
+### Step 3: OBS Setup Guide
+
+The app provides an in-app guide for connecting with OBS Studio. The next section covers the OBS configuration in detail, so you can follow along using both this guide and the in-app instructions.
+
+## OBS Studio Integration
+
+QuakeOverlay provides **two separate overlay URLs**. Each one should be added as its own browser source in OBS.
+
+| Overlay | URL | Purpose |
+|---------|-----|---------|
+| Alert Overlay | `http://localhost:47815/overlay/alerts/` | Displays earthquake alert notifications |
+| Map Overlay | `http://localhost:47815/overlay/map/` | Displays the epicenter and seismic intensity map |
+
+### Adding Browser Sources
+
+![Adding a browser source in OBS](/images/content/docs/setup-obs-add-source.svg "Add browser source in OBS")
+
+Repeat the following steps **for each of the two overlays**.
 
 1. Open OBS Studio
 2. In the **Sources** panel, click the **+** button
-3. Select **Browser** from the source type list
-4. Enter a name for the source (e.g., "QuakeOverlay")
-5. Click **OK**
+3. Select **Browser** from the list
+4. Choose "Create new" and enter a descriptive name
+   - For alerts: "QuakeOverlay Alert"
+   - For map: "QuakeOverlay Map"
+5. Click **OK** to open the properties dialog
 
-In the Browser Source properties, configure the following settings:
+### Browser Source Properties
 
-![OBS Browser Source properties](/images/content/docs/setup-obs-properties.svg "Recommended URL, size, and option settings")
+![OBS browser source properties](/images/content/docs/setup-obs-properties-new.svg "Browser source properties with new URL")
+
+In the properties dialog, enter the following values.
+
+**For the Alert Overlay:**
 
 ```
-URL: http://localhost:3210/overlay
+URL: http://localhost:47815/overlay/alerts/
 Width: 1920
 Height: 1080
-Custom CSS: (leave empty)
-Refresh browser when scene becomes active: checked
+FPS: 30
 ```
 
-### Recommended Browser Source Settings
+**For the Map Overlay:**
 
-| Setting | Value |
-|---------|-------|
-| URL | `http://localhost:3210/overlay` |
-| Width | 1920 |
-| Height | 1080 |
-| FPS | 30 |
-| Custom CSS | (empty) |
-| Shutdown source when not visible | Unchecked |
+```
+URL: http://localhost:47815/overlay/map/
+Width: 1920
+Height: 1080
+FPS: 30
+```
 
-## URL Settings
+### Recommended Options
 
-QuakeOverlay runs a local HTTP server to serve overlay content. The default port is `3210`, but you can change it if there is a conflict with other applications.
+Make sure to configure the following options in the properties dialog.
 
-### Changing the Port
+| Setting | Recommended Value | Reason |
+|---------|-------------------|--------|
+| Shutdown source when not visible | **Unchecked** | If enabled, the connection will drop when switching scenes |
+| Refresh browser when scene becomes active | **Checked** | Refreshes the overlay to the latest state on scene switch |
+| Custom CSS | **Leave empty** | Styles are managed by QuakeOverlay, so this should remain empty |
 
-To change the server port, open the Settings screen and navigate to the **Advanced** tab:
+## Testing the Overlay
 
-| Setting | Default Value | Description |
-|---------|--------------|-------------|
-| Port | 3210 | Local server port number |
-| Host | localhost | Server host address |
+Once the setup is complete, verify that both overlays are working correctly.
 
-After changing the port, update the URL in your OBS Browser Source accordingly.
+### Running a Test
 
-## Data Source Configuration
+1. Open the **Overlay** page in the QuakeOverlay app
+2. Click the **Test** button
+3. Check OBS for the following:
+   - **Alert Overlay**: A test alert notification should appear
+   - **Map Overlay**: A test map display should appear
 
-QuakeOverlay supports multiple earthquake data sources. During initial setup, you can choose from the following:
+If both overlays show the test content, your setup is complete.
 
-- **JMA (Japan Meteorological Agency)** - Real-time earthquake data for Japan
-- **P2P Earthquake** - Community-based earthquake detection network
-- **USGS** - United States Geological Survey global earthquake data
+### Checking Connection Status
 
-### Selecting a Data Source
+You can check the connection to the P2P Earthquake Information API from the **connection status card** on the **Dashboard** page.
 
-Navigate to the data source dropdown in the setup wizard and select your preferred provider. You can change this later in the Settings screen.
+| Status | Description |
+|--------|-------------|
+| **Connected** | Successfully connected to the API. Receiving earthquake data in real time |
+| **Connecting** | Attempting the initial connection to the API |
+| **Reconnecting** | The connection was temporarily lost and is being re-established |
+| **Disconnected** | The connection to the API has been lost. Check your network settings |
 
-## Verifying the Setup
+**If the status shows "Disconnected"**, try the following:
 
-After completing the initial setup, verify everything is working correctly:
-
-![Status bar connection states](/images/content/docs/setup-status-bar.svg "Green = Connected / Yellow = Reconnecting / Red = Error")
-
-1. Check that the QuakeOverlay status bar shows "Connected" in green
-2. Open your browser and navigate to `http://localhost:3210/overlay`
-3. Confirm that the overlay page loads with no errors
-4. In OBS, verify that the Browser Source displays the overlay
-5. Wait for a test notification or trigger one from the Settings screen
-
-## Next Steps
-
-Once the initial setup is complete, you may want to:
-
-- Customize the overlay appearance in the Theme Customization settings
-- Adjust earthquake intensity thresholds in Display Settings
-- Configure notification sounds and alerts in the Settings screen
+1. Verify that your internet connection is active
+2. Check that your firewall or security software is not blocking QuakeOverlay
+3. Restart the app and try connecting again
