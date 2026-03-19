@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter, Space_Grotesk, Zen_Kaku_Gothic_New, Noto_Sans_KR, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -53,6 +54,9 @@ export default function RootLayout({
         className={`${inter.variable} ${spaceGrotesk.variable} ${zenKakuGothicNew.variable} ${notoSansKR.variable} ${jetbrainsMono.variable}`}
       >
         {children}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );
