@@ -4,6 +4,7 @@ import type { RenderableTreeNode } from "@markdoc/markdoc";
 import { generateHeadingId } from "@/lib/docs-utils";
 import { CodeBlock } from "./CodeBlock";
 import { ImageCarousel } from "./ImageCarousel";
+import { Callout } from "./Callout";
 import type { ReactNode } from "react";
 
 type DocRendererProps = {
@@ -135,6 +136,12 @@ const config: Parameters<typeof Markdoc.transform>[1] = {
         interval: { type: Number },
       },
     },
+    callout: {
+      render: "Callout",
+      attributes: {
+        type: { type: String, required: true },
+      },
+    },
   },
   nodes: {
     heading: {
@@ -178,6 +185,7 @@ const components = {
   Link,
   DocImage,
   ImageCarouselTag,
+  Callout,
 };
 
 export function DocRenderer({ document }: DocRendererProps) {

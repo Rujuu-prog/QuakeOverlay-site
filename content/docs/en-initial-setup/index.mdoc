@@ -9,7 +9,7 @@ locale: "en"
 
 When you launch QuakeOverlay for the first time, a 3-step setup wizard will guide you through the initial configuration. Just follow the on-screen instructions to get started.
 
-![Setup wizard](/images/content/docs/setup-wizard-steps.svg "3-step setup wizard")
+![Setup wizard](/images/screenshots/ja/setup-step1.png "3-step setup wizard")
 
 ### Step 1: Language Selection
 
@@ -49,7 +49,7 @@ QuakeOverlay provides **two separate overlay URLs**. Each one should be added as
 
 ### Adding Browser Sources
 
-![Adding a browser source in OBS](/images/content/docs/setup-obs-add-source.svg "Add browser source in OBS")
+![Adding a browser source in OBS](/images/screenshots/ja/obs-source.png "Add browser source in OBS")
 
 Repeat the following steps **for each of the two overlays**.
 
@@ -63,9 +63,13 @@ Repeat the following steps **for each of the two overlays**.
 
 ### Browser Source Properties
 
-![OBS browser source properties](/images/content/docs/setup-obs-properties-new.svg "Browser source properties with new URL")
+![OBS browser source properties](/images/screenshots/ja/obs-property.png "Browser source properties with new URL")
 
 In the properties dialog, enter the following values.
+
+{% callout type="info" %}
+The URL is displayed on the "Overlay" page in the app. Since the port number may vary depending on your environment, we recommend copying the URL directly from the app.
+{% /callout %}
 
 **For the Alert Overlay:**
 
@@ -73,7 +77,6 @@ In the properties dialog, enter the following values.
 URL: http://localhost:47815/overlay/alerts/
 Width: 1920
 Height: 1080
-FPS: 30
 ```
 
 **For the Map Overlay:**
@@ -82,7 +85,6 @@ FPS: 30
 URL: http://localhost:47815/overlay/map/
 Width: 1920
 Height: 1080
-FPS: 30
 ```
 
 ### Recommended Options
