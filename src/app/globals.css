@@ -275,6 +275,14 @@
   line-height: var(--leading-normal);
 }
 
+.doc-content strong {
+  font-weight: 700;
+}
+
+.doc-content em {
+  font-style: italic;
+}
+
 .doc-content blockquote {
   border-left: 4px solid var(--color-border-accent);
   background: var(--color-bg-secondary);
