@@ -44,7 +44,12 @@ export function LanguageSwitcher() {
   }, [isOpen]);
 
   function switchLocale(newLocale: string) {
-    router.replace(pathname, { locale: newLocale });
+    let targetPath = pathname;
+    const docMatch = pathname.match(/^\/docs\/(ja|en|ko)-(.+)$/);
+    if (docMatch) {
+      targetPath = `/docs/${newLocale}-${docMatch[2]}`;
+    }
+    router.replace(targetPath, { locale: newLocale });
     setIsOpen(false);
   }
 

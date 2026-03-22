@@ -16,7 +16,7 @@ locale: "ko"
 
 ## Alerts 탭
 
-![알림 설정](/images/content/docs/overlay-settings-alerts.svg "Alert overlay settings")
+![알림 설정](/images/screenshots/ja/app-screenshot-overlay-settings.svg "Alert overlay settings")
 
 Alerts 탭에서는 지진 속보 알림 오버레이의 외관과 동작을 커스터마이즈할 수 있어요.
 
@@ -31,6 +31,8 @@ Alerts 탭에서는 지진 속보 알림 오버레이의 외관과 동작을 커
 
 테마에 따라 레이아웃 타입이 **banner**(가로형) 또는 **card**(세로형)로 전환돼요.
 
+별도 판매 추가 테마(**onyx** 등)도 이용할 수 있어요. 앞으로 새로운 테마가 추가될 예정이에요. 자세한 내용은 테마 커스터마이즈 문서를 참조해 주세요.
+
 ### 오버레이 URL
 
 "URL 복사" 버튼을 클릭하면 아래 URL이 클립보드에 복사돼요. OBS의 브라우저 소스에 이 URL을 설정해 주세요.
@@ -38,6 +40,10 @@ Alerts 탭에서는 지진 속보 알림 오버레이의 외관과 동작을 커
 ```
 http://localhost:47815/overlay/alerts/
 ```
+
+{% callout type="info" %}
+URL은 앱의 "오버레이" 페이지에 표시되어 있어요. 환경에 따라 포트 번호 등이 다를 수 있으므로, 앱 화면에서 복사해서 붙여넣는 것을 권장해요.
+{% /callout %}
 
 ### 라이브 프리뷰
 
@@ -59,7 +65,7 @@ http://localhost:47815/overlay/alerts/
 | 글꼴 크기 | 100% | 50~200% |
 | 애니메이션 속도 | 100% | 50~200% |
 | 글꼴 | default | 12종류 (자세한 내용은 테마 커스터마이즈 문서 참조) |
-| 애니메이션 | default | default / fade / float / blur / slide |
+| 애니메이션 | default | default / fade / float / blur / slide / bounce |
 | 애니메이션 방향 | up | up / down / left / right |
 | 스택 방식 | card | banner / card / timeline / ticker / replace |
 | 최대 표시 수 | 2 | 1~5 |
@@ -72,7 +78,7 @@ http://localhost:47815/overlay/alerts/
 
 ## Map 탭
 
-![맵 설정](/images/content/docs/overlay-settings-map.svg "Map overlay settings")
+![맵 설정](/images/screenshots/ja/app-screenshot-map-settings.svg "Map overlay settings")
 
 Map 탭에서는 지진 맵 오버레이의 외관을 커스터마이즈할 수 있어요.
 
@@ -85,6 +91,8 @@ Alerts 탭과 마찬가지로 다음 테마에서 선택할 수 있어요.
 - **impact**
 - **kawaii**
 
+별도 판매 추가 맵 테마(**onyx** 등)도 이용할 수 있어요. 앞으로 새로운 맵 테마가 추가될 예정이에요.
+
 ### 맵 오버레이 URL
 
 "URL 복사" 버튼을 클릭하면 아래 URL이 클립보드에 복사돼요.
@@ -92,6 +100,10 @@ Alerts 탭과 마찬가지로 다음 테마에서 선택할 수 있어요.
 ```
 http://localhost:47815/overlay/map/
 ```
+
+{% callout type="info" %}
+URL은 앱의 "오버레이" 페이지에 표시되어 있어요. 환경에 따라 포트 번호 등이 다를 수 있으므로, 앱 화면에서 복사해서 붙여넣는 것을 권장해요.
+{% /callout %}
 
 ### 맵 프리뷰
 
