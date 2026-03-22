@@ -9,7 +9,7 @@ locale: "ja"
 
 QuakeOverlayを初めて起動すると、3ステップのセットアップウィザードが表示されます。画面の案内に沿って進めるだけで、すぐに使い始めることができます。
 
-![セットアップウィザード](/images/content/docs/setup-wizard-steps.svg "3ステップのセットアップウィザード")
+![セットアップウィザード](/images/screenshots/ja/setup-step1.png "3ステップのセットアップウィザード")
 
 ### ステップ1: 言語選択
 
@@ -49,7 +49,7 @@ QuakeOverlayでは**2つのオーバーレイURL**を提供しています。そ
 
 ### ブラウザソースの追加手順
 
-![OBSでブラウザソースを追加](/images/content/docs/setup-obs-add-source.svg "OBSでブラウザソースを追加する手順")
+![OBSでブラウザソースを追加](/images/screenshots/ja/obs-source.png "OBSでブラウザソースを追加する手順")
 
 以下の手順を**2つのオーバーレイそれぞれ**に対して行います。
 
@@ -63,9 +63,13 @@ QuakeOverlayでは**2つのオーバーレイURL**を提供しています。そ
 
 ### ブラウザソースのプロパティ設定
 
-![OBSブラウザソースのプロパティ](/images/content/docs/setup-obs-properties-new.svg "ブラウザソースのプロパティに新しいURLを設定")
+![OBSブラウザソースのプロパティ](/images/screenshots/ja/obs-property.png "ブラウザソースのプロパティに新しいURLを設定")
 
 プロパティ画面で以下の値を設定してください。
+
+{% callout type="info" %}
+URLはアプリの「オーバーレイ」ページに表示されています。環境によってポート番号などが異なる場合があるため、アプリ画面からコピーして貼り付けることをおすすめします。
+{% /callout %}
 
 **アラートオーバーレイの場合:**
 
@@ -73,7 +77,6 @@ QuakeOverlayでは**2つのオーバーレイURL**を提供しています。そ
 URL: http://localhost:47815/overlay/alerts/
 幅: 1920
 高さ: 1080
-FPS: 30
 ```
 
 **マップオーバーレイの場合:**
@@ -82,7 +85,6 @@ FPS: 30
 URL: http://localhost:47815/overlay/map/
 幅: 1920
 高さ: 1080
-FPS: 30
 ```
 
 ### 推奨オプション設定

@@ -1,47 +1,54 @@
 ---
 title: "Installation"
-description: "How to download and install QuakeOverlay"
+description: "How to download and set up QuakeOverlay"
 category: "getting-started"
 order: 0
 locale: "en"
 ---
 ## Overview
 
-QuakeOverlay is a desktop application that displays real-time earthquake information as an overlay in OBS Studio. This guide walks you through downloading and installing QuakeOverlay on your system.
+QuakeOverlay is a desktop application that displays real-time earthquake information as an overlay in OBS Studio. This guide walks you through downloading and setting up QuakeOverlay on your system.
 
 ## System Requirements
 
-Before installing QuakeOverlay, make sure your system meets the following requirements.
+Before setting up QuakeOverlay, make sure your system meets the following requirements.
 
-| Requirement | Details |
-|-------------|---------|
-| OS | Windows 10 or later (64-bit) |
-| OBS Studio | 28.0 or later |
-| Memory | 4 GB or more recommended |
-| Network | Active internet connection (required for earthquake data) |
+{% table %}
+- Requirement
+- Details
+---
+- OS
+- Verified on Windows 11
+---
+- OBS Studio
+- Verified on 32.0.0
+---
+- Memory
+- 8 GB or more recommended
+---
+- Network
+- Active internet connection (required for earthquake data)
+{% /table %}
 
 ## Download
 
-QuakeOverlay is distributed through Booth. Follow these steps to download the installer.
+QuakeOverlay is distributed through Booth. Follow these steps to download the application.
 
 1. Visit the QuakeOverlay product page on [Booth](https://booth.pm)
 2. Add it to your cart and complete the purchase
-3. Go to your order history and download the installer
+3. Go to your order history and download the ZIP file
 
-## Installation
+## Setup
 
-Run the downloaded installer (.exe) and follow the on-screen instructions.
+Extract the downloaded ZIP file to a folder of your choice and run QuakeOverlay.exe.
 
-![NSIS installer](/images/content/docs/install-nsis-wizard.svg "NSIS installer screen")
-
-1. Double-click the downloaded installer (`.exe` file) to launch it
-2. Choose an installation destination folder (the default is fine for most users)
-3. Click **Install**
-4. Once the installation is complete, a desktop shortcut will be created
+1. Right-click the downloaded ZIP file and select "Extract All"
+2. Choose a destination folder (any location is fine)
+3. Once extraction is complete, double-click `QuakeOverlay.exe` in the folder to launch it
 
 ### Windows SmartScreen Warning
 
-When running the installer for the first time, Windows may display a "Windows protected your PC" warning. This is a standard warning for unsigned applications and it is safe to proceed.
+When running QuakeOverlay.exe for the first time, Windows may display a "Windows protected your PC" warning. This is a standard warning for unsigned applications and it is safe to proceed.
 
 ![SmartScreen warning](/images/content/docs/install-smartscreen.svg "SmartScreen warning")
 
@@ -50,7 +57,11 @@ When running the installer for the first time, Windows may display a "Windows pr
 
 ## First Launch
 
-After installation, launch QuakeOverlay from the desktop shortcut or Start menu. **On the first launch, a setup wizard will start automatically.** Follow the on-screen instructions to complete the initial configuration.
+Double-click QuakeOverlay.exe in the extracted folder to launch it. **On the first launch, a setup wizard will start automatically.** Follow the on-screen instructions to complete the initial configuration.
+
+{% callout type="info" %}
+To create a desktop or Start menu shortcut, right-click QuakeOverlay.exe and select "Create shortcut" or "Pin to Start".
+{% /callout %}
 
 ## Troubleshooting
 
@@ -58,21 +69,13 @@ After installation, launch QuakeOverlay from the desktop shortcut or Start menu.
 
 If QuakeOverlay fails to start, try the following steps.
 
-1. **Check antivirus software** — Make sure your antivirus is not blocking the installer or the application executable. If it is, add QuakeOverlay to the exception list
-2. **Run as administrator** — Right-click the QuakeOverlay shortcut or executable and select "Run as administrator"
-
-### Port Conflict
-
-QuakeOverlay uses port `47815` for its local server. If another application is already using this port, QuakeOverlay may not function correctly.
-
-You can check for port conflicts with the following command:
-
-```
-netstat -ano | findstr :47815
-```
-
-If another application is using port `47815`, close that application and restart QuakeOverlay.
+1. **Check antivirus software** — Make sure your antivirus is not blocking the application executable. If it is, add QuakeOverlay to the exception list
+2. **Run as administrator** — Right-click QuakeOverlay.exe and select "Run as administrator"
 
 ### App Data Location
 
-QuakeOverlay stores its settings and cache in the `%APPDATA%` folder. If you experience issues, you can delete the QuakeOverlay data in this folder and restart the application to reset it to its default state.
+QuakeOverlay runs in portable mode. Its settings and cache are stored in the same folder as `QuakeOverlay.exe`. If you experience issues, you can delete the QuakeOverlay data in this folder and restart the application to reset it to its default state.
+
+{% callout type="warning" %}
+Deleting the entire folder will also remove all settings data. If you want to keep your settings, only delete the data files, not the application executable.
+{% /callout %}
