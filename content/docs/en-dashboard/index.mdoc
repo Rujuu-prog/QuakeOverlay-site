@@ -9,17 +9,17 @@ locale: "en"
 
 The Dashboard is the home screen of QuakeOverlay. It appears when you first launch the app and provides an at-a-glance view of the entire system's status.
 
-![Dashboard overview](/images/content/docs/dashboard-overview.svg "Dashboard screen")
+![Dashboard overview](/images/screenshots/ja/dashboard.gif "Dashboard screen")
 
 Key information such as connection state, recent earthquake data, and statistics are organized into easy-to-read cards.
 
-## Sidebar Navigation
+## Tab Bar Navigation
 
-A sidebar is always visible on the left side of the screen, giving you quick access to every section of the app from any page.
+A tab bar is always visible at the top of the screen, giving you quick access to every section of the app from any page.
 
-![Sidebar navigation](/images/content/docs/sidebar-navigation.svg "Sidebar navigation")
+![Tab bar navigation](/images/screenshots/en/tabbar-en.png "Tab bar navigation")
 
-The sidebar includes the following menu items:
+The tab bar includes the following menu items:
 
 - **Dashboard** — Home screen (the current page)
 - **Monitor** — Real-time earthquake monitoring
@@ -70,9 +70,13 @@ At the bottom of the Dashboard, you will find statistics cards summarizing earth
 | Today's earthquake count | Number of earthquakes received today |
 | Total history count | Total number of earthquake events received since installation |
 | Last received time | Date and time of the most recently received earthquake |
-| Intensity distribution chart | A visual chart showing the count of earthquakes by intensity level |
+| Max intensity | The highest seismic intensity observed in the history |
 
 These statistics update automatically as new data is received.
+
+## Directory Health Check
+
+If required folders (such as overlay and theme folders) are missing, a warning banner will appear at the top of the Dashboard. If you see this warning, try reinstalling the app.
 
 ## Initial Data Fetch Banner
 
@@ -80,8 +84,17 @@ When you launch the app for the first time, a banner appears at the top of the D
 
 The banner displays the following information:
 
-- Data fetch progress
+- Data fetch progress (percentage)
 - Number of events fetched so far
-- Current status (fetching / complete)
+- Current status
+
+The fetch status can be one of the following:
+
+| Status | Description |
+|--------|-------------|
+| Fetching | Data is being retrieved |
+| Complete | All data has been successfully fetched |
+| Partial | Some data could not be fetched (yellow warning) |
+| Failed | Data fetch failed (a retry button is displayed) |
 
 Once the initial data fetch is complete, the banner will automatically disappear. You can continue using the rest of the app normally while the data is being retrieved.

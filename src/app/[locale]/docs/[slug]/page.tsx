@@ -1,5 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getDocsByLocale,
   getDocBySlug,
@@ -52,8 +52,13 @@ export default async function DocPage({
   setRequestLocale(locale);
 
   const doc = await getDocBySlug(slug);
-  if (!doc || doc.locale !== locale) {
+  if (!doc) {
     notFound();
+  }
+  if (doc.locale !== locale) {
+    const baseName = slug.replace(/^(ja|en|ko)-/, "");
+    const correctSlug = `${locale}-${baseName}`;
+    redirect(`/${locale}/docs/${correctSlug}`);
   }
 
   const t = await getTranslations("docs");
