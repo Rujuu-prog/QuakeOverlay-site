@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { getDocsByLocale, groupDocsByCategory } from "@/lib/docs";
+import { getSearchIndex } from "@/lib/search-index";
 import { Sidebar } from "@/components/docs/Sidebar";
 import { DocsSidebarDrawer } from "@/components/docs/DocsSidebarDrawer";
 
@@ -13,7 +14,10 @@ export default async function DocsLayout({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const docs = await getDocsByLocale(locale);
+  const [docs, searchIndex] = await Promise.all([
+    getDocsByLocale(locale),
+    getSearchIndex(locale),
+  ]);
   const categories = groupDocsByCategory(docs);
 
   return (
@@ -22,13 +26,16 @@ export default async function DocsLayout({
         {/* Desktop sidebar */}
         <div className="hidden w-64 shrink-0 md:block">
           <div className="sticky top-20">
-            <Sidebar categories={categories} />
+            <Sidebar categories={categories} searchIndex={searchIndex} />
           </div>
         </div>
 
         {/* Mobile sidebar drawer */}
         <div className="fixed bottom-4 right-4 z-30 md:hidden">
-          <DocsSidebarDrawer categories={categories} />
+          <DocsSidebarDrawer
+            categories={categories}
+            searchIndex={searchIndex}
+          />
         </div>
 
         {/* Main content */}

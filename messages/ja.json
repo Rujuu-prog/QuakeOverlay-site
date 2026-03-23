@@ -122,7 +122,10 @@
     },
     "sidebar": "サイドバー",
     "openSidebar": "サイドバーを開く",
-    "closeSidebar": "サイドバーを閉じる"
+    "closeSidebar": "サイドバーを閉じる",
+    "searchResultCount": "{count}件の検索結果",
+    "searchMatchBody": "本文に一致",
+    "noResultsHint": "タイトル・説明文・本文を検索しています。別のキーワードや短いキーワードをお試しください。"
   },
   "releases": {
     "title": "リリースノート",

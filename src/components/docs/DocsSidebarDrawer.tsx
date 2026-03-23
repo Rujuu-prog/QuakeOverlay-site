@@ -6,15 +6,18 @@ import { usePathname } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";
 import { Sidebar } from "./Sidebar";
 import type { SidebarCategory } from "@/types/docs";
+import type { SearchIndexEntry } from "@/types/search";
 
 type DocsSidebarDrawerProps = {
   categories: SidebarCategory[];
   currentSlug?: string;
+  searchIndex?: SearchIndexEntry[];
 };
 
 export function DocsSidebarDrawer({
   categories,
   currentSlug,
+  searchIndex,
 }: DocsSidebarDrawerProps) {
   const t = useTranslations("docs");
   const pathname = usePathname();
@@ -80,7 +83,7 @@ export function DocsSidebarDrawer({
                 <X className="size-5" />
               </button>
             </div>
-            <Sidebar categories={categories} currentSlug={currentSlug} />
+            <Sidebar categories={categories} currentSlug={currentSlug} searchIndex={searchIndex} />
           </div>
         </>
       )}
