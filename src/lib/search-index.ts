@@ -1,19 +1,19 @@
 import { DOC_CATEGORIES } from "@/constants/docs";
 import type { DocCategory } from "@/constants/docs";
-import type { SearchIndexEntry } from "@/types/search";
-import { normalizeForSearch, extractTextFromMarkdocAst } from "./search";
+import type { SearchIndexData } from "@/types/search";
+import { extractTextFromMarkdocAst } from "./search";
 import { reader } from "./reader";
 
 /**
  * Build search index for a locale. Server-side only.
  * Reads all docs via Keystatic reader and extracts plain text from Markdoc AST.
  *
- * This function encapsulates all index generation responsibility.
- * UI consumers should not know or care about the data source.
+ * Returns slim data without normalized fields to reduce RSC payload.
+ * Normalized fields are computed on the client side.
  */
 export async function getSearchIndex(
   locale: string
-): Promise<SearchIndexEntry[]> {
+): Promise<SearchIndexData[]> {
   const allDocs = await reader.collections.docs.all();
   const localeDocs = allDocs.filter((doc) => doc.entry.locale === locale);
 
@@ -26,7 +26,7 @@ export async function getSearchIndex(
     )
   );
 
-  const entries: SearchIndexEntry[] = [];
+  const entries: SearchIndexData[] = [];
 
   for (const item of fullDocs) {
     if (!item) continue;
@@ -44,9 +44,6 @@ export async function getSearchIndex(
       description: doc.entry.description,
       category: doc.entry.category as DocCategory,
       body: bodyText,
-      searchTitle: normalizeForSearch(doc.entry.title),
-      searchDescription: normalizeForSearch(doc.entry.description),
-      searchBody: normalizeForSearch(bodyText),
     });
   }
 
@@ -54,11 +51,13 @@ export async function getSearchIndex(
   const orderMap = new Map(
     localeDocs.map((d) => [d.slug, d.entry.order ?? 0])
   );
-  const categoryOrder = DOC_CATEGORIES.map((c) => c.key);
+  const categoryRank = new Map(
+    DOC_CATEGORIES.map((c, i) => [c.key, i])
+  );
 
   return entries.sort((a, b) => {
-    const catA = categoryOrder.indexOf(a.category);
-    const catB = categoryOrder.indexOf(b.category);
+    const catA = categoryRank.get(a.category) ?? 0;
+    const catB = categoryRank.get(b.category) ?? 0;
     if (catA !== catB) return catA - catB;
     return (orderMap.get(a.slug) ?? 0) - (orderMap.get(b.slug) ?? 0);
   });

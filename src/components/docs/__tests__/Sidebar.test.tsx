@@ -2,8 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, userEvent } from "@/test/utils";
 import { Sidebar } from "../Sidebar";
 import type { SidebarCategory } from "@/types/docs";
-import type { SearchIndexEntry } from "@/types/search";
-import { normalizeForSearch } from "@/lib/search";
+import type { SearchIndexData } from "@/types/search";
 
 vi.mock("@/i18n/navigation", () => ({
   Link: ({
@@ -102,18 +101,13 @@ describe("Sidebar", () => {
 // ---------------------------------------------------------------------------
 // Fulltext search with searchIndex
 // ---------------------------------------------------------------------------
-const searchIndex: SearchIndexEntry[] = [
+const searchIndex: SearchIndexData[] = [
   {
     slug: "installation",
     title: "Installation",
     description: "How to install the app",
     category: "getting-started",
     body: "Download the ZIP file and extract it to a folder on your computer.",
-    searchTitle: normalizeForSearch("Installation"),
-    searchDescription: normalizeForSearch("How to install the app"),
-    searchBody: normalizeForSearch(
-      "Download the ZIP file and extract it to a folder on your computer."
-    ),
   },
   {
     slug: "main-screen",
@@ -121,11 +115,6 @@ const searchIndex: SearchIndexEntry[] = [
     description: "Overview of the main screen",
     category: "screens",
     body: "The main screen displays earthquake information in real time.",
-    searchTitle: normalizeForSearch("Main Screen"),
-    searchDescription: normalizeForSearch("Overview of the main screen"),
-    searchBody: normalizeForSearch(
-      "The main screen displays earthquake information in real time."
-    ),
   },
 ];
 

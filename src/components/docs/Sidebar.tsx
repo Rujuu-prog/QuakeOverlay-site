@@ -5,26 +5,37 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Search } from "lucide-react";
 import { DOC_CATEGORIES } from "@/constants/docs";
-import { searchDocs } from "@/lib/search";
+import { normalizeForSearch, searchDocs } from "@/lib/search";
 import { SearchResults } from "./SearchResults";
 import type { SidebarCategory } from "@/types/docs";
-import type { SearchIndexEntry } from "@/types/search";
+import type { SearchIndexData, SearchIndexEntry } from "@/types/search";
 
 type SidebarProps = {
   categories: SidebarCategory[];
   currentSlug?: string;
-  searchIndex?: SearchIndexEntry[];
+  searchIndex?: SearchIndexData[];
 };
 
 export function Sidebar({ categories, currentSlug, searchIndex }: SidebarProps) {
   const t = useTranslations("docs");
   const [query, setQuery] = useState("");
 
+  // Compute normalized fields on client (avoids bloating RSC payload)
+  const fullIndex = useMemo<SearchIndexEntry[] | null>(() => {
+    if (!searchIndex) return null;
+    return searchIndex.map((d) => ({
+      ...d,
+      searchTitle: normalizeForSearch(d.title),
+      searchDescription: normalizeForSearch(d.description),
+      searchBody: normalizeForSearch(d.body),
+    }));
+  }, [searchIndex]);
+
   // Fulltext search results (when searchIndex is available and query is non-empty)
   const fulltextResults = useMemo(() => {
-    if (!searchIndex || !query.trim()) return null;
-    return searchDocs(searchIndex, query);
-  }, [searchIndex, query]);
+    if (!fullIndex || !query.trim()) return null;
+    return searchDocs(fullIndex, query);
+  }, [fullIndex, query]);
 
   // Fallback: title-only filtering (when searchIndex is not available)
   const filteredCategories = useMemo(() => {

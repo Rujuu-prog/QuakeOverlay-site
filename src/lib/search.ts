@@ -42,13 +42,23 @@ export function searchDocs(
   const normalizedQuery = normalizeForSearch(query);
   if (!normalizedQuery) return [];
 
-  const categoryOrder = DOC_CATEGORIES.map((c) => c.key);
+  const categoryRank = new Map(DOC_CATEGORIES.map((c, i) => [c.key, i]));
 
   type ScoredResult = SearchResult & { priority: number; originalIndex: number };
   const scored: ScoredResult[] = [];
 
   for (let i = 0; i < index.length; i++) {
     const doc = index[i];
+
+    // Skip entries without normalized fields (defensive guard)
+    if (
+      doc.searchTitle === undefined ||
+      doc.searchDescription === undefined ||
+      doc.searchBody === undefined
+    ) {
+      continue;
+    }
+
     let matchField: MatchField | null = null;
     let matchType: MatchType = "partial";
     let priority: number;
@@ -94,8 +104,8 @@ export function searchDocs(
   // Stable sort: priority → category order → original index
   scored.sort((a, b) => {
     if (a.priority !== b.priority) return a.priority - b.priority;
-    const catA = categoryOrder.indexOf(a.category);
-    const catB = categoryOrder.indexOf(b.category);
+    const catA = categoryRank.get(a.category) ?? 0;
+    const catB = categoryRank.get(b.category) ?? 0;
     if (catA !== catB) return catA - catB;
     return a.originalIndex - b.originalIndex;
   });
@@ -109,9 +119,10 @@ export function searchDocs(
 // ---------------------------------------------------------------------------
 
 /**
- * Build a mapping from normalized text positions to original text positions.
- * Follows the same rules as normalizeForSearch:
- * trim + lowercase + fullwidth→halfwidth space + \s+ compression.
+ * Build a mapping from normalized text positions to trimmed text positions.
+ * Handles whitespace normalization only (fullwidth→halfwidth space + \s+ compression).
+ * Does not perform lowercase — callers handle case via normalizeForSearch separately.
+ * Returned indices are relative to text.trim(), not the original text.
  *
  * Used by extractSnippet and HighlightedText to map match positions
  * from normalized text back to the original text for display.
@@ -226,7 +237,7 @@ export function extractTextFromMarkdocAst(node: unknown): string {
   // Recurse into children
   if (Array.isArray(obj.children)) {
     return obj.children
-      .map((child: unknown) => extractTextFromMarkdocAst(child))
+      .map((child: unknown) => extractTextFromMarkdocAst(child).trim())
       .filter(Boolean)
       .join(" ");
   }

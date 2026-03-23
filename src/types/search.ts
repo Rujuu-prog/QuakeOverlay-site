@@ -1,11 +1,20 @@
 import type { DocCategory } from "@/constants/docs";
 
-export type SearchIndexEntry = {
+/**
+ * Slim data passed from server to client (no normalized fields).
+ */
+export type SearchIndexData = {
   slug: string;
   title: string;
   description: string;
   category: DocCategory;
   body: string;
+};
+
+/**
+ * Full entry with normalized fields, computed on the client.
+ */
+export type SearchIndexEntry = SearchIndexData & {
   searchTitle: string;
   searchDescription: string;
   searchBody: string;

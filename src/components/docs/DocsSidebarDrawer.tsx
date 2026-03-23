@@ -6,12 +6,12 @@ import { usePathname } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";
 import { Sidebar } from "./Sidebar";
 import type { SidebarCategory } from "@/types/docs";
-import type { SearchIndexEntry } from "@/types/search";
+import type { SearchIndexData } from "@/types/search";
 
 type DocsSidebarDrawerProps = {
   categories: SidebarCategory[];
   currentSlug?: string;
-  searchIndex?: SearchIndexEntry[];
+  searchIndex?: SearchIndexData[];
 };
 
 export function DocsSidebarDrawer({

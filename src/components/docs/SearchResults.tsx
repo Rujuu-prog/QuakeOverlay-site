@@ -28,14 +28,15 @@ function HighlightedText({
   const matchIndex = normalizedText.indexOf(normalizedQuery);
   if (matchIndex === -1) return <>{text}</>;
 
+  const displayText = text.trim();
   const positions = buildNormalizedPositionMap(text);
   const origStart = positions[matchIndex] ?? 0;
   const origEnd =
-    positions[matchIndex + normalizedQuery.length] ?? text.trimEnd().length;
+    positions[matchIndex + normalizedQuery.length] ?? displayText.length;
 
-  const before = text.slice(0, origStart);
-  const match = text.slice(origStart, origEnd);
-  const after = text.slice(origEnd);
+  const before = displayText.slice(0, origStart);
+  const match = displayText.slice(origStart, origEnd);
+  const after = displayText.slice(origEnd);
 
   return (
     <>
