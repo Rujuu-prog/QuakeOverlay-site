@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { DOC_CATEGORIES } from "@/constants/docs";
-import { normalizeForSearch } from "@/lib/search";
+import { normalizeForSearch, buildNormalizedPositionMap } from "@/lib/search";
 import type { SearchResult } from "@/types/search";
 
 type SearchResultsProps = {
@@ -28,16 +28,14 @@ function HighlightedText({
   const matchIndex = normalizedText.indexOf(normalizedQuery);
   if (matchIndex === -1) return <>{text}</>;
 
-  // Map normalized position back to original text
-  // Since normalization preserves character count (mostly),
-  // we find the match in original text case-insensitively
-  const lowerText = text.toLowerCase().replace(/\u3000/g, " ");
-  const origIndex = lowerText.indexOf(normalizedQuery);
-  if (origIndex === -1) return <>{text}</>;
+  const positions = buildNormalizedPositionMap(text);
+  const origStart = positions[matchIndex] ?? 0;
+  const origEnd =
+    positions[matchIndex + normalizedQuery.length] ?? text.trimEnd().length;
 
-  const before = text.slice(0, origIndex);
-  const match = text.slice(origIndex, origIndex + normalizedQuery.length);
-  const after = text.slice(origIndex + normalizedQuery.length);
+  const before = text.slice(0, origStart);
+  const match = text.slice(origStart, origEnd);
+  const after = text.slice(origEnd);
 
   return (
     <>

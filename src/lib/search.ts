@@ -105,6 +105,44 @@ export function searchDocs(
 }
 
 // ---------------------------------------------------------------------------
+// Normalized→original position mapping
+// ---------------------------------------------------------------------------
+
+/**
+ * Build a mapping from normalized text positions to original text positions.
+ * Follows the same rules as normalizeForSearch:
+ * trim + lowercase + fullwidth→halfwidth space + \s+ compression.
+ *
+ * Used by extractSnippet and HighlightedText to map match positions
+ * from normalized text back to the original text for display.
+ */
+export function buildNormalizedPositionMap(text: string): number[] {
+  const trimmed = text.trim();
+  const positions: number[] = [];
+  let origIdx = 0;
+  let inWhitespace = false;
+
+  while (origIdx < trimmed.length) {
+    const ch = trimmed[origIdx];
+    const isWs = /\s/.test(ch) || ch === "\u3000";
+
+    if (isWs) {
+      if (!inWhitespace) {
+        positions.push(origIdx);
+        inWhitespace = true;
+      }
+      origIdx++;
+    } else {
+      inWhitespace = false;
+      positions.push(origIdx);
+      origIdx++;
+    }
+  }
+
+  return positions;
+}
+
+// ---------------------------------------------------------------------------
 // Snippet extraction
 // ---------------------------------------------------------------------------
 
@@ -130,33 +168,8 @@ export function extractSnippet(
   const matchIndex = normalizedBody.indexOf(normalizedQuery);
   if (matchIndex === -1) return "";
 
-  // Since normalization only does trim + lowercase + space compression,
-  // we map from normalized position back to original body.
-  // Build a mapping: for each char in normalized, track original position.
-  const trimStart = body.length - body.trimStart().length;
   const trimmed = body.trim();
-
-  // Build normalized-to-original position mapping
-  const origPositions: number[] = [];
-  let origIdx = 0;
-  const lowered = trimmed.toLowerCase().replace(/\u3000/g, " ");
-
-  for (let i = 0; i < lowered.length; i++) {
-    if (origIdx >= trimmed.length) break;
-
-    // Handle whitespace compression
-    if (lowered[i] === " ") {
-      origPositions.push(origIdx);
-      // Skip over consecutive whitespace in original
-      origIdx++;
-      while (origIdx < trimmed.length && /\s/.test(trimmed[origIdx])) {
-        origIdx++;
-      }
-    } else {
-      origPositions.push(origIdx);
-      origIdx++;
-    }
-  }
+  const origPositions = buildNormalizedPositionMap(body);
 
   // Map normalized match position to original positions
   const origStart = origPositions[matchIndex] ?? 0;

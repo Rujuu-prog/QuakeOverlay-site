@@ -17,13 +17,20 @@ export async function getSearchIndex(
   const allDocs = await reader.collections.docs.all();
   const localeDocs = allDocs.filter((doc) => doc.entry.locale === locale);
 
+  // Fetch all docs in parallel
+  const fullDocs = await Promise.all(
+    localeDocs.map((doc) =>
+      reader.collections.docs
+        .read(doc.slug, { resolveLinkedFiles: true })
+        .then((fullDoc) => (fullDoc ? { doc, fullDoc } : null))
+    )
+  );
+
   const entries: SearchIndexEntry[] = [];
 
-  for (const doc of localeDocs) {
-    const fullDoc = await reader.collections.docs.read(doc.slug, {
-      resolveLinkedFiles: true,
-    });
-    if (!fullDoc) continue;
+  for (const item of fullDocs) {
+    if (!item) continue;
+    const { doc, fullDoc } = item;
 
     const bodyText = fullDoc.content
       ? extractTextFromMarkdocAst(
@@ -43,16 +50,16 @@ export async function getSearchIndex(
     });
   }
 
-  // Sort by category order then doc order for stable results
+  // Pre-compute slug→order map for O(1) lookup during sort
+  const orderMap = new Map(
+    localeDocs.map((d) => [d.slug, d.entry.order ?? 0])
+  );
   const categoryOrder = DOC_CATEGORIES.map((c) => c.key);
+
   return entries.sort((a, b) => {
     const catA = categoryOrder.indexOf(a.category);
     const catB = categoryOrder.indexOf(b.category);
     if (catA !== catB) return catA - catB;
-    const orderA =
-      localeDocs.find((d) => d.slug === a.slug)?.entry.order ?? 0;
-    const orderB =
-      localeDocs.find((d) => d.slug === b.slug)?.entry.order ?? 0;
-    return orderA - orderB;
+    return (orderMap.get(a.slug) ?? 0) - (orderMap.get(b.slug) ?? 0);
   });
 }

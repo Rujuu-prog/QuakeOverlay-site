@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   normalizeForSearch,
+  buildNormalizedPositionMap,
   searchDocs,
   extractSnippet,
   extractTextFromMarkdocAst,
@@ -346,6 +347,71 @@ describe("extractSnippet", () => {
     const jaText = "QuakeOverlayは地震情報を自動で取得するツールです。";
     const snippet = extractSnippet(jaText, "地震情報", SNIPPET_CONTEXT_LENGTH);
     expect(snippet).toContain("地震情報");
+  });
+
+  it("handles text with newlines and tabs correctly", () => {
+    const text = "First line\n\tSecond\tline\n\nThird line with keyword here";
+    const snippet = extractSnippet(text, "keyword", 10);
+    expect(snippet).toContain("keyword");
+  });
+
+  it("handles text with consecutive whitespace around match", () => {
+    const text = "before   keyword   after";
+    const snippet = extractSnippet(text, "keyword", 5);
+    expect(snippet).toContain("keyword");
+  });
+});
+
+// ===========================================================================
+// buildNormalizedPositionMap
+// ===========================================================================
+describe("buildNormalizedPositionMap", () => {
+  it("maps simple text positions correctly", () => {
+    const positions = buildNormalizedPositionMap("hello");
+    expect(positions).toEqual([0, 1, 2, 3, 4]);
+  });
+
+  it("compresses consecutive whitespace into single position", () => {
+    const positions = buildNormalizedPositionMap("a   b");
+    // normalized: "a b" (3 chars)
+    // positions: a→0, space→1, b→4
+    expect(positions).toHaveLength(3);
+    expect(positions[0]).toBe(0); // 'a'
+    expect(positions[1]).toBe(1); // first space
+    expect(positions[2]).toBe(4); // 'b'
+  });
+
+  it("handles full-width spaces", () => {
+    const positions = buildNormalizedPositionMap("a\u3000b");
+    // normalized: "a b" (3 chars)
+    expect(positions).toHaveLength(3);
+    expect(positions[0]).toBe(0); // 'a'
+    expect(positions[1]).toBe(1); // fullwidth space
+    expect(positions[2]).toBe(2); // 'b'
+  });
+
+  it("handles newlines and tabs", () => {
+    const positions = buildNormalizedPositionMap("a\n\tb");
+    // normalized: "a b" (3 chars)
+    expect(positions).toHaveLength(3);
+    expect(positions[0]).toBe(0); // 'a'
+    expect(positions[1]).toBe(1); // newline (first ws)
+    expect(positions[2]).toBe(3); // 'b'
+  });
+
+  it("trims leading and trailing whitespace", () => {
+    const positions = buildNormalizedPositionMap("  hello  ");
+    // trimmed: "hello", normalized: "hello" (5 chars)
+    expect(positions).toHaveLength(5);
+    expect(positions[0]).toBe(0);
+  });
+
+  it("returns empty array for empty string", () => {
+    expect(buildNormalizedPositionMap("")).toEqual([]);
+  });
+
+  it("returns empty array for whitespace-only string", () => {
+    expect(buildNormalizedPositionMap("   ")).toEqual([]);
   });
 });
 
