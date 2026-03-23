@@ -108,6 +108,7 @@ const searchIndex: SearchIndexData[] = [
     description: "How to install the app",
     category: "getting-started",
     body: "Download the ZIP file and extract it to a folder on your computer.",
+    sections: [],
   },
   {
     slug: "main-screen",
@@ -115,6 +116,7 @@ const searchIndex: SearchIndexData[] = [
     description: "Overview of the main screen",
     category: "screens",
     body: "The main screen displays earthquake information in real time.",
+    sections: [],
   },
 ];
 

@@ -291,6 +291,14 @@ export function extractSectionedText(node: unknown): SectionedText {
 
   const parts: string[] = [];
   const sections: SectionMarker[] = [];
+  let currentLength = 0; // Track body length incrementally
+
+  function appendPart(text: string): void {
+    if (!text) return;
+    if (currentLength > 0) currentLength++; // space separator
+    currentLength += text.length;
+    parts.push(text);
+  }
 
   function walk(n: unknown): void {
     if (!n || typeof n !== "object") return;
@@ -306,17 +314,13 @@ export function extractSectionedText(node: unknown): SectionedText {
     if (headingLevel !== null && headingLevel >= 2 && headingLevel <= 4) {
       const headingText = extractTextFromMarkdocAst(o).trim();
       if (headingText) {
-        // Current body length = offset where this section starts
-        const currentBody = parts.filter(Boolean).join(" ");
-        const offset = currentBody.length > 0 ? currentBody.length + 1 : 0;
+        const offset = currentLength > 0 ? currentLength + 1 : 0;
         sections.push({
           id: generateHeadingId(headingText),
           offset,
         });
+        appendPart(headingText);
       }
-      // Add heading text to body
-      const text = extractTextFromMarkdocAst(o).trim();
-      if (text) parts.push(text);
       return; // Don't walk into heading children again
     }
 
@@ -325,7 +329,7 @@ export function extractSectionedText(node: unknown): SectionedText {
       const attrs = o.attributes as Record<string, unknown> | undefined;
       if (attrs?.content && typeof attrs.content === "string") {
         const trimmed = attrs.content.trim();
-        if (trimmed) parts.push(trimmed);
+        if (trimmed) appendPart(trimmed);
       }
       return;
     }
