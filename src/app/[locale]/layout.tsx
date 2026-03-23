@@ -6,7 +6,6 @@ import { routing } from "@/i18n/routing";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { SplashScreen } from "@/components/ui/SplashScreen";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -72,7 +71,6 @@ export default async function LocaleLayout({
   return (
     <div className="app-layout">
       <NextIntlClientProvider messages={messages}>
-        <SplashScreen />
         <SkipToContent />
         <Header />
         <main id="main-content">{children}</main>
