@@ -1,5 +1,10 @@
 import type { DocCategory } from "@/constants/docs";
 
+export type SectionMarker = {
+  id: string;
+  offset: number;
+};
+
 /**
  * Slim data passed from server to client (no normalized fields).
  */
@@ -9,6 +14,7 @@ export type SearchIndexData = {
   description: string;
   category: DocCategory;
   body: string;
+  sections: SectionMarker[];
 };
 
 /**
@@ -31,4 +37,5 @@ export type SearchResult = {
   snippet: string;
   matchField: MatchField;
   matchType: MatchType;
+  sectionId?: string;
 };

@@ -1,7 +1,7 @@
 import { DOC_CATEGORIES } from "@/constants/docs";
 import type { DocCategory } from "@/constants/docs";
 import type { SearchIndexData } from "@/types/search";
-import { extractTextFromMarkdocAst } from "./search";
+import { extractSectionedText } from "./search";
 import { reader } from "./reader";
 
 /**
@@ -32,11 +32,11 @@ export async function getSearchIndex(
     if (!item) continue;
     const { doc, fullDoc } = item;
 
-    const bodyText = fullDoc.content
-      ? extractTextFromMarkdocAst(
+    const { body: bodyText, sections } = fullDoc.content
+      ? extractSectionedText(
           fullDoc.content as unknown as Record<string, unknown>
         )
-      : "";
+      : { body: "", sections: [] };
 
     entries.push({
       slug: doc.slug,
@@ -44,6 +44,7 @@ export async function getSearchIndex(
       description: doc.entry.description,
       category: doc.entry.category as DocCategory,
       body: bodyText,
+      sections,
     });
   }
 

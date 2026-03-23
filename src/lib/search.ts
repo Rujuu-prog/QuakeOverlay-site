@@ -1,8 +1,10 @@
 import { DOC_CATEGORIES } from "@/constants/docs";
+import { generateHeadingId } from "@/lib/docs-utils";
 import { SNIPPET_CONTEXT_LENGTH, SEARCH_PRIORITY } from "@/constants/search";
 import type {
   SearchIndexEntry,
   SearchResult,
+  SectionMarker,
   MatchField,
   MatchType,
 } from "@/types/search";
@@ -88,6 +90,24 @@ export function searchDocs(
         ? extractSnippet(doc.body, normalizedQuery, SNIPPET_CONTEXT_LENGTH)
         : "";
 
+    // Determine sectionId for body matches
+    let sectionId: string | undefined;
+    if (matchField === "body" && doc.sections && doc.sections.length > 0) {
+      const matchPos = doc.searchBody.indexOf(normalizedQuery);
+      if (matchPos >= 0) {
+        // Map normalized position back to body position
+        const posMap = buildNormalizedPositionMap(doc.body);
+        const origPos = posMap[matchPos] ?? 0;
+        // Find the last section with offset <= origPos
+        for (let s = doc.sections.length - 1; s >= 0; s--) {
+          if (doc.sections[s].offset <= origPos) {
+            sectionId = doc.sections[s].id;
+            break;
+          }
+        }
+      }
+    }
+
     scored.push({
       slug: doc.slug,
       title: doc.title,
@@ -96,6 +116,7 @@ export function searchDocs(
       snippet,
       matchField,
       matchType,
+      sectionId,
       priority,
       originalIndex: i,
     });
@@ -243,5 +264,86 @@ export function extractTextFromMarkdocAst(node: unknown): string {
   }
 
   return "";
+}
+
+// ---------------------------------------------------------------------------
+// Section-aware text extraction
+// ---------------------------------------------------------------------------
+
+type SectionedText = {
+  body: string;
+  sections: SectionMarker[];
+};
+
+/**
+ * Extract text from Markdoc AST with section boundary tracking.
+ * Records the offset in the body text where each heading section begins.
+ */
+export function extractSectionedText(node: unknown): SectionedText {
+  if (!node || typeof node !== "object") return { body: "", sections: [] };
+
+  const obj = node as Record<string, unknown>;
+
+  // Handle Keystatic wrapper
+  if (obj.node && typeof obj.node === "object") {
+    return extractSectionedText(obj.node);
+  }
+
+  const parts: string[] = [];
+  const sections: SectionMarker[] = [];
+
+  function walk(n: unknown): void {
+    if (!n || typeof n !== "object") return;
+    const o = n as Record<string, unknown>;
+
+    // Detect heading nodes
+    let headingLevel: number | null = null;
+    if (o.type === "heading") {
+      const attrs = o.attributes as Record<string, unknown> | undefined;
+      headingLevel = (attrs?.level as number) ?? null;
+    }
+
+    if (headingLevel !== null && headingLevel >= 2 && headingLevel <= 4) {
+      const headingText = extractTextFromMarkdocAst(o).trim();
+      if (headingText) {
+        // Current body length = offset where this section starts
+        const currentBody = parts.filter(Boolean).join(" ");
+        const offset = currentBody.length > 0 ? currentBody.length + 1 : 0;
+        sections.push({
+          id: generateHeadingId(headingText),
+          offset,
+        });
+      }
+      // Add heading text to body
+      const text = extractTextFromMarkdocAst(o).trim();
+      if (text) parts.push(text);
+      return; // Don't walk into heading children again
+    }
+
+    // Text node
+    if (o.type === "text") {
+      const attrs = o.attributes as Record<string, unknown> | undefined;
+      if (attrs?.content && typeof attrs.content === "string") {
+        const trimmed = attrs.content.trim();
+        if (trimmed) parts.push(trimmed);
+      }
+      return;
+    }
+
+    // Recurse into children
+    if (Array.isArray(o.children)) {
+      for (const child of o.children) {
+        walk(child);
+      }
+    }
+  }
+
+  if (Array.isArray(obj.children)) {
+    for (const child of obj.children) {
+      walk(child);
+    }
+  }
+
+  return { body: parts.filter(Boolean).join(" "), sections };
 }
 

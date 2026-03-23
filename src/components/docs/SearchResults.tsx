@@ -78,7 +78,7 @@ export function SearchResults({ results, query }: SearchResultsProps) {
           return (
             <li key={result.slug}>
               <Link
-                href={`/docs/${result.slug}`}
+                href={`/docs/${result.slug}${result.sectionId ? `#${result.sectionId}` : ""}`}
                 className="block rounded-lg border border-border-default p-3 transition-colors duration-200 hover:border-border-accent hover:bg-bg-hover"
               >
                 <span className="text-sm font-medium text-text-primary">

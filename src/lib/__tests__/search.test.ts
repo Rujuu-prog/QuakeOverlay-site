@@ -5,6 +5,7 @@ import {
   searchDocs,
   extractSnippet,
   extractTextFromMarkdocAst,
+  extractSectionedText,
 } from "../search";
 import { SNIPPET_CONTEXT_LENGTH } from "@/constants/search";
 import type { SearchIndexEntry } from "@/types/search";
@@ -24,6 +25,7 @@ function entry(
     description = "",
     category = "getting-started",
     body = "",
+    sections = [],
   } = overrides;
   return {
     slug,
@@ -31,6 +33,7 @@ function entry(
     description,
     category,
     body,
+    sections,
     searchTitle: normalizeForSearch(title),
     searchDescription: normalizeForSearch(description),
     searchBody: normalizeForSearch(body),
@@ -504,5 +507,175 @@ describe("extractTextFromMarkdocAst", () => {
 
   it("returns empty string for empty object", () => {
     expect(extractTextFromMarkdocAst({})).toBe("");
+  });
+});
+
+// ===========================================================================
+// extractSectionedText
+// ===========================================================================
+describe("extractSectionedText", () => {
+  it("extracts body text and section markers from AST with headings", () => {
+    const ast = {
+      type: "document",
+      children: [
+        {
+          type: "heading",
+          attributes: { level: 2 },
+          children: [
+            { type: "text", attributes: { content: "Getting Started" } },
+          ],
+        },
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "First section content." } },
+          ],
+        },
+        {
+          type: "heading",
+          attributes: { level: 2 },
+          children: [
+            { type: "text", attributes: { content: "Installation" } },
+          ],
+        },
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "Install the app here." } },
+          ],
+        },
+      ],
+    };
+
+    const result = extractSectionedText(ast);
+    expect(result.body).toContain("Getting Started");
+    expect(result.body).toContain("First section content");
+    expect(result.body).toContain("Installation");
+    expect(result.body).toContain("Install the app here");
+    expect(result.sections).toHaveLength(2);
+    expect(result.sections[0].id).toBe("getting-started");
+    expect(result.sections[1].id).toBe("installation");
+    expect(result.sections[0].offset).toBeLessThan(result.sections[1].offset);
+  });
+
+  it("returns empty sections for AST without headings", () => {
+    const ast = {
+      type: "document",
+      children: [
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "Just a paragraph." } },
+          ],
+        },
+      ],
+    };
+
+    const result = extractSectionedText(ast);
+    expect(result.body).toContain("Just a paragraph");
+    expect(result.sections).toEqual([]);
+  });
+
+  it("handles Keystatic node wrapper", () => {
+    const ast = {
+      node: {
+        type: "document",
+        children: [
+          {
+            type: "heading",
+            attributes: { level: 2 },
+            children: [
+              { type: "text", attributes: { content: "Wrapped Heading" } },
+            ],
+          },
+          {
+            type: "paragraph",
+            children: [
+              { type: "text", attributes: { content: "Wrapped body." } },
+            ],
+          },
+        ],
+      },
+    };
+
+    const result = extractSectionedText(ast);
+    expect(result.sections).toHaveLength(1);
+    expect(result.sections[0].id).toBe("wrapped-heading");
+  });
+
+  it("returns empty for null/undefined", () => {
+    expect(extractSectionedText(null)).toEqual({ body: "", sections: [] });
+    expect(extractSectionedText(undefined)).toEqual({ body: "", sections: [] });
+  });
+});
+
+// ===========================================================================
+// searchDocs — sectionId
+// ===========================================================================
+describe("searchDocs — sectionId", () => {
+  it("returns sectionId for body matches when sections are available", () => {
+    const testIndex: SearchIndexEntry[] = [
+      entry({
+        slug: "doc-with-sections",
+        title: "My Doc",
+        body: "Introduction text. Getting Started First section content. Installation Install the app here.",
+        sections: [
+          { id: "getting-started", offset: 19 },
+          { id: "installation", offset: 58 },
+        ],
+      }),
+    ];
+
+    const results = searchDocs(testIndex, "Install the app");
+    expect(results).toHaveLength(1);
+    expect(results[0].matchField).toBe("body");
+    expect(results[0].sectionId).toBe("installation");
+  });
+
+  it("returns sectionId of the first section for match before any heading", () => {
+    const testIndex: SearchIndexEntry[] = [
+      entry({
+        slug: "doc-intro",
+        title: "My Doc",
+        body: "Introduction text before any heading. Section One Body content.",
+        sections: [
+          { id: "section-one", offset: 36 },
+        ],
+      }),
+    ];
+
+    const results = searchDocs(testIndex, "Introduction");
+    expect(results).toHaveLength(1);
+    expect(results[0].sectionId).toBeUndefined();
+  });
+
+  it("does not set sectionId for title/description matches", () => {
+    const testIndex: SearchIndexEntry[] = [
+      entry({
+        slug: "doc-title-match",
+        title: "Installation Guide",
+        body: "Some body content.",
+        sections: [{ id: "overview", offset: 0 }],
+      }),
+    ];
+
+    const results = searchDocs(testIndex, "Installation");
+    expect(results[0].matchField).toBe("title");
+    expect(results[0].sectionId).toBeUndefined();
+  });
+
+  it("does not set sectionId when sections array is empty", () => {
+    const testIndex: SearchIndexEntry[] = [
+      entry({
+        slug: "doc-no-sections",
+        title: "My Doc",
+        body: "Some keyword in body.",
+        sections: [],
+      }),
+    ];
+
+    const results = searchDocs(testIndex, "keyword");
+    expect(results[0].matchField).toBe("body");
+    expect(results[0].sectionId).toBeUndefined();
   });
 });
