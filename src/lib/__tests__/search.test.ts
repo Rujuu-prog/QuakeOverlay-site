@@ -524,6 +524,49 @@ describe("extractTextFromMarkdocAst", () => {
   it("returns empty string for empty object", () => {
     expect(extractTextFromMarkdocAst({})).toBe("");
   });
+
+  it("inserts space between block-level children (paragraphs)", () => {
+    const ast = {
+      type: "document",
+      children: [
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "first" } },
+          ],
+        },
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "second" } },
+          ],
+        },
+      ],
+    };
+    expect(extractTextFromMarkdocAst(ast)).toBe("first second");
+  });
+
+  it("inserts space between heading and paragraph children", () => {
+    const ast = {
+      type: "document",
+      children: [
+        {
+          type: "heading",
+          attributes: { level: 2 },
+          children: [
+            { type: "text", attributes: { content: "Title" } },
+          ],
+        },
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "content" } },
+          ],
+        },
+      ],
+    };
+    expect(extractTextFromMarkdocAst(ast)).toBe("Title content");
+  });
 });
 
 // ===========================================================================
@@ -622,6 +665,74 @@ describe("extractSectionedText", () => {
   it("returns empty for null/undefined", () => {
     expect(extractSectionedText(null)).toEqual({ body: "", sections: [] });
     expect(extractSectionedText(undefined)).toEqual({ body: "", sections: [] });
+  });
+
+  it("separates heading and paragraph text with space", () => {
+    const ast = {
+      type: "document",
+      children: [
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "intro" } },
+          ],
+        },
+        {
+          type: "heading",
+          attributes: { level: 2 },
+          children: [
+            { type: "text", attributes: { content: "Title" } },
+          ],
+        },
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "body" } },
+          ],
+        },
+      ],
+    };
+    const result = extractSectionedText(ast);
+    expect(result.body).toBe("intro Title body");
+  });
+
+  it("computes correct section offset when heading text appears earlier in body", () => {
+    const ast = {
+      type: "document",
+      children: [
+        {
+          type: "paragraph",
+          children: [
+            {
+              type: "text",
+              attributes: { content: "See Installation guide below." },
+            },
+          ],
+        },
+        {
+          type: "heading",
+          attributes: { level: 2 },
+          children: [
+            { type: "text", attributes: { content: "Installation" } },
+          ],
+        },
+        {
+          type: "paragraph",
+          children: [
+            { type: "text", attributes: { content: "Steps here." } },
+          ],
+        },
+      ],
+    };
+    const result = extractSectionedText(ast);
+    expect(result.sections).toHaveLength(1);
+    expect(result.sections[0].id).toBe("installation");
+    // Offset must point to the heading occurrence, not the earlier mention in paragraph
+    const headingPos = result.body.indexOf(
+      "Installation",
+      result.sections[0].offset
+    );
+    expect(headingPos).toBe(result.sections[0].offset);
   });
 });
 

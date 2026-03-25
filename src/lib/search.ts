@@ -232,9 +232,29 @@ export function extractSnippet(
 // Markdoc AST text extraction
 // ---------------------------------------------------------------------------
 
+const BLOCK_TYPES = new Set([
+  "paragraph",
+  "heading",
+  "list",
+  "item",
+  "blockquote",
+  "hr",
+  "fence",
+  "table",
+  "thead",
+  "tbody",
+  "tr",
+  "td",
+  "th",
+]);
+
 /**
  * Extract all plain text from a Markdoc AST node tree.
  * Handles Keystatic's { node: { children: [...] } } wrapper format.
+ *
+ * Block-level children (paragraph, heading, etc.) are separated by spaces.
+ * Inline children are joined without spaces to preserve CJK adjacency
+ * (e.g. 地震**情報** → 地震情報, not 地震 情報).
  */
 export function extractTextFromMarkdocAst(node: unknown): string {
   if (!node || typeof node !== "object") return "";
@@ -255,14 +275,20 @@ export function extractTextFromMarkdocAst(node: unknown): string {
     return "";
   }
 
-  // Recurse into children — join without forced spaces to preserve
-  // CJK adjacency (e.g. 地震**情報** → 地震情報, not 地震 情報)
+  // Recurse into children — insert space before block-level elements
+  // to prevent word concatenation across blocks
   if (Array.isArray(obj.children)) {
-    return obj.children
-      .map((child: unknown) => extractTextFromMarkdocAst(child))
-      .join("")
-      .replace(/\s+/g, " ")
-      .trim();
+    const parts: string[] = [];
+    for (const child of obj.children) {
+      const text = extractTextFromMarkdocAst(child);
+      if (!text) continue;
+      const childObj = child as Record<string, unknown>;
+      if (parts.length > 0 && BLOCK_TYPES.has(childObj?.type as string)) {
+        parts.push(" ");
+      }
+      parts.push(text);
+    }
+    return parts.join("").replace(/\s+/g, " ").trim();
   }
 
   return "";
@@ -280,6 +306,10 @@ type SectionedText = {
 /**
  * Extract text from Markdoc AST with section boundary tracking.
  * Records the offset in the body text where each heading section begins.
+ *
+ * Builds the body incrementally by extracting text from each block-level
+ * node, separating blocks with spaces. Section offsets are recorded at
+ * the time of heading encounter, avoiding fragile indexOf-based lookups.
  */
 export function extractSectionedText(node: unknown): SectionedText {
   if (!node || typeof node !== "object") return { body: "", sections: [] };
@@ -291,42 +321,46 @@ export function extractSectionedText(node: unknown): SectionedText {
     return extractSectionedText(obj.node);
   }
 
-  let rawBody = "";
-  const headingEntries: { id: string; text: string }[] = [];
+  let body = "";
+  const sections: SectionMarker[] = [];
+
+  function appendSeparator(): void {
+    if (body.length > 0) body += " ";
+  }
 
   function walk(n: unknown): void {
     if (!n || typeof n !== "object") return;
     const o = n as Record<string, unknown>;
 
-    // Detect heading nodes
-    let headingLevel: number | null = null;
+    // Heading (h2-h4): record offset then append text
     if (o.type === "heading") {
       const attrs = o.attributes as Record<string, unknown> | undefined;
-      headingLevel = (attrs?.level as number) ?? null;
+      const level = (attrs?.level as number) ?? null;
+      if (level !== null && level >= 2 && level <= 4) {
+        const headingText = extractTextFromMarkdocAst(o).trim();
+        if (headingText) {
+          appendSeparator();
+          sections.push({
+            id: generateHeadingId(headingText),
+            offset: body.length,
+          });
+          body += headingText;
+        }
+        return;
+      }
     }
 
-    if (headingLevel !== null && headingLevel >= 2 && headingLevel <= 4) {
-      const headingText = extractTextFromMarkdocAst(o);
-      if (headingText.trim()) {
-        headingEntries.push({
-          id: generateHeadingId(headingText.trim()),
-          text: headingText.trim(),
-        });
-        rawBody += headingText;
+    // Other block-level nodes: extract text as a unit
+    if (BLOCK_TYPES.has(o.type as string)) {
+      const blockText = extractTextFromMarkdocAst(o).trim();
+      if (blockText) {
+        appendSeparator();
+        body += blockText;
       }
       return;
     }
 
-    // Text node
-    if (o.type === "text") {
-      const attrs = o.attributes as Record<string, unknown> | undefined;
-      if (attrs?.content && typeof attrs.content === "string") {
-        rawBody += attrs.content;
-      }
-      return;
-    }
-
-    // Recurse into children
+    // Non-block containers (document, etc.): recurse into children
     if (Array.isArray(o.children)) {
       for (const child of o.children) {
         walk(child);
@@ -337,20 +371,6 @@ export function extractSectionedText(node: unknown): SectionedText {
   if (Array.isArray(obj.children)) {
     for (const child of obj.children) {
       walk(child);
-    }
-  }
-
-  // Normalize the body (compress whitespace, trim)
-  const body = rawBody.replace(/\s+/g, " ").trim();
-
-  // Compute section offsets in the normalized body
-  const sections: SectionMarker[] = [];
-  let searchFrom = 0;
-  for (const heading of headingEntries) {
-    const idx = body.indexOf(heading.text, searchFrom);
-    if (idx !== -1) {
-      sections.push({ id: heading.id, offset: idx });
-      searchFrom = idx + heading.text.length;
     }
   }
 
