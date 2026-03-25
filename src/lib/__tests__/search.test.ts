@@ -430,15 +430,31 @@ describe("extractTextFromMarkdocAst", () => {
     expect(extractTextFromMarkdocAst(ast)).toBe("Hello world");
   });
 
-  it("extracts text from nested children", () => {
+  it("extracts text from nested children with natural spacing", () => {
     const ast = {
       type: "paragraph",
       children: [
-        { type: "text", attributes: { content: "Hello" } },
+        { type: "text", attributes: { content: "Hello " } },
         { type: "text", attributes: { content: "world" } },
       ],
     };
     expect(extractTextFromMarkdocAst(ast)).toBe("Hello world");
+  });
+
+  it("does not insert space between adjacent CJK inline nodes", () => {
+    const ast = {
+      type: "paragraph",
+      children: [
+        { type: "text", attributes: { content: "地震" } },
+        {
+          type: "strong",
+          children: [
+            { type: "text", attributes: { content: "情報" } },
+          ],
+        },
+      ],
+    };
+    expect(extractTextFromMarkdocAst(ast)).toBe("地震情報");
   });
 
   it("extracts text from heading nodes", () => {

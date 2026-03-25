@@ -255,12 +255,14 @@ export function extractTextFromMarkdocAst(node: unknown): string {
     return "";
   }
 
-  // Recurse into children
+  // Recurse into children — join without forced spaces to preserve
+  // CJK adjacency (e.g. 地震**情報** → 地震情報, not 地震 情報)
   if (Array.isArray(obj.children)) {
     return obj.children
-      .map((child: unknown) => extractTextFromMarkdocAst(child).trim())
-      .filter(Boolean)
-      .join(" ");
+      .map((child: unknown) => extractTextFromMarkdocAst(child))
+      .join("")
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
   return "";
@@ -289,16 +291,8 @@ export function extractSectionedText(node: unknown): SectionedText {
     return extractSectionedText(obj.node);
   }
 
-  const parts: string[] = [];
-  const sections: SectionMarker[] = [];
-  let currentLength = 0; // Track body length incrementally
-
-  function appendPart(text: string): void {
-    if (!text) return;
-    if (currentLength > 0) currentLength++; // space separator
-    currentLength += text.length;
-    parts.push(text);
-  }
+  let rawBody = "";
+  const headingEntries: { id: string; text: string }[] = [];
 
   function walk(n: unknown): void {
     if (!n || typeof n !== "object") return;
@@ -312,24 +306,22 @@ export function extractSectionedText(node: unknown): SectionedText {
     }
 
     if (headingLevel !== null && headingLevel >= 2 && headingLevel <= 4) {
-      const headingText = extractTextFromMarkdocAst(o).trim();
-      if (headingText) {
-        const offset = currentLength > 0 ? currentLength + 1 : 0;
-        sections.push({
-          id: generateHeadingId(headingText),
-          offset,
+      const headingText = extractTextFromMarkdocAst(o);
+      if (headingText.trim()) {
+        headingEntries.push({
+          id: generateHeadingId(headingText.trim()),
+          text: headingText.trim(),
         });
-        appendPart(headingText);
+        rawBody += headingText;
       }
-      return; // Don't walk into heading children again
+      return;
     }
 
     // Text node
     if (o.type === "text") {
       const attrs = o.attributes as Record<string, unknown> | undefined;
       if (attrs?.content && typeof attrs.content === "string") {
-        const trimmed = attrs.content.trim();
-        if (trimmed) appendPart(trimmed);
+        rawBody += attrs.content;
       }
       return;
     }
@@ -348,6 +340,20 @@ export function extractSectionedText(node: unknown): SectionedText {
     }
   }
 
-  return { body: parts.filter(Boolean).join(" "), sections };
+  // Normalize the body (compress whitespace, trim)
+  const body = rawBody.replace(/\s+/g, " ").trim();
+
+  // Compute section offsets in the normalized body
+  const sections: SectionMarker[] = [];
+  let searchFrom = 0;
+  for (const heading of headingEntries) {
+    const idx = body.indexOf(heading.text, searchFrom);
+    if (idx !== -1) {
+      sections.push({ id: heading.id, offset: idx });
+      searchFrom = idx + heading.text.length;
+    }
+  }
+
+  return { body, sections };
 }
 
