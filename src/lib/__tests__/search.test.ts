@@ -280,6 +280,22 @@ describe("searchDocs", () => {
     expect(bodyMatch).toBeDefined();
     expect(bodyMatch!.snippet.length).toBeGreaterThan(0);
   });
+
+  it("passes raw query to extractSnippet (no double normalization)", () => {
+    const testIndex: SearchIndexEntry[] = [
+      entry({
+        slug: "doc",
+        title: "Other",
+        description: "",
+        body: "The earthquake monitoring system detects seismic activity.",
+      }),
+    ];
+    // Use mixed-case query — extractSnippet should normalize internally
+    const results = searchDocs(testIndex, "Earthquake");
+    expect(results).toHaveLength(1);
+    expect(results[0].matchField).toBe("body");
+    expect(results[0].snippet).toContain("earthquake");
+  });
 });
 
 // ===========================================================================

@@ -87,7 +87,7 @@ export function searchDocs(
 
     const snippet =
       matchField === "body"
-        ? extractSnippet(doc.body, normalizedQuery, SNIPPET_CONTEXT_LENGTH)
+        ? extractSnippet(doc.body, query, SNIPPET_CONTEXT_LENGTH)
         : "";
 
     // Determine sectionId for body matches
