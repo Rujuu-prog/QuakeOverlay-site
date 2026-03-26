@@ -76,7 +76,7 @@ export function Sidebar({ categories, currentSlug, searchIndex }: SidebarProps) 
 
       {/* Fulltext search results */}
       {useFulltext ? (
-        <SearchResults results={fulltextResults!} query={query} />
+        <SearchResults results={fulltextResults ?? []} query={query} />
       ) : hasQuery && !hasFilteredResults ? (
         /* Fallback: title-only no results */
         <p className="text-sm text-text-muted">{t("noResults")}</p>

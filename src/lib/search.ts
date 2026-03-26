@@ -85,24 +85,29 @@ export function searchDocs(
       continue;
     }
 
-    const snippet =
-      matchField === "body"
-        ? extractSnippet(doc.body, query, SNIPPET_CONTEXT_LENGTH)
-        : "";
-
-    // Determine sectionId for body matches
+    // For body matches, compute position map once for both snippet and sectionId
+    let snippet = "";
     let sectionId: string | undefined;
-    if (matchField === "body" && doc.sections && doc.sections.length > 0) {
+    if (matchField === "body") {
       const matchPos = doc.searchBody.indexOf(normalizedQuery);
       if (matchPos >= 0) {
-        // Map normalized position back to body position
         const posMap = buildNormalizedPositionMap(doc.body);
-        const origPos = posMap[matchPos] ?? 0;
-        // Find the last section with offset <= origPos
-        for (let s = doc.sections.length - 1; s >= 0; s--) {
-          if (doc.sections[s].offset <= origPos) {
-            sectionId = doc.sections[s].id;
-            break;
+
+        snippet = buildSnippetFromMap(
+          doc.body.trim(),
+          posMap,
+          matchPos,
+          normalizedQuery.length,
+          SNIPPET_CONTEXT_LENGTH
+        );
+
+        if (doc.sections && doc.sections.length > 0) {
+          const origPos = posMap[matchPos] ?? 0;
+          for (let s = doc.sections.length - 1; s >= 0; s--) {
+            if (doc.sections[s].offset <= origPos) {
+              sectionId = doc.sections[s].id;
+              break;
+            }
           }
         }
       }
@@ -179,6 +184,39 @@ export function buildNormalizedPositionMap(text: string): number[] {
 // ---------------------------------------------------------------------------
 
 /**
+ * Build a snippet from pre-computed position map and match location.
+ * Shared by extractSnippet (public API) and searchDocs (avoids duplicate
+ * position map computation).
+ */
+function buildSnippetFromMap(
+  trimmedBody: string,
+  positionMap: number[],
+  matchIndex: number,
+  matchLength: number,
+  contextLength: number
+): string {
+  const origStart = positionMap[matchIndex] ?? 0;
+  const origEnd =
+    matchIndex + matchLength < positionMap.length
+      ? positionMap[matchIndex + matchLength] ?? trimmedBody.length
+      : trimmedBody.length;
+
+  const contextStart = Math.max(0, origStart - contextLength);
+  const contextEnd = Math.min(trimmedBody.length, origEnd + contextLength);
+
+  let snippet = trimmedBody.slice(contextStart, contextEnd);
+
+  if (contextStart > 0) {
+    snippet = "…" + snippet;
+  }
+  if (contextEnd < trimmedBody.length) {
+    snippet = snippet + "…";
+  }
+
+  return snippet;
+}
+
+/**
  * Extract a text snippet around the first match of `query` in `body`.
  *
  * Rules:
@@ -200,32 +238,14 @@ export function extractSnippet(
   const matchIndex = normalizedBody.indexOf(normalizedQuery);
   if (matchIndex === -1) return "";
 
-  const trimmed = body.trim();
-  const origPositions = buildNormalizedPositionMap(body);
-
-  // Map normalized match position to original positions
-  const origStart = origPositions[matchIndex] ?? 0;
-  const origEnd =
-    matchIndex + normalizedQuery.length < origPositions.length
-      ? origPositions[matchIndex + normalizedQuery.length] ??
-        trimmed.length
-      : trimmed.length;
-
-  // Calculate context window in original string
-  const contextStart = Math.max(0, origStart - contextLength);
-  const contextEnd = Math.min(trimmed.length, origEnd + contextLength);
-
-  let snippet = trimmed.slice(contextStart, contextEnd);
-
-  // Add ellipsis
-  if (contextStart > 0) {
-    snippet = "…" + snippet;
-  }
-  if (contextEnd < trimmed.length) {
-    snippet = snippet + "…";
-  }
-
-  return snippet;
+  const positionMap = buildNormalizedPositionMap(body);
+  return buildSnippetFromMap(
+    body.trim(),
+    positionMap,
+    matchIndex,
+    normalizedQuery.length,
+    contextLength
+  );
 }
 
 // ---------------------------------------------------------------------------
