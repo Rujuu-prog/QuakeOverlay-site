@@ -126,6 +126,10 @@ const defaultMessages = {
     sidebar: "Sidebar",
     openSidebar: "Open sidebar",
     closeSidebar: "Close sidebar",
+    searchResultCount: "{count} results",
+    searchMatchBody: "Match in body",
+    noResultsHint:
+      "Searching titles, descriptions, and body text. Try a different or shorter keyword.",
   },
   releases: {
     title: "Release Notes",

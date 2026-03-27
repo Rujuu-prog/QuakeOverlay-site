@@ -6,20 +6,6 @@ export const ANIMATION = {
   rootMargin: "0px 0px -50px 0px",
 } as const;
 
-export const SPLASH_SCREEN = {
-  displayDuration: 3500,
-  fadeDuration: 500,
-  sessionKey: "quake-overlay-splash-shown",
-} as const;
-
-export const SPLASH_CONTENT = {
-  rippleCount: 3,
-  rippleSize: 80,
-  rippleStaggerDelay: 0.6,
-  rippleDuration: "2s",
-  iconSize: 40,
-} as const;
-
 export const LOADING_ANIMATION = {
   rippleCount: 3,
   rippleDuration: "2s",
