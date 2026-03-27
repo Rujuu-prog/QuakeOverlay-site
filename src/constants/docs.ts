@@ -1,22 +1,23 @@
 import { BookOpen, Monitor, Palette, HelpCircle, LifeBuoy } from "lucide-react";
 import type { ElementType } from "react";
+import { DOC_CATEGORY_KEYS } from "./doc-categories";
 
-export type DocCategory =
-  | "getting-started"
-  | "screens"
-  | "customization"
-  | "faq"
-  | "support";
+export type { DocCategory } from "./doc-categories";
+export { DOC_CATEGORY_KEYS } from "./doc-categories";
 
 export type DocCategoryDef = {
-  key: DocCategory;
+  key: (typeof DOC_CATEGORY_KEYS)[number];
   icon: ElementType;
 };
 
-export const DOC_CATEGORIES: DocCategoryDef[] = [
-  { key: "getting-started", icon: BookOpen },
-  { key: "screens", icon: Monitor },
-  { key: "customization", icon: Palette },
-  { key: "faq", icon: HelpCircle },
-  { key: "support", icon: LifeBuoy },
-];
+const CATEGORY_ICONS: Record<(typeof DOC_CATEGORY_KEYS)[number], ElementType> = {
+  "getting-started": BookOpen,
+  screens: Monitor,
+  customization: Palette,
+  faq: HelpCircle,
+  support: LifeBuoy,
+};
+
+export const DOC_CATEGORIES: DocCategoryDef[] = DOC_CATEGORY_KEYS.map(
+  (key) => ({ key, icon: CATEGORY_ICONS[key] })
+);

@@ -1,5 +1,5 @@
-import { DOC_CATEGORIES } from "@/constants/docs";
-import type { DocCategory } from "@/constants/docs";
+import { DOC_CATEGORY_KEYS } from "@/constants/doc-categories";
+import type { DocCategory } from "@/constants/doc-categories";
 import type { SearchIndexData } from "@/types/search";
 import { extractSectionedText } from "./search";
 import { reader, getAllDocs } from "./reader";
@@ -53,7 +53,7 @@ export async function getSearchIndex(
     localeDocs.map((d) => [d.slug, d.entry.order ?? 0])
   );
   const categoryRank = new Map(
-    DOC_CATEGORIES.map((c, i) => [c.key, i])
+    DOC_CATEGORY_KEYS.map((key, i) => [key, i])
   );
 
   return entries.sort((a, b) => {

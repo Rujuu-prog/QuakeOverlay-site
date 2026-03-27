@@ -1,4 +1,4 @@
-import { DOC_CATEGORIES } from "@/constants/docs";
+import { DOC_CATEGORY_KEYS } from "@/constants/doc-categories";
 import { generateHeadingId } from "@/lib/docs-utils";
 import { SNIPPET_CONTEXT_LENGTH, SEARCH_PRIORITY } from "@/constants/search";
 import type {
@@ -30,7 +30,7 @@ export function normalizeForSearch(text: string): string {
 // ---------------------------------------------------------------------------
 
 /** Pre-computed category→rank map (DOC_CATEGORIES is a static constant). */
-const CATEGORY_RANK = new Map(DOC_CATEGORIES.map((c, i) => [c.key, i]));
+const CATEGORY_RANK = new Map(DOC_CATEGORY_KEYS.map((key, i) => [key, i]));
 
 /**
  * Search documents in the index. Returns results sorted by priority:
