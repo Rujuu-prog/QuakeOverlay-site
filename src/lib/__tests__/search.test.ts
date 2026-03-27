@@ -281,7 +281,7 @@ describe("searchDocs", () => {
     expect(bodyMatch!.snippet.length).toBeGreaterThan(0);
   });
 
-  it("passes raw query to extractSnippet (no double normalization)", () => {
+  it("normalizes query internally for body snippet generation", () => {
     const testIndex: SearchIndexEntry[] = [
       entry({
         slug: "doc",
@@ -290,7 +290,7 @@ describe("searchDocs", () => {
         body: "The earthquake monitoring system detects seismic activity.",
       }),
     ];
-    // Use mixed-case query — extractSnippet should normalize internally
+    // Use mixed-case query — searchDocs normalizes internally for snippet
     const results = searchDocs(testIndex, "Earthquake");
     expect(results).toHaveLength(1);
     expect(results[0].matchField).toBe("body");

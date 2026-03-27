@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { DOC_CATEGORIES } from "@/constants/docs";
 import { normalizeForSearch, buildNormalizedPositionMap } from "@/lib/search";
 import type { SearchResult } from "@/types/search";
 
@@ -71,10 +70,6 @@ export function SearchResults({ results, query }: SearchResultsProps) {
       </p>
       <ul className="flex flex-col gap-2">
         {results.map((result) => {
-          const catDef = DOC_CATEGORIES.find(
-            (c) => c.key === result.category
-          );
-
           return (
             <li key={result.slug}>
               <Link
@@ -85,7 +80,7 @@ export function SearchResults({ results, query }: SearchResultsProps) {
                   <HighlightedText text={result.title} query={query} />
                 </span>
                 <span className="ml-2 text-xs text-text-muted">
-                  {t(`categories.${catDef?.key ?? result.category}`)}
+                  {t(`categories.${result.category}`)}
                 </span>
                 {result.matchField === "body" && result.snippet && (
                   <p className="mt-1 text-xs text-text-secondary">

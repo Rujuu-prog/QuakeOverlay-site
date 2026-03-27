@@ -2,7 +2,7 @@ import { DOC_CATEGORIES } from "@/constants/docs";
 import type { DocCategory } from "@/constants/docs";
 import type { SearchIndexData } from "@/types/search";
 import { extractSectionedText } from "./search";
-import { reader } from "./reader";
+import { reader, getAllDocs } from "./reader";
 
 /**
  * Build search index for a locale. Server-side only.
@@ -14,7 +14,7 @@ import { reader } from "./reader";
 export async function getSearchIndex(
   locale: string
 ): Promise<SearchIndexData[]> {
-  const allDocs = await reader.collections.docs.all();
+  const allDocs = await getAllDocs();
   const localeDocs = allDocs.filter((doc) => doc.entry.locale === locale);
 
   // Fetch all docs in parallel

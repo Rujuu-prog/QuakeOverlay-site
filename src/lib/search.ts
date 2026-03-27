@@ -29,6 +29,9 @@ export function normalizeForSearch(text: string): string {
 // Search
 // ---------------------------------------------------------------------------
 
+/** Pre-computed category→rank map (DOC_CATEGORIES is a static constant). */
+const CATEGORY_RANK = new Map(DOC_CATEGORIES.map((c, i) => [c.key, i]));
+
 /**
  * Search documents in the index. Returns results sorted by priority:
  * 1. title prefix match
@@ -43,8 +46,6 @@ export function searchDocs(
 ): SearchResult[] {
   const normalizedQuery = normalizeForSearch(query);
   if (!normalizedQuery) return [];
-
-  const categoryRank = new Map(DOC_CATEGORIES.map((c, i) => [c.key, i]));
 
   type ScoredResult = SearchResult & { priority: number; originalIndex: number };
   const scored: ScoredResult[] = [];
@@ -130,8 +131,8 @@ export function searchDocs(
   // Stable sort: priority → category order → original index
   scored.sort((a, b) => {
     if (a.priority !== b.priority) return a.priority - b.priority;
-    const catA = categoryRank.get(a.category) ?? 0;
-    const catB = categoryRank.get(b.category) ?? 0;
+    const catA = CATEGORY_RANK.get(a.category) ?? 0;
+    const catB = CATEGORY_RANK.get(b.category) ?? 0;
     if (catA !== catB) return catA - catB;
     return a.originalIndex - b.originalIndex;
   });
