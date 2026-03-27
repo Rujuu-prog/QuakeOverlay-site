@@ -5,18 +5,40 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Search } from "lucide-react";
 import { DOC_CATEGORIES } from "@/constants/docs";
+import { normalizeForSearch, searchDocs } from "@/lib/search";
+import { SearchResults } from "./SearchResults";
 import type { SidebarCategory } from "@/types/docs";
+import type { SearchIndexData, SearchIndexEntry } from "@/types/search";
 
 type SidebarProps = {
   categories: SidebarCategory[];
   currentSlug?: string;
+  searchIndex?: SearchIndexData[];
 };
 
-export function Sidebar({ categories, currentSlug }: SidebarProps) {
+export function Sidebar({ categories, currentSlug, searchIndex }: SidebarProps) {
   const t = useTranslations("docs");
   const [query, setQuery] = useState("");
 
-  const filtered = useMemo(() => {
+  // Compute normalized fields on client (avoids bloating RSC payload)
+  const fullIndex = useMemo<SearchIndexEntry[] | null>(() => {
+    if (!searchIndex) return null;
+    return searchIndex.map((d) => ({
+      ...d,
+      searchTitle: normalizeForSearch(d.title),
+      searchDescription: normalizeForSearch(d.description),
+      searchBody: normalizeForSearch(d.body),
+    }));
+  }, [searchIndex]);
+
+  // Fulltext search results (when searchIndex is available and query is non-empty)
+  const fulltextResults = useMemo(() => {
+    if (!fullIndex || !query.trim()) return null;
+    return searchDocs(fullIndex, query);
+  }, [fullIndex, query]);
+
+  // Fallback: title-only filtering (when searchIndex is not available)
+  const filteredCategories = useMemo(() => {
     if (!query.trim()) return categories;
 
     const lower = query.toLowerCase();
@@ -30,7 +52,13 @@ export function Sidebar({ categories, currentSlug }: SidebarProps) {
       .filter((cat) => cat.items.length > 0);
   }, [categories, query]);
 
-  const hasResults = filtered.some((cat) => cat.items.length > 0);
+  const hasQuery = query.trim().length > 0;
+  const useFulltext = hasQuery && searchIndex != null;
+
+  // For fallback title-only mode
+  const hasFilteredResults = filteredCategories.some(
+    (cat) => cat.items.length > 0
+  );
 
   return (
     <aside aria-label={t("sidebar")}>
@@ -46,11 +74,17 @@ export function Sidebar({ categories, currentSlug }: SidebarProps) {
         />
       </div>
 
-      {/* Categories */}
-      {hasResults ? (
+      {/* Fulltext search results */}
+      {useFulltext ? (
+        <SearchResults results={fulltextResults ?? []} query={query} />
+      ) : hasQuery && !hasFilteredResults ? (
+        /* Fallback: title-only no results */
+        <p className="text-sm text-text-muted">{t("noResults")}</p>
+      ) : (
+        /* Category list (default or fallback filtered) */
         <nav>
           <ul className="flex flex-col gap-6">
-            {filtered.map((cat) => {
+            {(hasQuery ? filteredCategories : categories).map((cat) => {
               const catDef = DOC_CATEGORIES.find(
                 (c) => c.key === cat.category
               );
@@ -86,8 +120,6 @@ export function Sidebar({ categories, currentSlug }: SidebarProps) {
             })}
           </ul>
         </nav>
-      ) : (
-        <p className="text-sm text-text-muted">{t("noResults")}</p>
       )}
     </aside>
   );

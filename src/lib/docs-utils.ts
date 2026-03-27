@@ -1,5 +1,5 @@
-import { DOC_CATEGORIES } from "@/constants/docs";
-import type { DocCategory } from "@/constants/docs";
+import { DOC_CATEGORY_KEYS } from "@/constants/doc-categories";
+import type { DocCategory } from "@/constants/doc-categories";
 import type { DocEntry, DocNavItem, DocTocItem, SidebarCategory } from "@/types/docs";
 
 /**
@@ -19,7 +19,7 @@ export function generateHeadingId(text: string): string {
  * Sort docs by category display order, then by order field.
  */
 export function sortDocs(docs: DocEntry[]): DocEntry[] {
-  const categoryOrder = DOC_CATEGORIES.map((c) => c.key);
+  const categoryOrder = [...DOC_CATEGORY_KEYS];
   return [...docs].sort((a, b) => {
     const catA = categoryOrder.indexOf(a.category);
     const catB = categoryOrder.indexOf(b.category);

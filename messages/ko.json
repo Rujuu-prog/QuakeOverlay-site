@@ -122,7 +122,10 @@
     },
     "sidebar": "사이드바",
     "openSidebar": "사이드바 열기",
-    "closeSidebar": "사이드바 닫기"
+    "closeSidebar": "사이드바 닫기",
+    "searchResultCount": "{count}개의 결과",
+    "searchMatchBody": "본문에서 일치",
+    "noResultsHint": "제목, 설명, 본문을 검색합니다. 다른 키워드나 짧은 키워드를 시도해 보세요."
   },
   "releases": {
     "title": "릴리스 노트",

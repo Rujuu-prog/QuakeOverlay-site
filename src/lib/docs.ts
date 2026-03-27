@@ -1,6 +1,6 @@
 import type { DocCategory } from "@/constants/docs";
 import type { DocEntry } from "@/types/docs";
-import { reader } from "./reader";
+import { reader, getAllDocs } from "./reader";
 import { sortDocs } from "./docs-utils";
 
 // Re-export client-safe utilities for convenience
@@ -16,7 +16,7 @@ export {
  * Fetch all docs for a locale from Keystatic.
  */
 export async function getDocsByLocale(locale: string): Promise<DocEntry[]> {
-  const allDocs = await reader.collections.docs.all();
+  const allDocs = await getAllDocs();
 
   const filtered: DocEntry[] = allDocs
     .filter((doc) => doc.entry.locale === locale)
